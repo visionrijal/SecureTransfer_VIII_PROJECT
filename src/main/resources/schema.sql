@@ -1,10 +1,5 @@
--- Drop existing tables if they exist
-DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS file_transfers CASCADE;
-DROP TABLE IF EXISTS transfer_peers CASCADE;
-
--- Create users table
-CREATE TABLE users (
+-- Create users table (only if it doesn't exist)
+CREATE TABLE IF NOT EXISTS users (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
@@ -15,8 +10,8 @@ CREATE TABLE users (
     active BOOLEAN NOT NULL
 );
 
--- Create file_transfers table
-CREATE TABLE file_transfers (
+-- Create file_transfers table (only if it doesn't exist)
+CREATE TABLE IF NOT EXISTS file_transfers (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     file_name VARCHAR(255) NOT NULL,
     file_size BIGINT NOT NULL,
@@ -29,8 +24,8 @@ CREATE TABLE file_transfers (
     FOREIGN KEY (receiver_id) REFERENCES users(id)
 );
 
--- Create transfer_peers table
-CREATE TABLE transfer_peers (
+-- Create transfer_peers table (only if it doesn't exist)
+CREATE TABLE IF NOT EXISTS transfer_peers (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     transfer_id BIGINT NOT NULL,
     peer_id VARCHAR(255) NOT NULL,

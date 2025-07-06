@@ -1,4 +1,3 @@
-/* Modern Login Screen Styles */
 .login-container {
     -fx-background-color: linear-gradient(to bottom right, #667eea, #764ba2);
     -fx-min-width: 400;
@@ -92,7 +91,6 @@
     -fx-min-height: 40;
     -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.3), 5, 0, 0, 2);
 }
-
 .primary-button:hover {
     -fx-background-color: linear-gradient(to bottom right, #5a67d8, #6b46c1);
 }
@@ -165,13 +163,11 @@
     -fx-text-fill: #6b7280;
 }
 
-/* Icon styling for buttons and fields */
 .icon-button {
     -fx-content-display: left;
     -fx-graphic-text-gap: 10;
 }
 
-/* Security features indicator */
 .security-badge {
     -fx-background-color: rgba(16, 185, 129, 0.1);
     -fx-background-radius: 20;
@@ -185,13 +181,11 @@
     -fx-font-weight: 600;
 }
 
-/* Loading state */
 .loading-button {
     -fx-opacity: 0.7;
     -fx-cursor: wait;
 }
 
-/* Validation states */
 .field-valid {
     -fx-border-color: #10b981;
     -fx-background-color: #f0fdf4;
@@ -202,12 +196,10 @@
     -fx-background-color: #fef2f2;
 }
 
-/* Accessibility improvements */
 .login-container:focused {
     -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.3), 10, 0, 0, 0);
 }
 
-/* Animation classes */
 .shake {
     -fx-animation: shake 0.5s ease-in-out;
 }

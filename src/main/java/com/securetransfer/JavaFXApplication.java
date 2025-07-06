@@ -17,6 +17,10 @@ public class JavaFXApplication extends Application {
     private ConfigurableApplicationContext springContext;
     private Parent rootNode;
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void init() {
         springContext = SpringApplication.run(SecureTransferApplication.class);
@@ -34,7 +38,6 @@ public class JavaFXApplication extends Application {
             fxmlLoader.setControllerFactory(springContext::getBean);
             rootNode = fxmlLoader.load();
             
-            // Inject Spring context into controller
             Object controller = fxmlLoader.getController();
             if (controller instanceof BaseController) {
                 ((BaseController) controller).setSpringContext(springContext);
@@ -42,7 +45,6 @@ public class JavaFXApplication extends Application {
             
             Scene scene = new Scene(rootNode);
             
-            // Load stylesheet if it exists
             URL cssUrl = getClass().getClassLoader().getResource("styles/global.css");
             if (cssUrl != null) {
                 scene.getStylesheets().add(cssUrl.toExternalForm());
@@ -53,9 +55,9 @@ public class JavaFXApplication extends Application {
             primaryStage.setMinWidth(800);
             primaryStage.setMinHeight(600);
             primaryStage.show();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Failed to load FXML: " + e.getMessage(), e);
+            throw e;
         }
     }
 

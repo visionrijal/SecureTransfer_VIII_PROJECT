@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
     <!-- Background Circle -->
-    <circle cx="50" cy="50" r="45" fill="#4a90e2" opacity="0.1"/>
+    <circle cx="60" cy="60" r="56" fill="#3498db" fill-opacity="0.1"/>
     
     <!-- Shield Shape -->
-    <path d="M50 10 L80 25 L80 45 C80 65 65 80 50 90 C35 80 20 65 20 45 L20 25 Z" 
-          fill="#4a90e2" stroke="#4a90e2" stroke-width="2"/>
+    <path d="M60 20L20 40V60C20 80 40 100 60 100C80 100 100 80 100 60V40L60 20Z" fill="#3498db"/>
     
     <!-- Lock Body -->
-    <rect x="40" y="45" width="20" height="15" rx="2" fill="#ffffff"/>
+    <rect x="45" y="50" width="30" height="25" rx="4" fill="white"/>
     
     <!-- Lock Top -->
-    <path d="M45 45 L55 45 L55 40 C55 37 52 35 50 35 C48 35 45 37 45 40 Z" 
-          fill="#ffffff"/>
+    <path d="M55 50V40C55 35 57.5 30 60 30C62.5 30 65 35 65 40V50" stroke="white" stroke-width="4"/>
     
-    <!-- Keyhole -->
-    <circle cx="50" cy="52" r="3" fill="#4a90e2"/>
-    <rect x="48" y="52" width="4" height="5" fill="#4a90e2"/>
+    <!-- Checkmark -->
+    <path d="M50 65L55 70L70 55" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 </svg> 

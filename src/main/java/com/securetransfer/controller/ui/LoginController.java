@@ -61,6 +61,18 @@ public class LoginController extends BaseController {
             errorLabel.setVisible(false);
             errorLabel.setManaged(false);
         });
+
+        usernameField.setOnKeyPressed(event -> {
+            if (event.getCode().toString().equals("ENTER")) {
+                passwordField.requestFocus();
+            }
+        });
+
+        passwordField.setOnKeyPressed(event -> {
+            if (event.getCode().toString().equals("ENTER")) {
+                handleLogin();
+            }
+        });
     }
 
     @FXML
@@ -84,6 +96,15 @@ public class LoginController extends BaseController {
         try {
             User user = userService.authenticate(username, password);
             if (user != null) {
+                // Get a fresh user object to avoid any JPA session issues
+                User freshUser = userService.findByUsername(username).orElse(user);
+                
+                // Force reset the session to ensure clean state
+                com.securetransfer.util.UserSession.getInstance().forceReset();
+                
+                // Set the current user in the session
+                com.securetransfer.util.UserSession.getInstance().setCurrentUser(freshUser);
+                logger.info("User session set for: {}", freshUser.getUsername());
                 showSuccess("Login successful!");
                 loadMainScreen();
             } else {

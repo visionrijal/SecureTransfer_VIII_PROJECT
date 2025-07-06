@@ -70,6 +70,24 @@ public class RegistrationController extends BaseController {
             errorLabel.setVisible(false);
             errorLabel.setManaged(false);
         });
+
+        usernameField.setOnKeyPressed(event -> {
+            if (event.getCode().toString().equals("ENTER")) {
+                passwordField.requestFocus();
+            }
+        });
+
+        passwordField.setOnKeyPressed(event -> {
+            if (event.getCode().toString().equals("ENTER")) {
+                confirmPasswordField.requestFocus();
+            }
+        });
+
+        confirmPasswordField.setOnKeyPressed(event -> {
+            if (event.getCode().toString().equals("ENTER")) {
+                handleRegister();
+            }
+        });
     }
     
     @FXML

@@ -2,67 +2,194 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.shape.Circle?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="com.securetransfer.controller.ui.MainController"
-            stylesheets="/styles/main.css">
+            stylesheets="@../styles/main.css">
     
-    <!-- Top Bar -->
     <top>
-        <HBox styleClass="top-bar">
-            <padding>
-                <Insets top="15" right="20" bottom="15" left="20"/>
-            </padding>
-            
-            <!-- Logo and Title -->
-            <HBox alignment="CENTER_LEFT" spacing="10">
-                <Circle radius="15" fill="#667eea"/>
-                <Text styleClass="app-title">SecureTransfer</Text>
+        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="20">
+            <HBox alignment="CENTER_LEFT" spacing="12" onMouseClicked="#showWelcomePage" styleClass="navbar-brand-container">
+                <SVGPath styleClass="navbar-logo" content="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                <Text text="SecureTransfer" styleClass="navbar-brand"/>
             </HBox>
-            
-            <!-- User Info and Logout -->
-            <HBox alignment="CENTER_RIGHT" spacing="15" HBox.hgrow="ALWAYS">
-                <Label fx:id="welcomeLabel" styleClass="username-label"/>
-                <Button fx:id="logoutButton" text="Logout" styleClass="logout-button" onAction="#handleLogout"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <Button text="Send Files" onAction="#showSendFiles" styleClass="nav-link"/>
+                <Button text="Receive Files" onAction="#showReceiveFiles" styleClass="nav-link"/>
+                <Button text="USB Wizard" onAction="#showUSBWizard" styleClass="nav-link"/>
+                <Button text="Transfer History" onAction="#showTransferHistory" styleClass="nav-link"/>
+                <Button text="Features" onAction="#scrollToFeatures" styleClass="nav-link"/>
+                <Button text="Security" onAction="#scrollToSecurity" styleClass="nav-link"/>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <HBox alignment="CENTER_RIGHT" spacing="12">
+                <Button onAction="#showProfile" styleClass="nav-profile">
+                    <graphic>
+                        <SVGPath styleClass="profile-icon" content="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </graphic>
+                </Button>
+                <Button text="Logout" onAction="#logout" styleClass="nav-button,logout"/>
             </HBox>
         </HBox>
     </top>
     
-    <!-- Main Content -->
     <center>
-        <VBox spacing="20" styleClass="main-content">
-            <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
-            </padding>
-            
-            <!-- File Transfer Section -->
-            <VBox spacing="15" styleClass="transfer-section">
-                <Text styleClass="section-title">Send File</Text>
+        <VBox spacing="0">
+            <VBox fx:id="contentArea" styleClass="content-area">
+                <ScrollPane fx:id="mainScrollPane" fitToWidth="true" fitToHeight="true" styleClass="main-scroll-pane" visible="true">
+                    <content>
+                        <VBox styleClass="main-content" spacing="0">
+                            
+                            <!-- Hero Section -->
+                            <VBox fx:id="heroSection" styleClass="hero-section" alignment="CENTER" spacing="40">
+                                <VBox alignment="CENTER" spacing="24">
+                                    <Text text="Welcome to SecureTransfer" styleClass="hero-title"/>
+                                    <Text text="Your files, your security, your control" styleClass="hero-subtitle"/>
+                                    <HBox alignment="CENTER" spacing="20">
+                                        <Button text="Send Files" onAction="#showSendFiles" styleClass="hero-cta,primary">
+                                            <graphic>
+                                                <SVGPath styleClass="hero-cta-icon" content="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z M8,12V14H16V12H8M8,16V18H13V16H8Z"/>
+                                            </graphic>
+                                        </Button>
+                                        
+                                        <Button text="Receive Files" onAction="#showReceiveFiles" styleClass="hero-cta,secondary">
+                                            <graphic>
+                                                <SVGPath styleClass="hero-cta-icon" content="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+                                            </graphic>
+                                        </Button>
+                                    </HBox>
+                                </VBox>
+                                
+                                <!-- Stats Container -->
+                                <HBox styleClass="stats-container" alignment="CENTER" spacing="60">
+                                    <VBox styleClass="stat-item" alignment="CENTER" spacing="8">
+                                        <SVGPath styleClass="stat-icon" content="M7,2V4H8V18A4,4 0 0,0 12,22A4,4 0 0,0 16,18V4H17V2H7M11,16C10.4,16 10,15.6 10,15C10,14.4 10.4,14 11,14C11.6,14 12,14.4 12,15C12,15.6 11.6,16 11,16M13,12C12.4,12 12,11.6 12,11C12,10.4 12.4,10 13,10C13.6,10 14,10.4 14,11C14,11.6 13.6,12 13,12M14,7H10V8H14V7Z"/>
+                                        <Text text="Lightning Fast" styleClass="stat-label"/>
+                                    </VBox>
+                                    <VBox styleClass="stat-item" alignment="CENTER" spacing="8">
+                                        <SVGPath styleClass="stat-icon" content="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"/>
+                                        <Text text="Secure" styleClass="stat-label"/>
+                                    </VBox>
+                                    <VBox styleClass="stat-item" alignment="CENTER" spacing="8">
+                                        <SVGPath styleClass="stat-icon" content="M12,3L2,12H5V20H19V12H22L12,3M12,8.75A2.25,2.25 0 0,1 14.25,11A2.25,2.25 0 0,1 12,13.25A2.25,2.25 0 0,1 9.75,11A2.25,2.25 0 0,1 12,8.75M12,15C13.5,15 16.5,15.75 16.5,17.25V18H7.5V17.25C7.5,15.75 10.5,15 12,15Z"/>
+                                        <Text text="Offline Ready" styleClass="stat-label"/>
+                                    </VBox>
+                                </HBox>
+                            </VBox>
+                            
+                            <!-- Main Sections -->
+                            <HBox styleClass="main-sections" spacing="0">
+                                <VBox fx:id="featuresSection" styleClass="features-section" spacing="32" HBox.hgrow="ALWAYS">
+                                    <VBox alignment="CENTER" spacing="16">
+                                        <Text text="Features" styleClass="section-title"/>
+                                        <Text text="Everything you need for secure file transfers" styleClass="section-subtitle"/>
+                                    </VBox>
+                                    
+                                    <VBox styleClass="features-list" spacing="24">
+                                        <HBox styleClass="feature-item" alignment="CENTER_LEFT" spacing="16">
+                                            <SVGPath styleClass="feature-icon" content="M7,2V4H8V18A4,4 0 0,0 12,22A4,4 0 0,0 16,18V4H17V2H7M11,16C10.4,16 10,15.6 10,15C10,14.4 10.4,14 11,14C11.6,14 12,14.4 12,15C12,15.6 11.6,16 11,16M13,12C12.4,12 12,11.6 12,11C12,10.4 12.4,10 13,10C13.6,10 14,10.4 14,11C14,11.6 13.6,12 13,12M14,7H10V8H14V7Z"/>
+                                            <VBox spacing="4">
+                                                <Text text="Lightning Fast Transfers" styleClass="feature-title"/>
+                                                <Text text="Optimized for speed and reliability" styleClass="feature-desc"/>
+                                            </VBox>
+                                        </HBox>
+                                        
+                                        <HBox styleClass="feature-item" alignment="CENTER_LEFT" spacing="16">
+                                            <SVGPath styleClass="feature-icon" content="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z"/>
+                                            <VBox spacing="4">
+                                                <Text text="USB Wizard" styleClass="feature-title"/>
+                                                <Text text="Easy USB device management" styleClass="feature-desc"/>
+                                            </VBox>
+                                        </HBox>
+                                        
+                                        <HBox styleClass="feature-item" alignment="CENTER_LEFT" spacing="16">
+                                            <SVGPath styleClass="feature-icon" content="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"/>
+                                            <VBox spacing="4">
+                                                <Text text="Transfer History" styleClass="feature-title"/>
+                                                <Text text="Track and manage all transfers" styleClass="feature-desc"/>
+                                            </VBox>
+                                        </HBox>
+                                        
+                                        <HBox styleClass="feature-item" alignment="CENTER_LEFT" spacing="16">
+                                            <SVGPath styleClass="feature-icon" content="M12,3L2,12H5V20H19V12H22L12,3M12,8.75A2.25,2.25 0 0,1 14.25,11A2.25,2.25 0 0,1 12,13.25A2.25,2.25 0 0,1 9.75,11A2.25,2.25 0 0,1 12,8.75M12,15C13.5,15 16.5,15.75 16.5,17.25V18H7.5V17.25C7.5,15.75 10.5,15 12,15Z"/>
+                                            <VBox spacing="4">
+                                                <Text text="Offline Capability" styleClass="feature-title"/>
+                                                <Text text="Works without internet connection" styleClass="feature-desc"/>
+                                            </VBox>
+                                        </HBox>
+                                    </VBox>
+                                </VBox>
+                                
+                                <!-- Security Section -->
+                                <VBox fx:id="securitySection" styleClass="security-section" spacing="32" HBox.hgrow="ALWAYS">
+                                    <VBox alignment="CENTER" spacing="16">
+                                        <Text text="Security" styleClass="section-title"/>
+                                        <Text text="Your data protection is our priority" styleClass="section-subtitle"/>
+                                    </VBox>
+                                    
+                                    <VBox styleClass="security-list" spacing="24">
+                                <HBox styleClass="security-item" alignment="CENTER_LEFT" spacing="16">
+                                    <SVGPath styleClass="security-icon encryption" content="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                                    <VBox spacing="4">
+                                        <Text text="End-to-End Encryption" styleClass="security-title"/>
+                                        <Text text="256-bit AES encryption" styleClass="security-desc"/>
+                                    </VBox>
+                                </HBox>
+                                
+                                <HBox styleClass="security-item" alignment="CENTER_LEFT" spacing="16">
+                                    <SVGPath styleClass="security-icon privacy" content="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                    <VBox spacing="4">
+                                        <Text text="Zero-Knowledge" styleClass="security-title"/>
+                                        <Text text="Your data stays private" styleClass="security-desc"/>
+                                    </VBox>
+                                </HBox>
+                                
+                                <HBox styleClass="security-item" alignment="CENTER_LEFT" spacing="16">
+                                    <SVGPath styleClass="security-icon audit" content="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    <VBox spacing="4">
+                                        <Text text="Audit Trails" styleClass="security-title"/>
+                                        <Text text="Complete transfer logs" styleClass="security-desc"/>
+                                    </VBox>
+                                </HBox>
+                                
+                                <HBox styleClass="security-item" alignment="CENTER_LEFT" spacing="16">
+                                    <SVGPath styleClass="security-icon local" content="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                                    <VBox spacing="4">
+                                        <Text text="Local Processing" styleClass="security-title"/>
+                                        <Text text="No cloud dependency" styleClass="security-desc"/>
+                                    </VBox>
+                                </HBox>
+                            </VBox>
+                        </VBox>
+                    </HBox>
+                    <HBox styleClass="footer" alignment="CENTER">
+                        <HBox alignment="CENTER_LEFT" spacing="8" HBox.hgrow="ALWAYS" maxWidth="300" minWidth="220">
+                            <SVGPath styleClass="footer-logo" content="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <VBox alignment="CENTER_LEFT" spacing="2">
+                                <Text text="SecureTransfer" styleClass="footer-brand"/>
+                                <Text text="File transfer made simple" styleClass="footer-tagline"/>
+                            </VBox>
+                        </HBox>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <VBox alignment="CENTER" spacing="8" minWidth="180">
+                            <Text text="Made by DokoData team" styleClass="footer-center-text"/>
+                        </VBox>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <HBox alignment="CENTER_RIGHT" spacing="20" HBox.hgrow="ALWAYS" maxWidth="300" minWidth="220">
+                            <Button text="About" onAction="#showAbout" styleClass="footer-link"/>
+                        </HBox>
+                    </HBox>
+                </VBox>
+            </content>
+        </ScrollPane>
                 
-                <HBox spacing="10" alignment="CENTER_LEFT">
-                    <Button fx:id="selectFileButton" text="Select File" styleClass="primary-button" onAction="#handleSendFile"/>
-                    <Button fx:id="transferButton" text="Transfer" styleClass="primary-button" onAction="#handleTransfer"/>
-                </HBox>
+                <VBox fx:id="sendFilesContent" styleClass="send-files-content" visible="false">
+                </VBox>
                 
-                <ProgressBar fx:id="transferProgress" progress="0.0" maxWidth="Infinity"/>
-                <Label fx:id="statusLabel" styleClass="status-label"/>
-            </VBox>
-            
-            <!-- File List -->
-            <VBox spacing="15" styleClass="history-section">
-                <Text styleClass="section-title">Files</Text>
-                
-                <TableView fx:id="fileTable" styleClass="transfer-table">
-                    <columns>
-                        <TableColumn fx:id="fileNameColumn" text="File Name" prefWidth="200"/>
-                        <TableColumn fx:id="fileSizeColumn" text="Size" prefWidth="100"/>
-                        <TableColumn fx:id="statusColumn" text="Status" prefWidth="100"/>
-                    </columns>
-                </TableView>
             </VBox>
         </VBox>
     </center>

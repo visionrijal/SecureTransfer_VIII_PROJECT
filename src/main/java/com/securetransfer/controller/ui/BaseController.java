@@ -27,7 +27,44 @@ public abstract class BaseController {
         return loader;
     }
     
-    protected abstract void loadLoginScreen();
+    protected void loadFXML(String fxmlPath) {
+        try {
+            logger.debug("Loading FXML: {}", fxmlPath);
+            FXMLLoader loader = createFxmlLoader(fxmlPath);
+            Parent root = loader.load();
+            
+            Stage stage = getCurrentStage();
+            if (stage != null) {
+                Scene scene = new Scene(root);
+                
+                // Load CSS if available
+                String cssPath = fxmlPath.replace(".fxml", ".css");
+                try {
+                    scene.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
+                } catch (Exception e) {
+                    logger.debug("No CSS file found for: {}", cssPath);
+                }
+                
+                stage.setScene(scene);
+                stage.show();
+            }
+        } catch (IOException e) {
+            logger.error("Error loading FXML: {}", fxmlPath, e);
+        }
+    }
     
-    protected abstract void loadRegistrationScreen();
+    protected Stage getCurrentStage() {
+        // This is a simplified version - in a real app you'd track the current stage
+        return null; // Will be overridden by controllers that need it
+    }
+    
+    // Default implementations for navigation methods
+    // Controllers can override these if they need custom navigation behavior
+    protected void loadLoginScreen() {
+        loadFXML("/fxml/login.fxml");
+    }
+    
+    protected void loadRegistrationScreen() {
+        loadFXML("/fxml/registration.fxml");
+    }
 } 

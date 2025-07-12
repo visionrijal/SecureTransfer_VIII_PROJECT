@@ -235,15 +235,18 @@ public class SecureTransferWebSocketServer extends org.java_websocket.server.Web
         logger.info("WebSocket server started successfully on port {}", getPort());
     }
     public void registerSession(String transferCode, WebSocket conn, boolean isSender) {
+        logger.info("registerSession called for transfer code: {} with isSender: {}", transferCode, isSender);
         TransferSession session = activeSessions.get(transferCode);
         
         if (session != null) {
+            logger.info("Found existing session for transfer code: {}", transferCode);
             if (isSender) {
                 session.setSenderWebSocket(conn);
                 logger.info("Sender WebSocket registered for code {}", transferCode);
                 
                 // If receiver is already connected, notify both parties
                 if (session.getReceiverWebSocket() != null) {
+                    logger.info("Receiver already connected, notifying both parties for transfer code: {}", transferCode);
                     try {
                         Map<String, Object> notification = new HashMap<>();
                         notification.put("type", "peerConnected");
@@ -259,6 +262,8 @@ public class SecureTransferWebSocketServer extends org.java_websocket.server.Web
                     } catch (Exception e) {
                         logger.error("Error sending peer connection notification: {}", e.getMessage());
                     }
+                } else {
+                    logger.info("Receiver not yet connected for transfer code: {}", transferCode);
                 }
             } else {
                 session.setReceiverWebSocket(conn);
@@ -266,6 +271,7 @@ public class SecureTransferWebSocketServer extends org.java_websocket.server.Web
                 
                 // If sender is already connected, notify both parties
                 if (session.getSenderWebSocket() != null) {
+                    logger.info("Sender already connected, notifying both parties for transfer code: {}", transferCode);
                     try {
                         Map<String, Object> notification = new HashMap<>();
                         notification.put("type", "peerConnected");
@@ -283,8 +289,13 @@ public class SecureTransferWebSocketServer extends org.java_websocket.server.Web
                     }
                     // Call the callback if set
                     if (receiverConnectedCallback != null) {
+                        logger.info("Calling receiverConnectedCallback for transfer code: {}", transferCode);
                         receiverConnectedCallback.accept(transferCode, conn);
+                    } else {
+                        logger.warn("receiverConnectedCallback is null for transfer code: {}", transferCode);
                     }
+                } else {
+                    logger.info("Sender not yet connected for transfer code: {}", transferCode);
                 }
             }
         } else {

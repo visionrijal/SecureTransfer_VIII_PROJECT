@@ -290,7 +290,12 @@ public class SecureTransferWebSocketServer extends org.java_websocket.server.Web
                     // Call the callback if set
                     if (receiverConnectedCallback != null) {
                         logger.info("Calling receiverConnectedCallback for transfer code: {}", transferCode);
-                        receiverConnectedCallback.accept(transferCode, conn);
+                        try {
+                            receiverConnectedCallback.accept(transferCode, conn);
+                            logger.info("receiverConnectedCallback executed successfully for transfer code: {}", transferCode);
+                        } catch (Exception e) {
+                            logger.error("Error executing receiverConnectedCallback for transfer code: {}: {}", transferCode, e.getMessage(), e);
+                        }
                     } else {
                         logger.warn("receiverConnectedCallback is null for transfer code: {}", transferCode);
                     }

@@ -35,10 +35,9 @@ public class SecureTransferWebSocketServer extends org.java_websocket.server.Web
     }
 
     public SecureTransferWebSocketServer(@Value("${websocket.port:8445}") int preferredPort) {
-        // Bind to all network interfaces (0.0.0.0) to allow external connections
-        super(new InetSocketAddress("0.0.0.0", preferredPort));
-        int port = getPort();
-        logger.info("Initializing WebSocket server on port {} bound to all interfaces", port);
+        // Try to bind to the preferred port, but fall back to other ports if needed
+        super(new InetSocketAddress("0.0.0.0", findAvailablePort(preferredPort)));
+        logger.info("Initializing WebSocket server on port {} bound to all interfaces", getPort());
         try {
             KeystoreManager km = new KeystoreManager();
             KeyStore ks = km.loadOrCreateKeystore();
@@ -50,6 +49,39 @@ public class SecureTransferWebSocketServer extends org.java_websocket.server.Web
             setWebSocketFactory(new org.java_websocket.server.DefaultSSLWebSocketServerFactory(sslContext));
         } catch (Exception e) {
             logger.warn("Could not initialize SSL for WebSocket server, running in non-SSL mode: {}", e.getMessage());
+        }
+    }
+
+    private static int findAvailablePort(int preferredPort) {
+        // Try the preferred port first
+        if (isPortAvailable(preferredPort)) {
+            return preferredPort;
+        }
+        
+        // Try alternative ports in a range
+        for (int port = preferredPort + 1; port <= preferredPort + 10; port++) {
+            if (isPortAvailable(port)) {
+                LoggerFactory.getLogger(SecureTransferWebSocketServer.class).info("Preferred port {} is in use, using alternative port {}", preferredPort, port);
+                return port;
+            }
+        }
+        
+        // If all ports in range are busy, use any available port
+        try (java.net.ServerSocket serverSocket = new java.net.ServerSocket(0)) {
+            int availablePort = serverSocket.getLocalPort();
+            LoggerFactory.getLogger(SecureTransferWebSocketServer.class).warn("All preferred ports are in use, using random available port: {}", availablePort);
+            return availablePort;
+        } catch (Exception e) {
+            LoggerFactory.getLogger(SecureTransferWebSocketServer.class).error("Could not find any available port, using preferred port: {}", preferredPort, e);
+            return preferredPort;
+        }
+    }
+    
+    private static boolean isPortAvailable(int port) {
+        try (java.net.ServerSocket serverSocket = new java.net.ServerSocket(port)) {
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 

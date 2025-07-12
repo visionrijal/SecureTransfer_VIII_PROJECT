@@ -152,7 +152,7 @@ public class TransferServiceImpl implements TransferService {
                 try {
                     // Get the sender's IP and WebSocket port
                     String senderIp = NetworkUtils.getLocalIpAddress().orElse("127.0.0.1");
-                    int websocketPort = 8445; // Default WebSocket port
+                    int websocketPort = webSocketServer.getActualPort(); // Get actual WebSocket server port
                     
                     // Store the connection details
                     storeSenderConnectionDetails(transferCode, senderIp, websocketPort);
@@ -189,10 +189,12 @@ public class TransferServiceImpl implements TransferService {
             .thenRun(() -> {
                 // Connect sender to its own WebSocket server to receive notifications
                 logger.info("Connecting sender to WebSocket server for transfer code: {}", transferCode);
+                int websocketPort = webSocketServer.getActualPort();
+                List<String> localhostAddresses = Arrays.asList("127.0.0.1:" + websocketPort);
                 webSocketClientManager.connect(
                     transferCode,
                     "sender",
-                    Arrays.asList("127.0.0.1"), // Connect to localhost
+                    localhostAddresses, // Connect to localhost with actual port
                     msg -> logger.info("Sender connection status: {}", msg),
                     err -> logger.error("Sender connection error: {}", err),
                     url -> logger.info("Sender WebSocket open: {}", url),
@@ -277,10 +279,12 @@ public class TransferServiceImpl implements TransferService {
             .thenRun(() -> {
                 // Connect sender to its own WebSocket server to receive notifications
                 logger.info("Connecting sender to WebSocket server for transfer code: {}", transferCode);
+                int websocketPort = webSocketServer.getActualPort();
+                List<String> localhostAddresses = Arrays.asList("127.0.0.1:" + websocketPort);
                 webSocketClientManager.connect(
                     transferCode,
                     "sender",
-                    Arrays.asList("127.0.0.1"), // Connect to localhost
+                    localhostAddresses, // Connect to localhost with actual port
                     msg -> logger.info("Sender connection status: {}", msg),
                     err -> logger.error("Sender connection error: {}", err),
                     url -> logger.info("Sender WebSocket open: {}", url),

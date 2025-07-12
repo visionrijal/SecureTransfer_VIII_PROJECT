@@ -7398,3 +7398,301 @@ java.net.BindException: Address already in use
 2025-07-12 15:17:03 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Successfully discovered public IP 27.34.65.131 via pre-tested STUN server stun.ipfire.org:3478
 2025-07-12 15:17:03 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Discovered external IP 27.34.65.131 via STUN
 2025-07-12 15:17:03 [ForkJoinPool.commonPool-worker-1] INFO  c.s.s.impl.P2PConnectionServiceImpl - Connection details discovered: ConnectionDetails{localIp='192.168.1.101', externalIp='27.34.65.131', externalPort=8444, portMapped=false, discoveryMethod=STUN}
+2025-07-12 15:17:07 [pool-4-thread-1] WARN  com.securetransfer.util.UPnPManager - No UPnP gateway device found
+2025-07-12 15:17:07 [pool-4-thread-1] WARN  c.s.s.impl.P2PConnectionServiceImpl - Failed to remove WebSocket server UPnP port mapping
+2025-07-12 15:18:11 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - Starting application using Java 21.0.7 with PID 41353 (started by randomguy in /home/randomguy/IdeaProjects/Secure Transfer)
+2025-07-12 15:18:11 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - No active profile set, falling back to 1 default profile: "default"
+2025-07-12 15:18:11 [JavaFX-Launcher] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-12 15:18:11 [JavaFX-Launcher] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 34 ms. Found 3 JPA repository interfaces.
+2025-07-12 15:18:12 [JavaFX-Launcher] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-07-12 15:18:12 [JavaFX-Launcher] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-07-12 15:18:12 [JavaFX-Launcher] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2025-07-12 15:18:12 [JavaFX-Launcher] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-07-12 15:18:12 [JavaFX-Launcher] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 727 ms
+2025-07-12 15:18:12 [JavaFX-Launcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-12 15:18:12 [JavaFX-Launcher] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/securetransfer user=SA
+2025-07-12 15:18:12 [JavaFX-Launcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-12 15:18:12 [JavaFX-Launcher] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/securetransfer'
+2025-07-12 15:18:12 [JavaFX-Launcher] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-12 15:18:12 [JavaFX-Launcher] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-07-12 15:18:12 [JavaFX-Launcher] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-12 15:18:12 [JavaFX-Launcher] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-12 15:18:12 [JavaFX-Launcher] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-12 15:18:13 [JavaFX-Launcher] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-12 15:18:13 [JavaFX-Launcher] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-12 15:18:13 [JavaFX-Launcher] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-12 15:18:13 [JavaFX-Launcher] INFO  c.s.s.impl.EncryptionServiceImpl - Encryption service initialized with provided key
+2025-07-12 15:18:13 [JavaFX-Launcher] INFO  c.s.s.i.SecureTransferWebSocketServer - Initializing WebSocket server on port 8445 bound to all interfaces
+2025-07-12 15:18:13 [JavaFX-Launcher] WARN  c.s.s.i.SecureTransferWebSocketServer - Could not initialize SSL for WebSocket server, running in non-SSL mode: Unknown object id - S - passed to distinguished name
+2025-07-12 15:18:13 [JavaFX-Launcher] INFO  c.s.s.impl.P2PConnectionServiceImpl - Initializing P2P connection service
+2025-07-12 15:18:13 [JavaFX-Launcher] INFO  c.s.s.impl.P2PConnectionServiceImpl - P2P server started on port 8444
+2025-07-12 15:18:13 [pool-3-thread-1] INFO  c.s.s.impl.P2PConnectionServiceImpl - Listening for incoming P2P connections
+2025-07-12 15:18:13 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Attempting to discover connection details via STUN
+2025-07-12 15:18:13 [JavaFX-Launcher] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-12 15:18:13 [JavaFX-Launcher] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: b9a41281-ff34-4c02-8cf2-14c913d658f0
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-07-12 15:18:14 [JavaFX-Launcher] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@17c6129c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2340570d, org.springframework.security.web.context.SecurityContextHolderFilter@41f2c116, org.springframework.security.web.header.HeaderWriterFilter@117ddf96, org.springframework.web.filter.CorsFilter@17069894, org.springframework.security.web.authentication.logout.LogoutFilter@33c00a75, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2de389c6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@aff244a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@697249f0, org.springframework.security.web.access.ExceptionTranslationFilter@bf130b2, org.springframework.security.web.access.intercept.AuthorizationFilter@641a050c]
+2025-07-12 15:18:14 [JavaFX-Launcher] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2025-07-12 15:18:14 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - Started application in 3.085 seconds (process running for 3.593)
+2025-07-12 15:18:14 [scheduling-1] INFO  c.s.s.impl.EncryptionServiceImpl - Encryption key rotated successfully
+2025-07-12 15:18:14 [JavaFX-Launcher] INFO  c.s.config.WebSocketConfig - WebSocket server started successfully on port 8445
+2025-07-12 15:18:14 [JavaFX-Launcher] INFO  c.s.config.DatabaseStartupListener - Application started - checking database health...
+2025-07-12 15:18:14 [WebSocketSelector-91] INFO  c.s.s.i.SecureTransferWebSocketServer - WebSocket server started successfully on port 8445
+2025-07-12 15:18:14 [scheduling-1] DEBUG c.s.service.impl.TransferServiceImpl - Cleaning up completed transfers
+2025-07-12 15:18:14 [scheduling-1] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        sender_transfers 
+    where
+        start_time<?
+2025-07-12 15:18:14 [scheduling-1] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        receiver_transfers 
+    where
+        received_time<?
+2025-07-12 15:18:14 [JavaFX-Launcher] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.active,
+        u1_0.created_at,
+        u1_0.device_id,
+        u1_0.last_login,
+        u1_0.password_hash,
+        u1_0.user_token,
+        u1_0.username 
+    from
+        users u1_0
+2025-07-12 15:18:14 [JavaFX-Launcher] INFO  c.s.util.DatabaseHealthCheck - Database health check: Found 1 users in database
+2025-07-12 15:18:14 [JavaFX-Launcher] INFO  c.s.util.DatabaseHealthCheck - Existing users: random
+2025-07-12 15:18:14 [JavaFX Application Thread] WARN  javafx.css - CSS Error parsing file:/home/randomguy/IdeaProjects/Secure%20Transfer/target/classes/styles/global.css: Expected '<color>' while parsing '-fx-background-color' at [333,42]
+2025-07-12 15:18:20 [ForkJoinPool.commonPool-worker-1] INFO  c.securetransfer.util.NetworkUtils - Found working STUN server: stun.freeswitch.org:3478
+2025-07-12 15:18:20 [ForkJoinPool.commonPool-worker-1] INFO  JitsiConfig - Initialized newConfig: merge of application.properties @ file:/home/randomguy/IdeaProjects/Secure%20Transfer/target/classes/application.properties,system properties,reference.conf @ jar:file:/home/randomguy/.m2/repository/org/jitsi/ice4j/3.2-9-gb64c86f/ice4j-3.2-9-gb64c86f.jar!/reference.conf: 1
+2025-07-12 15:18:20 [ForkJoinPool.commonPool-worker-1] INFO  o.j.c.ReadOnlyConfigurationService - net.java.sip.communicator.SC_HOME_DIR_LOCATION not set
+2025-07-12 15:18:20 [ForkJoinPool.commonPool-worker-1] INFO  JitsiConfig - Initialized legacyConfig: sip communicator props (no description provided)
+2025-07-12 15:18:20 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.h.MappingCandidateHarvesters - Using AwsCandidateHarvester.
+2025-07-12 15:18:21 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.h.MappingCandidateHarvesters - Discarding a mapping harvester: org.ice4j.ice.harvest.AwsCandidateHarvester@4cd6dd26
+2025-07-12 15:18:21 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.h.MappingCandidateHarvesters - Initialized mapping harvesters (delay=573ms).  stunDiscoveryFailed=false
+2025-07-12 15:18:21 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Gathering candidates for component data.RTP.
+2025-07-12 15:18:21 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Start ICE connectivity establishment.
+2025-07-12 15:18:21 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Init checklist for stream data
+2025-07-12 15:18:21 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - ICE state changed from Waiting to Running.
+2025-07-12 15:18:21 [ForkJoinPool.commonPool-worker-1] INFO  o.ice4j.ice.ConnectivityCheckClient - Start connectivity checks.
+2025-07-12 15:18:21 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Successfully discovered public IP 27.34.65.131 via pre-tested STUN server stun.freeswitch.org:3478
+2025-07-12 15:18:21 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Discovered external IP 27.34.65.131 via STUN
+2025-07-12 15:18:21 [ForkJoinPool.commonPool-worker-1] INFO  c.s.s.impl.P2PConnectionServiceImpl - Connection details discovered: ConnectionDetails{localIp='192.168.1.101', externalIp='27.34.65.131', externalPort=8444, portMapped=false, discoveryMethod=STUN}
+2025-07-12 15:18:22 [JavaFX Application Thread] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.active,
+        u1_0.created_at,
+        u1_0.device_id,
+        u1_0.last_login,
+        u1_0.password_hash,
+        u1_0.user_token,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-07-12 15:18:23 [JavaFX Application Thread] DEBUG org.hibernate.SQL - 
+    update
+        users 
+    set
+        active=?,
+        created_at=?,
+        device_id=?,
+        last_login=?,
+        password_hash=?,
+        user_token=?,
+        username=? 
+    where
+        id=?
+2025-07-12 15:18:23 [JavaFX Application Thread] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.active,
+        u1_0.created_at,
+        u1_0.device_id,
+        u1_0.last_login,
+        u1_0.password_hash,
+        u1_0.user_token,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-07-12 15:18:23 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - New UserSession instance created
+2025-07-12 15:18:23 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - Created new UserSession instance
+2025-07-12 15:18:23 [JavaFX Application Thread] INFO  com.securetransfer.util.UserSession - Force resetting UserSession instance
+2025-07-12 15:18:23 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - New UserSession instance created
+2025-07-12 15:18:23 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - Created new UserSession instance
+2025-07-12 15:18:23 [JavaFX Application Thread] INFO  com.securetransfer.util.UserSession - Setting current user to: random
+2025-07-12 15:18:23 [JavaFX Application Thread] INFO  c.s.controller.ui.LoginController - User session set for: random
+2025-07-12 15:18:23 [JavaFX Application Thread] DEBUG c.s.controller.ui.LoginController - Loading main screen with toast
+2025-07-12 15:18:23 [JavaFX Application Thread] DEBUG c.s.controller.ui.BaseController - Creating FXML loader for path: /fxml/main.fxml
+2025-07-12 15:18:23 [JavaFX Application Thread] INFO  c.s.controller.ui.MainController - SecureTransfer main page initialized successfully
+2025-07-12 15:18:48 [JavaFX Application Thread] INFO  c.s.controller.ui.MainController - Showing receive files content
+2025-07-12 15:18:48 [JavaFX Application Thread] DEBUG c.s.controller.ui.BaseController - Creating FXML loader for path: /fxml/receive-files.fxml
+2025-07-12 15:18:48 [JavaFX Application Thread] INFO  c.s.c.ui.ReceiveFilesController - ReceiveFilesController initialized
+2025-07-12 15:18:48 [JavaFX Application Thread] DEBUG org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.auto_saved,
+        rt1_0.checksum,
+        rt1_0.error_message,
+        rt1_0.file_name,
+        rt1_0.file_path,
+        rt1_0.file_size,
+        rt1_0.received_time,
+        rt1_0.saved_time,
+        rt1_0.sender_code,
+        rt1_0.sender_username,
+        rt1_0.session_id,
+        rt1_0.transfer_status 
+    from
+        receiver_transfers rt1_0 
+    where
+        rt1_0.received_time>=? 
+    order by
+        rt1_0.received_time desc
+2025-07-12 15:18:48 [JavaFX Application Thread] DEBUG c.s.controller.ui.MainController - Active page changed to: receive-files
+2025-07-12 15:18:48 [JavaFX Application Thread] INFO  c.s.controller.ui.MainController - Receive files content loaded successfully
+2025-07-12 15:18:48 [JavaFX Application Thread] WARN  javafx.css - CSS Error parsing file:/home/randomguy/IdeaProjects/Secure%20Transfer/target/classes/styles/receive-files.css: Expected '<color>' while parsing '-fx-background' at [16,36]
+2025-07-12 15:19:07 [ForkJoinPool.commonPool-worker-1] DEBUG com.securetransfer.util.UserSession - Getting current user: random
+2025-07-12 15:19:07 [ForkJoinPool.commonPool-worker-1] DEBUG com.securetransfer.util.UserSession - Getting current user: random
+2025-07-12 15:19:07 [ForkJoinPool.commonPool-worker-1] INFO  c.s.service.impl.TransferServiceImpl - Connecting to transfer with code: 435137
+2025-07-12 15:19:07 [ForkJoinPool.commonPool-worker-1] WARN  c.s.service.impl.TransferServiceImpl - No sender local IP found for transfer code: 435137
+2025-07-12 15:19:07 [ForkJoinPool.commonPool-worker-1] INFO  c.s.service.impl.TransferServiceImpl - No sender local IP found, using discovered addresses: [192.168.1.101]
+2025-07-12 15:19:07 [ForkJoinPool.commonPool-worker-1] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Attempting direct LAN connection...
+2025-07-12 15:19:07 [WebSocketConnectReadThread-113] ERROR c.s.util.WebSocketClientManager - WebSocket error: Connection refused
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.Net.connect0(Native Method)
+	at java.base/sun.nio.ch.Net.connect(Net.java:589)
+	at java.base/sun.nio.ch.Net.connect(Net.java:578)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:583)
+	at java.base/java.net.Socket.connect(Socket.java:751)
+	at org.java_websocket.client.WebSocketClient.run(WebSocketClient.java:475)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-07-12 15:19:07 [WebSocketConnectReadThread-115] ERROR c.s.util.WebSocketClientManager - WebSocket error: Connection refused
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.Net.connect0(Native Method)
+	at java.base/sun.nio.ch.Net.connect(Net.java:589)
+	at java.base/sun.nio.ch.Net.connect(Net.java:578)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:583)
+	at java.base/java.net.Socket.connect(Socket.java:751)
+	at org.java_websocket.client.WebSocketClient.run(WebSocketClient.java:475)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-07-12 15:19:07 [WebSocketConnectReadThread-115] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Connection error: Connection refused
+2025-07-12 15:19:07 [WebSocketConnectReadThread-113] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Connection error: Connection refused
+2025-07-12 15:19:07 [WebSocketConnectReadThread-115] INFO  c.s.util.WebSocketClientManager - WebSocket closed: ws://192.168.1.101:8447/transfer?code=435137&role=receiver (-1 - Connection refused)
+2025-07-12 15:19:07 [WebSocketConnectReadThread-113] INFO  c.s.util.WebSocketClientManager - WebSocket closed: ws://192.168.1.101:8446/transfer?code=435137&role=receiver (-1 - Connection refused)
+2025-07-12 15:19:07 [WebSocketConnectReadThread-113] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Connection closed: Connection refused
+2025-07-12 15:19:07 [WebSocketConnectReadThread-115] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Connection closed: Connection refused
+2025-07-12 15:19:07 [WebSocketWorker-60] INFO  c.s.s.i.SecureTransferWebSocketServer - New WebSocket connection from: /192.168.1.101:54426
+2025-07-12 15:19:07 [WebSocketWorker-60] INFO  c.s.s.i.SecureTransferWebSocketServer - Registering receiver WebSocket for transfer code: 435137 from /192.168.1.101:54426
+2025-07-12 15:19:07 [WebSocketWorker-60] INFO  c.s.s.i.SecureTransferWebSocketServer - Creating new transfer session for code: 435137
+2025-07-12 15:19:07 [WebSocketConnectReadThread-112] INFO  c.s.util.WebSocketClientManager - WebSocket opened: ws://192.168.1.101:8445/transfer?code=435137&role=receiver
+2025-07-12 15:19:07 [WebSocketConnectReadThread-112] INFO  c.s.service.impl.TransferServiceImpl - Connection status: WebSocket connection established
+2025-07-12 15:19:07 [WebSocketWorker-60] INFO  c.s.s.i.SecureTransferWebSocketServer - Receiver WebSocket registered for code 435137
+2025-07-12 15:19:07 [WebSocketWorker-60] INFO  c.s.s.i.SecureTransferWebSocketServer - Sent connection confirmation to receiver for transfer code: 435137
+2025-07-12 15:19:07 [WebSocketConnectReadThread-112] INFO  c.s.util.WebSocketClientManager - WebSocket message: {"role":"receiver","type":"connected","transferCode":"435137","timestamp":1752312847601}
+2025-07-12 15:19:07 [JavaFX Application Thread] ERROR c.s.service.impl.TransferServiceImpl - Connection error: Connection refused
+2025-07-12 15:19:07 [JavaFX Application Thread] ERROR c.s.service.impl.TransferServiceImpl - Connection error: Connection refused
+2025-07-12 15:19:07 [WebSocketConnectReadThread-112] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Connection confirmed by server
+2025-07-12 15:19:07 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - WebSocket closed: Connection refused
+2025-07-12 15:19:07 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - WebSocket closed: Connection refused
+2025-07-12 15:19:07 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - WebSocket open: ws://192.168.1.101:8445/transfer?code=435137&role=receiver
+2025-07-12 15:19:07 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - WebSocket connection established successfully for transfer code: 435137
+2025-07-12 15:19:07 [ForkJoinPool.commonPool-worker-1] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Connected via direct LAN
+2025-07-12 15:19:07 [ForkJoinPool.commonPool-worker-1] INFO  c.s.service.impl.TransferServiceImpl - Connection result received for transfer code 435137: DIRECT_LAN
+2025-07-12 15:19:07 [ForkJoinPool.commonPool-worker-1] INFO  c.s.s.impl.WebSocketServiceImpl - Registering receiver for transfer code: 435137
+2025-07-12 15:19:07 [ForkJoinPool.commonPool-worker-1] WARN  c.s.s.impl.WebSocketServiceImpl - Transfer code 435137 not found
+2025-07-12 15:19:07 [ForkJoinPool.commonPool-worker-1] INFO  c.s.service.impl.TransferServiceImpl - No session found for transfer code: 435137, creating a basic session
+2025-07-12 15:19:21 [JavaFX Application Thread] INFO  c.s.s.impl.P2PConnectionServiceImpl - P2P server stopped
+2025-07-12 15:19:21 [JavaFX Application Thread] INFO  c.s.s.impl.P2PConnectionServiceImpl - P2P connection service shutdown complete
+2025-07-12 15:19:21 [JavaFX Application Thread] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-12 15:19:21 [JavaFX Application Thread] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-12 15:19:21 [JavaFX Application Thread] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-07-12 15:19:30 [pool-13-thread-1] WARN  com.securetransfer.util.UPnPManager - No UPnP gateway device found
+2025-07-12 15:19:30 [pool-13-thread-1] WARN  c.s.s.impl.P2PConnectionServiceImpl - Failed to remove WebSocket server UPnP port mapping
+2025-07-12 15:24:20 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - Starting application using Java 21.0.7 with PID 42213 (started by randomguy in /home/randomguy/IdeaProjects/Secure Transfer)
+2025-07-12 15:24:20 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - No active profile set, falling back to 1 default profile: "default"
+2025-07-12 15:24:21 [JavaFX-Launcher] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-12 15:24:21 [JavaFX-Launcher] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 34 ms. Found 3 JPA repository interfaces.
+2025-07-12 15:24:21 [JavaFX-Launcher] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-07-12 15:24:21 [JavaFX-Launcher] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-07-12 15:24:21 [JavaFX-Launcher] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2025-07-12 15:24:21 [JavaFX-Launcher] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-07-12 15:24:21 [JavaFX-Launcher] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 738 ms
+2025-07-12 15:24:21 [JavaFX-Launcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-12 15:24:21 [JavaFX-Launcher] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/securetransfer user=SA
+2025-07-12 15:24:21 [JavaFX-Launcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-12 15:24:21 [JavaFX-Launcher] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/securetransfer'
+2025-07-12 15:24:21 [JavaFX-Launcher] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-12 15:24:21 [JavaFX-Launcher] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-07-12 15:24:21 [JavaFX-Launcher] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-12 15:24:22 [JavaFX-Launcher] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-12 15:24:22 [JavaFX-Launcher] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-12 15:24:22 [JavaFX-Launcher] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-12 15:24:22 [JavaFX-Launcher] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-12 15:24:22 [JavaFX-Launcher] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-12 15:24:22 [JavaFX-Launcher] INFO  c.s.s.impl.EncryptionServiceImpl - Encryption service initialized with provided key
+2025-07-12 15:24:22 [JavaFX-Launcher] INFO  c.s.s.i.SecureTransferWebSocketServer - Preferred port 8445 is in use, using alternative port 8446
+2025-07-12 15:24:22 [JavaFX-Launcher] INFO  c.s.s.i.SecureTransferWebSocketServer - Initializing WebSocket server on port 8446 bound to all interfaces
+2025-07-12 15:24:23 [JavaFX-Launcher] WARN  c.s.s.i.SecureTransferWebSocketServer - Could not initialize SSL for WebSocket server, running in non-SSL mode: Unknown object id - S - passed to distinguished name
+2025-07-12 15:24:23 [JavaFX-Launcher] INFO  c.s.s.impl.P2PConnectionServiceImpl - Initializing P2P connection service
+2025-07-12 15:24:23 [JavaFX-Launcher] INFO  c.s.s.impl.P2PConnectionServiceImpl - P2P server started on port 8444
+2025-07-12 15:24:23 [pool-3-thread-1] INFO  c.s.s.impl.P2PConnectionServiceImpl - Listening for incoming P2P connections
+2025-07-12 15:24:23 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Attempting to discover connection details via STUN
+2025-07-12 15:24:23 [JavaFX-Launcher] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-12 15:24:23 [JavaFX-Launcher] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 09028550-6065-4e39-b9eb-2ac7c771175d
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-07-12 15:24:23 [JavaFX-Launcher] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@70bdab1, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5b70629d, org.springframework.security.web.context.SecurityContextHolderFilter@7637fe26, org.springframework.security.web.header.HeaderWriterFilter@1164f12e, org.springframework.web.filter.CorsFilter@1b9f921, org.springframework.security.web.authentication.logout.LogoutFilter@719bc272, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3b9fbabf, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1bfe6e33, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@138aaf6d, org.springframework.security.web.access.ExceptionTranslationFilter@13811e4f, org.springframework.security.web.access.intercept.AuthorizationFilter@10d98fd2]
+2025-07-12 15:24:23 [JavaFX-Launcher] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2025-07-12 15:24:23 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - Started application in 3.319 seconds (process running for 3.848)
+2025-07-12 15:24:23 [scheduling-1] INFO  c.s.s.impl.EncryptionServiceImpl - Encryption key rotated successfully
+2025-07-12 15:24:23 [JavaFX-Launcher] INFO  c.s.config.WebSocketConfig - WebSocket server started successfully on port 8446
+2025-07-12 15:24:23 [JavaFX-Launcher] INFO  c.s.config.DatabaseStartupListener - Application started - checking database health...
+2025-07-12 15:24:23 [WebSocketSelector-91] INFO  c.s.s.i.SecureTransferWebSocketServer - WebSocket server started successfully on port 8446
+2025-07-12 15:24:23 [scheduling-1] DEBUG c.s.service.impl.TransferServiceImpl - Cleaning up completed transfers
+2025-07-12 15:24:23 [scheduling-1] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        sender_transfers 
+    where
+        start_time<?
+2025-07-12 15:24:23 [scheduling-1] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        receiver_transfers 
+    where
+        received_time<?
+2025-07-12 15:24:23 [JavaFX-Launcher] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.active,
+        u1_0.created_at,
+        u1_0.device_id,
+        u1_0.last_login,
+        u1_0.password_hash,
+        u1_0.user_token,
+        u1_0.username 
+    from
+        users u1_0
+2025-07-12 15:24:23 [JavaFX-Launcher] INFO  c.s.util.DatabaseHealthCheck - Database health check: Found 1 users in database
+2025-07-12 15:24:23 [JavaFX-Launcher] INFO  c.s.util.DatabaseHealthCheck - Existing users: random
+2025-07-12 15:24:24 [JavaFX Application Thread] WARN  javafx.css - CSS Error parsing file:/home/randomguy/IdeaProjects/Secure%20Transfer/target/classes/styles/global.css: Expected '<color>' while parsing '-fx-background-color' at [333,42]
+2025-07-12 15:24:25 [JavaFX Application Thread] INFO  c.s.s.impl.P2PConnectionServiceImpl - P2P server stopped
+2025-07-12 15:24:25 [JavaFX Application Thread] INFO  c.s.s.impl.P2PConnectionServiceImpl - P2P connection service shutdown complete
+2025-07-12 15:24:25 [JavaFX Application Thread] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-12 15:24:25 [JavaFX Application Thread] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-12 15:24:25 [JavaFX Application Thread] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

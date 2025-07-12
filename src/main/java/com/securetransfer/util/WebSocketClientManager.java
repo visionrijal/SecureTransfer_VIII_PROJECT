@@ -178,39 +178,100 @@ public class WebSocketClientManager {
         Set<WebSocketClient> clients = new HashSet<>();
         
         // Try connecting to each address
-        for (String ip : peerLocalAddresses) {
-            String[] portsToTry = {"8445", "8446", "8447"};
-            for (String port : portsToTry) {
+        for (String address : peerLocalAddresses) {
+            String ip;
+            String port;
+            
+            // Check if address contains port information (format: "ip:port")
+            if (address.contains(":")) {
+                String[] parts = address.split(":", 2);
+                ip = parts[0];
+                port = parts[1];
+                
+                // Try the specific port
                 String url = "ws://" + ip + ":" + port + "/transfer?code=" + transferCode + "&role=" + role;
-            try {
-                WebSocketClient client = createClient(url, onStatus, onError, onOpen, onClose, onMessage, onBinary);
-                clients.add(client);
-                
-                client.connect();
-                
-                CompletableFuture.runAsync(() -> {
-                    try {
-                        // Wait up to 2 seconds for connection to establish
-                        for (int i = 0; i < 20; i++) {
-                            if (client.isOpen()) {
-                                result.complete(Optional.of(client));
-                                
-                                // Close all other clients
-                                for (WebSocketClient otherClient : clients) {
-                                    if (otherClient != client && otherClient.isOpen()) {
-                                        otherClient.close();
+                try {
+                    WebSocketClient client = createClient(url, onStatus, onError, onOpen, onClose, onMessage, onBinary);
+                    clients.add(client);
+                    
+                    client.connect();
+                    
+                    CompletableFuture.runAsync(() -> {
+                        try {
+                            // Wait up to 2 seconds for connection to establish
+                            for (int i = 0; i < 20; i++) {
+                                if (client.isOpen()) {
+                                    result.complete(Optional.of(client));
+                                    
+                                    // Close all other clients
+                                    for (WebSocketClient otherClient : clients) {
+                                        if (otherClient != client && otherClient.isOpen()) {
+                                            otherClient.close();
+                                        }
                                     }
+                                    return;
                                 }
-                                return;
+                                Thread.sleep(100);
                             }
-                            Thread.sleep(100);
+                            
+                            // Connection failed, close this client
+                            if (client.isOpen()) {
+                                client.close();
+                            }
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                            if (client.isOpen()) {
+                                client.close();
+                            }
                         }
+                    });
+                } catch (Exception e) {
+                    logger.error("WebSocket error: {}", e.getMessage());
+                }
+            } else {
+                // Use default ports if no port specified
+                ip = address;
+                String[] portsToTry = {"8445", "8446", "8447"};
+                for (String defaultPort : portsToTry) {
+                    String url = "ws://" + ip + ":" + defaultPort + "/transfer?code=" + transferCode + "&role=" + role;
+                    try {
+                        WebSocketClient client = createClient(url, onStatus, onError, onOpen, onClose, onMessage, onBinary);
+                        clients.add(client);
+                        
+                        client.connect();
+                        
+                        CompletableFuture.runAsync(() -> {
+                            try {
+                                // Wait up to 2 seconds for connection to establish
+                                for (int i = 0; i < 20; i++) {
+                                    if (client.isOpen()) {
+                                        result.complete(Optional.of(client));
+                                        
+                                        // Close all other clients
+                                        for (WebSocketClient otherClient : clients) {
+                                            if (otherClient != client && otherClient.isOpen()) {
+                                                otherClient.close();
+                                            }
+                                        }
+                                        return;
+                                    }
+                                    Thread.sleep(100);
+                                }
+                                
+                                // Connection failed, close this client
+                                if (client.isOpen()) {
+                                    client.close();
+                                }
+                            } catch (InterruptedException e) {
+                                Thread.currentThread().interrupt();
+                                if (client.isOpen()) {
+                                    client.close();
+                                }
+                            }
+                        });
                     } catch (Exception e) {
-                        logger.warn("Error checking client connection: {}", e.getMessage());
+                        logger.error("WebSocket error: {}", e.getMessage());
                     }
-                });
-            } catch (Exception e) {
-                    logger.warn("Direct LAN connection failed for {}:{}: {}", ip, port, e.getMessage());
                 }
             }
         }

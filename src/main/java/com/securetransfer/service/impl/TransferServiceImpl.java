@@ -12,6 +12,7 @@ import com.securetransfer.service.WebSocketService.SenderInfo;
 import com.securetransfer.service.WebSocketService.ReceiverInfo;
 import com.securetransfer.util.WebSocketClientManager;
 import com.securetransfer.util.ToastNotification;
+import com.securetransfer.util.NetworkUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,8 @@ public class TransferServiceImpl implements TransferService {
     @Autowired
     private EncryptionService encryptionService;
     
+    private final WebSocketClientManager webSocketClientManager = new WebSocketClientManager();
+    
     @Autowired
     private SenderTransferRepository senderTransferRepository;
     
@@ -83,7 +86,7 @@ public class TransferServiceImpl implements TransferService {
         logger.info("Initiating transfer for code: {}", transferCode);
         CompletableFuture<TransferSession> future = new CompletableFuture<>();
         Consumer<String> toast = msg -> ToastNotification.show(null, msg, ToastNotification.NotificationType.INFO, javafx.util.Duration.seconds(3), 70);
-        WebSocketClientManager.connect(
+        webSocketClientManager.connect(
             transferCode,
             "sender",
             discoverLocalLANAddresses(),
@@ -95,6 +98,19 @@ public class TransferServiceImpl implements TransferService {
             bytes -> handleIncomingBinary(transferCode, bytes)
         ).thenAccept(connResult -> {
             activeClients.put(transferCode, connResult.client);
+            
+            // Store sender connection details for receiver lookup
+            try {
+                // Get the sender's IP and WebSocket port
+                String senderIp = NetworkUtils.getLocalIpAddress().orElse("127.0.0.1");
+                int websocketPort = 8445; // Default WebSocket port
+                
+                // Store the connection details
+                storeSenderConnectionDetails(transferCode, senderIp, websocketPort);
+                logger.info("Stored sender connection details for transfer {}: {}:{}", transferCode, senderIp, websocketPort);
+            } catch (Exception e) {
+                logger.warn("Failed to store sender connection details: {}", e.getMessage());
+            }
             
             // Create a unique session ID for this transfer
             String sessionId = UUID.randomUUID().toString();
@@ -257,7 +273,7 @@ public class TransferServiceImpl implements TransferService {
             ToastNotification.show(null, "Connection error: " + err, ToastNotification.NotificationType.ERROR, javafx.util.Duration.seconds(3), 70);
         };
         
-        WebSocketClientManager.connect(
+        webSocketClientManager.connect(
             transferCode,
             "receiver",
             discoverLocalLANAddresses(),
@@ -823,5 +839,26 @@ public class TransferServiceImpl implements TransferService {
             logger.warn("Failed to discover LAN IPs: {}", e.getMessage());
         }
         return ips;
+    }
+    
+    // Store sender connection details
+    private final Map<String, String> senderConnectionDetails = new ConcurrentHashMap<>();
+    
+    @Override
+    public void storeSenderConnectionDetails(String transferCode, String ip, int port) {
+        String details = ip + ":" + port;
+        senderConnectionDetails.put(transferCode, details);
+        logger.info("Stored sender connection details for {}: {}", transferCode, details);
+    }
+    
+    @Override
+    public String getSenderConnectionDetails(String transferCode) {
+        String details = senderConnectionDetails.get(transferCode);
+        if (details != null) {
+            logger.info("Retrieved sender connection details for {}: {}", transferCode, details);
+        } else {
+            logger.warn("No sender connection details found for transfer code: {}", transferCode);
+        }
+        return details;
     }
 }

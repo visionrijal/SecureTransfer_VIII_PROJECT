@@ -148,7 +148,7 @@ public interface WebSocketService {
         private org.java_websocket.WebSocket receiverWebSocket;
         private String fileName;
         private long fileSize;
-
+        
         public TransferSession(String transferCode, SenderInfo sender, ReceiverInfo receiver, String fileName, long fileSize) {
             this.transferCode = transferCode;
             this.sender = sender;

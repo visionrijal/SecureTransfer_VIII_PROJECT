@@ -813,3 +813,995 @@ This generated password is for development use only. Your security configuration
 2025-07-12 12:54:49 [pool-11-thread-1] WARN  c.s.s.impl.P2PConnectionServiceImpl - Failed to remove WebSocket server UPnP port mapping
 2025-07-12 12:54:51 [pool-11-thread-1] WARN  com.securetransfer.util.UPnPManager - No UPnP gateway device found
 2025-07-12 12:54:51 [pool-11-thread-1] WARN  c.s.s.impl.P2PConnectionServiceImpl - Failed to remove WebSocket server UPnP port mapping
+2025-07-12 13:30:27 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - Starting application using Java 21.0.7 with PID 18490 (started by randomguy in /home/randomguy/IdeaProjects/Secure Transfer)
+2025-07-12 13:30:27 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - No active profile set, falling back to 1 default profile: "default"
+2025-07-12 13:30:27 [JavaFX-Launcher] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-12 13:30:27 [JavaFX-Launcher] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 28 ms. Found 3 JPA repository interfaces.
+2025-07-12 13:30:28 [JavaFX-Launcher] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-07-12 13:30:28 [JavaFX-Launcher] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-07-12 13:30:28 [JavaFX-Launcher] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2025-07-12 13:30:28 [JavaFX-Launcher] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-07-12 13:30:28 [JavaFX-Launcher] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 610 ms
+2025-07-12 13:30:28 [JavaFX-Launcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-12 13:30:28 [JavaFX-Launcher] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/securetransfer user=SA
+2025-07-12 13:30:28 [JavaFX-Launcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-12 13:30:28 [JavaFX-Launcher] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/securetransfer'
+2025-07-12 13:30:28 [JavaFX-Launcher] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-12 13:30:28 [JavaFX-Launcher] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-07-12 13:30:28 [JavaFX-Launcher] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-12 13:30:28 [JavaFX-Launcher] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-12 13:30:28 [JavaFX-Launcher] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-12 13:30:28 [JavaFX-Launcher] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-12 13:30:28 [JavaFX-Launcher] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-12 13:30:29 [JavaFX-Launcher] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-12 13:30:29 [JavaFX-Launcher] INFO  c.s.s.impl.EncryptionServiceImpl - Encryption service initialized with provided key
+2025-07-12 13:30:29 [JavaFX-Launcher] INFO  c.s.s.i.SecureTransferWebSocketServer - Initializing WebSocket server on port 8445 bound to all interfaces
+2025-07-12 13:30:29 [JavaFX-Launcher] WARN  c.s.s.i.SecureTransferWebSocketServer - Could not initialize SSL for WebSocket server, running in non-SSL mode: Unknown object id - S - passed to distinguished name
+2025-07-12 13:30:29 [JavaFX-Launcher] INFO  c.s.s.impl.P2PConnectionServiceImpl - Initializing P2P connection service
+2025-07-12 13:30:29 [JavaFX-Launcher] INFO  c.s.s.impl.P2PConnectionServiceImpl - P2P server started on port 8444
+2025-07-12 13:30:29 [pool-3-thread-1] INFO  c.s.s.impl.P2PConnectionServiceImpl - Listening for incoming P2P connections
+2025-07-12 13:30:29 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Attempting to discover connection details via STUN
+2025-07-12 13:30:29 [JavaFX-Launcher] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-12 13:30:29 [JavaFX-Launcher] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: bf900dd5-0de3-469d-8181-1d7b6bf59a1b
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-07-12 13:30:29 [JavaFX-Launcher] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@261e3a1d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@45e090fe, org.springframework.security.web.context.SecurityContextHolderFilter@1ce87069, org.springframework.security.web.header.HeaderWriterFilter@50492cd2, org.springframework.web.filter.CorsFilter@775f09da, org.springframework.security.web.authentication.logout.LogoutFilter@f7b95ed, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6445face, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2a11a01d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@eac3776, org.springframework.security.web.access.ExceptionTranslationFilter@545f1e79, org.springframework.security.web.access.intercept.AuthorizationFilter@4ec5ab13]
+2025-07-12 13:30:29 [JavaFX-Launcher] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2025-07-12 13:30:29 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - Started application in 2.699 seconds (process running for 3.215)
+2025-07-12 13:30:29 [scheduling-1] INFO  c.s.s.impl.EncryptionServiceImpl - Encryption key rotated successfully
+2025-07-12 13:30:29 [JavaFX-Launcher] INFO  c.s.config.DatabaseStartupListener - Application started - checking database health...
+2025-07-12 13:30:29 [scheduling-1] DEBUG c.s.service.impl.TransferServiceImpl - Cleaning up completed transfers
+2025-07-12 13:30:29 [scheduling-1] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        sender_transfers 
+    where
+        start_time<?
+2025-07-12 13:30:29 [scheduling-1] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        receiver_transfers 
+    where
+        received_time<?
+2025-07-12 13:30:29 [JavaFX-Launcher] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.active,
+        u1_0.created_at,
+        u1_0.device_id,
+        u1_0.last_login,
+        u1_0.password_hash,
+        u1_0.user_token,
+        u1_0.username 
+    from
+        users u1_0
+2025-07-12 13:30:29 [JavaFX-Launcher] INFO  c.s.util.DatabaseHealthCheck - Database health check: Found 1 users in database
+2025-07-12 13:30:29 [JavaFX-Launcher] INFO  c.s.util.DatabaseHealthCheck - Existing users: random
+2025-07-12 13:30:30 [JavaFX Application Thread] WARN  javafx.css - CSS Error parsing file:/home/randomguy/IdeaProjects/Secure%20Transfer/target/classes/styles/global.css: Expected '<color>' while parsing '-fx-background-color' at [333,42]
+2025-07-12 13:30:33 [JavaFX Application Thread] DEBUG c.s.controller.ui.LoginController - Loading registration screen
+2025-07-12 13:30:33 [JavaFX Application Thread] DEBUG c.s.controller.ui.BaseController - Creating FXML loader for path: /fxml/registration.fxml
+2025-07-12 13:30:35 [ForkJoinPool.commonPool-worker-1] INFO  c.securetransfer.util.NetworkUtils - Found working STUN server: stun.freeswitch.org:3478
+2025-07-12 13:30:35 [ForkJoinPool.commonPool-worker-1] INFO  JitsiConfig - Initialized newConfig: merge of application.properties @ file:/home/randomguy/IdeaProjects/Secure%20Transfer/target/classes/application.properties,system properties,reference.conf @ jar:file:/home/randomguy/.m2/repository/org/jitsi/ice4j/3.2-9-gb64c86f/ice4j-3.2-9-gb64c86f.jar!/reference.conf: 1
+2025-07-12 13:30:35 [ForkJoinPool.commonPool-worker-1] INFO  o.j.c.ReadOnlyConfigurationService - net.java.sip.communicator.SC_HOME_DIR_LOCATION not set
+2025-07-12 13:30:35 [ForkJoinPool.commonPool-worker-1] INFO  JitsiConfig - Initialized legacyConfig: sip communicator props (no description provided)
+2025-07-12 13:30:35 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.h.MappingCandidateHarvesters - Using AwsCandidateHarvester.
+2025-07-12 13:30:36 [JavaFX Application Thread] DEBUG c.s.c.ui.RegistrationController - Loading login screen
+2025-07-12 13:30:36 [JavaFX Application Thread] DEBUG c.s.controller.ui.BaseController - Creating FXML loader for path: /fxml/login.fxml
+2025-07-12 13:30:36 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.h.MappingCandidateHarvesters - Discarding a mapping harvester: org.ice4j.ice.harvest.AwsCandidateHarvester@4601a318
+2025-07-12 13:30:36 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.h.MappingCandidateHarvesters - Initialized mapping harvesters (delay=572ms).  stunDiscoveryFailed=false
+2025-07-12 13:30:36 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Gathering candidates for component data.RTP.
+2025-07-12 13:30:36 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Start ICE connectivity establishment.
+2025-07-12 13:30:36 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Init checklist for stream data
+2025-07-12 13:30:36 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - ICE state changed from Waiting to Running.
+2025-07-12 13:30:36 [ForkJoinPool.commonPool-worker-1] INFO  o.ice4j.ice.ConnectivityCheckClient - Start connectivity checks.
+2025-07-12 13:30:36 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Successfully discovered public IP 27.34.65.131 via pre-tested STUN server stun.freeswitch.org:3478
+2025-07-12 13:30:36 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Discovered external IP 27.34.65.131 via STUN
+2025-07-12 13:30:36 [ForkJoinPool.commonPool-worker-1] INFO  c.s.s.impl.P2PConnectionServiceImpl - Connection details discovered: ConnectionDetails{localIp='192.168.1.101', externalIp='27.34.65.131', externalPort=8444, portMapped=false, discoveryMethod=STUN}
+2025-07-12 13:30:42 [JavaFX Application Thread] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.active,
+        u1_0.created_at,
+        u1_0.device_id,
+        u1_0.last_login,
+        u1_0.password_hash,
+        u1_0.user_token,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-07-12 13:30:42 [JavaFX Application Thread] DEBUG org.hibernate.SQL - 
+    update
+        users 
+    set
+        active=?,
+        created_at=?,
+        device_id=?,
+        last_login=?,
+        password_hash=?,
+        user_token=?,
+        username=? 
+    where
+        id=?
+2025-07-12 13:30:42 [JavaFX Application Thread] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.active,
+        u1_0.created_at,
+        u1_0.device_id,
+        u1_0.last_login,
+        u1_0.password_hash,
+        u1_0.user_token,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-07-12 13:30:42 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - New UserSession instance created
+2025-07-12 13:30:42 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - Created new UserSession instance
+2025-07-12 13:30:42 [JavaFX Application Thread] INFO  com.securetransfer.util.UserSession - Force resetting UserSession instance
+2025-07-12 13:30:42 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - New UserSession instance created
+2025-07-12 13:30:42 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - Created new UserSession instance
+2025-07-12 13:30:42 [JavaFX Application Thread] INFO  com.securetransfer.util.UserSession - Setting current user to: random
+2025-07-12 13:30:42 [JavaFX Application Thread] INFO  c.s.controller.ui.LoginController - User session set for: random
+2025-07-12 13:30:42 [JavaFX Application Thread] DEBUG c.s.controller.ui.LoginController - Loading main screen with toast
+2025-07-12 13:30:42 [JavaFX Application Thread] DEBUG c.s.controller.ui.BaseController - Creating FXML loader for path: /fxml/main.fxml
+2025-07-12 13:30:42 [JavaFX Application Thread] INFO  c.s.controller.ui.MainController - SecureTransfer main page initialized successfully
+2025-07-12 13:31:36 [JavaFX Application Thread] INFO  c.s.s.impl.P2PConnectionServiceImpl - P2P server stopped
+2025-07-12 13:31:36 [JavaFX Application Thread] INFO  c.s.s.impl.P2PConnectionServiceImpl - P2P connection service shutdown complete
+2025-07-12 13:31:36 [JavaFX Application Thread] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-12 13:31:36 [JavaFX Application Thread] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-12 13:31:36 [JavaFX Application Thread] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-07-12 13:33:50 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - Starting application using Java 21.0.7 with PID 19815 (started by randomguy in /home/randomguy/IdeaProjects/Secure Transfer)
+2025-07-12 13:33:50 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - No active profile set, falling back to 1 default profile: "default"
+2025-07-12 13:33:50 [JavaFX-Launcher] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-12 13:33:50 [JavaFX-Launcher] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 31 ms. Found 3 JPA repository interfaces.
+2025-07-12 13:33:51 [JavaFX-Launcher] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-07-12 13:33:51 [JavaFX-Launcher] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-07-12 13:33:51 [JavaFX-Launcher] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2025-07-12 13:33:51 [JavaFX-Launcher] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-07-12 13:33:51 [JavaFX-Launcher] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 620 ms
+2025-07-12 13:33:51 [JavaFX-Launcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-12 13:33:51 [JavaFX-Launcher] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/securetransfer user=SA
+2025-07-12 13:33:51 [JavaFX-Launcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-12 13:33:51 [JavaFX-Launcher] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/securetransfer'
+2025-07-12 13:33:51 [JavaFX-Launcher] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-12 13:33:51 [JavaFX-Launcher] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-07-12 13:33:51 [JavaFX-Launcher] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-12 13:33:51 [JavaFX-Launcher] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-12 13:33:51 [JavaFX-Launcher] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-12 13:33:52 [JavaFX-Launcher] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-12 13:33:52 [JavaFX-Launcher] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-12 13:33:52 [JavaFX-Launcher] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-12 13:33:52 [JavaFX-Launcher] INFO  c.s.s.impl.EncryptionServiceImpl - Encryption service initialized with provided key
+2025-07-12 13:33:52 [JavaFX-Launcher] INFO  c.s.s.i.SecureTransferWebSocketServer - Initializing WebSocket server on port 8445 bound to all interfaces
+2025-07-12 13:33:52 [JavaFX-Launcher] WARN  c.s.s.i.SecureTransferWebSocketServer - Could not initialize SSL for WebSocket server, running in non-SSL mode: Unknown object id - S - passed to distinguished name
+2025-07-12 13:33:52 [JavaFX-Launcher] INFO  c.s.s.impl.P2PConnectionServiceImpl - Initializing P2P connection service
+2025-07-12 13:33:52 [JavaFX-Launcher] INFO  c.s.s.impl.P2PConnectionServiceImpl - P2P server started on port 8444
+2025-07-12 13:33:52 [pool-3-thread-1] INFO  c.s.s.impl.P2PConnectionServiceImpl - Listening for incoming P2P connections
+2025-07-12 13:33:52 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Attempting to discover connection details via STUN
+2025-07-12 13:33:53 [JavaFX-Launcher] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-12 13:33:53 [JavaFX-Launcher] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 8c8996ab-65d5-4032-85b7-3847e9c4d49d
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-07-12 13:33:53 [JavaFX-Launcher] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@261e3a1d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@45e090fe, org.springframework.security.web.context.SecurityContextHolderFilter@1ce87069, org.springframework.security.web.header.HeaderWriterFilter@50492cd2, org.springframework.web.filter.CorsFilter@775f09da, org.springframework.security.web.authentication.logout.LogoutFilter@f7b95ed, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6445face, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2a11a01d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@eac3776, org.springframework.security.web.access.ExceptionTranslationFilter@545f1e79, org.springframework.security.web.access.intercept.AuthorizationFilter@4ec5ab13]
+2025-07-12 13:33:53 [JavaFX-Launcher] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2025-07-12 13:33:53 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - Started application in 2.99 seconds (process running for 3.491)
+2025-07-12 13:33:53 [scheduling-1] INFO  c.s.s.impl.EncryptionServiceImpl - Encryption key rotated successfully
+2025-07-12 13:33:53 [JavaFX-Launcher] INFO  c.s.config.DatabaseStartupListener - Application started - checking database health...
+2025-07-12 13:33:53 [scheduling-1] DEBUG c.s.service.impl.TransferServiceImpl - Cleaning up completed transfers
+2025-07-12 13:33:53 [scheduling-1] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        sender_transfers 
+    where
+        start_time<?
+2025-07-12 13:33:53 [scheduling-1] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        receiver_transfers 
+    where
+        received_time<?
+2025-07-12 13:33:53 [JavaFX-Launcher] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.active,
+        u1_0.created_at,
+        u1_0.device_id,
+        u1_0.last_login,
+        u1_0.password_hash,
+        u1_0.user_token,
+        u1_0.username 
+    from
+        users u1_0
+2025-07-12 13:33:53 [JavaFX-Launcher] INFO  c.s.util.DatabaseHealthCheck - Database health check: Found 1 users in database
+2025-07-12 13:33:53 [JavaFX-Launcher] INFO  c.s.util.DatabaseHealthCheck - Existing users: random
+2025-07-12 13:33:53 [JavaFX Application Thread] WARN  javafx.css - CSS Error parsing file:/home/randomguy/IdeaProjects/Secure%20Transfer/target/classes/styles/global.css: Expected '<color>' while parsing '-fx-background-color' at [333,42]
+2025-07-12 13:33:59 [JavaFX Application Thread] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.active,
+        u1_0.created_at,
+        u1_0.device_id,
+        u1_0.last_login,
+        u1_0.password_hash,
+        u1_0.user_token,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-07-12 13:33:59 [JavaFX Application Thread] DEBUG org.hibernate.SQL - 
+    update
+        users 
+    set
+        active=?,
+        created_at=?,
+        device_id=?,
+        last_login=?,
+        password_hash=?,
+        user_token=?,
+        username=? 
+    where
+        id=?
+2025-07-12 13:33:59 [JavaFX Application Thread] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.active,
+        u1_0.created_at,
+        u1_0.device_id,
+        u1_0.last_login,
+        u1_0.password_hash,
+        u1_0.user_token,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-07-12 13:33:59 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - New UserSession instance created
+2025-07-12 13:33:59 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - Created new UserSession instance
+2025-07-12 13:33:59 [JavaFX Application Thread] INFO  com.securetransfer.util.UserSession - Force resetting UserSession instance
+2025-07-12 13:33:59 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - New UserSession instance created
+2025-07-12 13:33:59 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - Created new UserSession instance
+2025-07-12 13:33:59 [JavaFX Application Thread] INFO  com.securetransfer.util.UserSession - Setting current user to: random
+2025-07-12 13:33:59 [JavaFX Application Thread] INFO  c.s.controller.ui.LoginController - User session set for: random
+2025-07-12 13:33:59 [JavaFX Application Thread] DEBUG c.s.controller.ui.LoginController - Loading main screen with toast
+2025-07-12 13:33:59 [JavaFX Application Thread] DEBUG c.s.controller.ui.BaseController - Creating FXML loader for path: /fxml/main.fxml
+2025-07-12 13:33:59 [JavaFX Application Thread] INFO  c.s.controller.ui.MainController - SecureTransfer main page initialized successfully
+2025-07-12 13:34:03 [JavaFX Application Thread] INFO  c.s.controller.ui.MainController - Showing send files content
+2025-07-12 13:34:03 [JavaFX Application Thread] DEBUG c.s.controller.ui.BaseController - Creating FXML loader for path: /fxml/send-files.fxml
+2025-07-12 13:34:03 [JavaFX Application Thread] INFO  c.s.c.ui.SendFilesController - SendFilesController initialized
+2025-07-12 13:34:03 [JavaFX Application Thread] INFO  c.s.c.ui.SendFilesController - MainController reference set in SendFilesController
+2025-07-12 13:34:03 [JavaFX Application Thread] INFO  c.s.controller.ui.MainController - Send files content loaded successfully
+2025-07-12 13:34:03 [JavaFX Application Thread] DEBUG c.s.controller.ui.MainController - Active page changed to: send-files
+2025-07-12 13:34:07 [JavaFX Application Thread] INFO  c.s.c.ui.SendFilesController - Added file: Answer Key Set A.docx (1139682 bytes)
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Running on thread: Thread-20
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Input: /home/randomguy/Pathshala/Class 9/First Term Exam/Answer Key/Answer Key Set A.docx (1139682 bytes) Output: /home/randomguy/Pathshala/Class 9/First Term Exam/Answer Key/Answer Key Set A.docx.enc
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.0
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.00718796997759024
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.01437593995518048
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.02156390993277072
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.02875187991036096
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.0359398498879512
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.04312781986554144
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.05031578984313168
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.05750375982072192
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.06469172979831216
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.0718796997759024
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.07906766975349264
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.08625563973108288
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.09344360970867312
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.10063157968626336
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.1078195496638536
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.11500751964144384
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.12219548961903408
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.1293834595966243
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.13657142957421456
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.1437593995518048
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.15094736952939505
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.15813533950698527
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.16532330948457552
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.17251127946216577
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.17969924943975601
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.18688721941734623
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.19407518939493648
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.20126315937252673
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.20845112935011698
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.2156390993277072
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.22282706930529744
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.2300150392828877
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.2372030092604779
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.24439097923806816
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.2515789492156584
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.2587669191932486
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.26595488917083887
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.2731428591484291
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.28033082912601937
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.2875187991036096
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.29470676908119986
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.3018947390587901
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.3090827090363803
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.31627067901397055
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.3234586489915608
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.33064661896915104
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.3378345889467413
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.34502255892433153
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.3522105289019218
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.35939849887951203
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.3665864688571022
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.37377443883469247
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.3809624088122827
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.38815037878987296
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.3953383487674632
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.40252631874505346
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4097142887226437
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.41690225870023395
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.42409022867782414
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4312781986554144
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.43846616863300464
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4456541386105949
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.45284210858818513
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4600300785657754
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4672180485433656
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4744060185209558
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.48159398849854607
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4887819584761363
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.49596992845372656
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5031578984313168
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.510345868408907
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5175338383864972
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5247218083640875
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5319097783416777
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.539097748319268
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5462857182968582
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5534736882744485
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5606616582520387
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5678496282296289
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5750375982072192
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5822255681848094
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5894135381623997
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5966015081399899
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6037894781175802
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6109774480951704
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6181654180727606
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6253533880503509
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6325413580279411
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6397293280055314
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6469172979831216
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6541052679607119
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6612932379383021
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6684812079158923
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6756691778934826
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6828571478710728
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6900451178486631
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6972330878262533
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7044210578038436
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7116090277814338
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7187969977590241
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7259849677366143
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7331729377142044
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7403609076917947
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7475488776693849
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7547368476469752
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7619248176245654
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7691127876021557
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:08 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7763007575797459
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7834887275573361
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7906766975349264
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7978646675125166
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8050526374901069
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8122406074676971
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8194285774452874
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8266165474228776
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8338045174004679
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8409924873780581
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8481804573556483
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8553684273332386
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8625563973108288
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8697443672884191
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8769323372660093
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8841203072435996
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8913082772211898
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.89849624719878
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9056842171763703
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9128721871539605
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9200601571315508
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.927248127109141
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9344360970867313
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9416240670643214
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9488120370419116
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9560000070195019
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9631879769970921
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9703759469746824
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9775639169522726
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9847518869298629
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9919398569074531
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9991278268850434
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 994 bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 992 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 1.0
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote final 16 encrypted bytes
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 1.0
+2025-07-12 13:34:09 [Thread-20] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Finished successfully
+2025-07-12 13:34:13 [ForkJoinPool.commonPool-worker-1] INFO  c.securetransfer.util.NetworkUtils - Found working STUN server: stun.freeswitch.org:3478
+2025-07-12 13:34:13 [ForkJoinPool.commonPool-worker-1] INFO  JitsiConfig - Initialized newConfig: merge of application.properties @ file:/home/randomguy/IdeaProjects/Secure%20Transfer/target/classes/application.properties,system properties,reference.conf @ jar:file:/home/randomguy/.m2/repository/org/jitsi/ice4j/3.2-9-gb64c86f/ice4j-3.2-9-gb64c86f.jar!/reference.conf: 1
+2025-07-12 13:34:13 [ForkJoinPool.commonPool-worker-1] INFO  o.j.c.ReadOnlyConfigurationService - net.java.sip.communicator.SC_HOME_DIR_LOCATION not set
+2025-07-12 13:34:13 [ForkJoinPool.commonPool-worker-1] INFO  JitsiConfig - Initialized legacyConfig: sip communicator props (no description provided)
+2025-07-12 13:34:13 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.h.MappingCandidateHarvesters - Using AwsCandidateHarvester.
+2025-07-12 13:34:14 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.h.MappingCandidateHarvesters - Discarding a mapping harvester: org.ice4j.ice.harvest.AwsCandidateHarvester@1d8835
+2025-07-12 13:34:14 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.h.MappingCandidateHarvesters - Initialized mapping harvesters (delay=573ms).  stunDiscoveryFailed=false
+2025-07-12 13:34:14 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Gathering candidates for component data.RTP.
+2025-07-12 13:34:14 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Start ICE connectivity establishment.
+2025-07-12 13:34:14 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Init checklist for stream data
+2025-07-12 13:34:14 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - ICE state changed from Waiting to Running.
+2025-07-12 13:34:14 [ForkJoinPool.commonPool-worker-1] INFO  o.ice4j.ice.ConnectivityCheckClient - Start connectivity checks.
+2025-07-12 13:34:14 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Successfully discovered public IP 27.34.65.131 via pre-tested STUN server stun.freeswitch.org:3478
+2025-07-12 13:34:14 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Discovered external IP 27.34.65.131 via STUN
+2025-07-12 13:34:14 [ForkJoinPool.commonPool-worker-1] INFO  c.s.s.impl.P2PConnectionServiceImpl - Connection details discovered: ConnectionDetails{localIp='192.168.1.101', externalIp='27.34.65.131', externalPort=8444, portMapped=false, discoveryMethod=STUN}
+2025-07-12 13:34:42 [JavaFX Application Thread] INFO  c.s.controller.ui.MainController - Showing send files content
+2025-07-12 13:34:42 [JavaFX Application Thread] DEBUG c.s.controller.ui.BaseController - Creating FXML loader for path: /fxml/send-files.fxml
+2025-07-12 13:34:42 [JavaFX Application Thread] INFO  c.s.c.ui.SendFilesController - SendFilesController initialized
+2025-07-12 13:34:42 [JavaFX Application Thread] INFO  c.s.c.ui.SendFilesController - MainController reference set in SendFilesController
+2025-07-12 13:34:42 [JavaFX Application Thread] INFO  c.s.controller.ui.MainController - Send files content loaded successfully
+2025-07-12 13:34:42 [JavaFX Application Thread] DEBUG c.s.controller.ui.MainController - Active page changed to: send-files
+2025-07-12 13:34:45 [JavaFX Application Thread] INFO  c.s.controller.ui.MainController - Showing receive files content
+2025-07-12 13:34:45 [JavaFX Application Thread] DEBUG c.s.controller.ui.BaseController - Creating FXML loader for path: /fxml/receive-files.fxml
+2025-07-12 13:34:45 [JavaFX Application Thread] INFO  c.s.c.ui.ReceiveFilesController - ReceiveFilesController initialized
+2025-07-12 13:34:45 [JavaFX Application Thread] DEBUG org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.auto_saved,
+        rt1_0.checksum,
+        rt1_0.error_message,
+        rt1_0.file_name,
+        rt1_0.file_path,
+        rt1_0.file_size,
+        rt1_0.received_time,
+        rt1_0.saved_time,
+        rt1_0.sender_code,
+        rt1_0.sender_username,
+        rt1_0.session_id,
+        rt1_0.transfer_status 
+    from
+        receiver_transfers rt1_0 
+    where
+        rt1_0.received_time>=? 
+    order by
+        rt1_0.received_time desc
+2025-07-12 13:34:45 [JavaFX Application Thread] DEBUG c.s.controller.ui.MainController - Active page changed to: receive-files
+2025-07-12 13:34:45 [JavaFX Application Thread] INFO  c.s.controller.ui.MainController - Receive files content loaded successfully
+2025-07-12 13:34:45 [JavaFX Application Thread] WARN  javafx.css - CSS Error parsing file:/home/randomguy/IdeaProjects/Secure%20Transfer/target/classes/styles/receive-files.css: Expected '<color>' while parsing '-fx-background' at [16,36]
+2025-07-12 13:35:06 [ForkJoinPool.commonPool-worker-1] DEBUG com.securetransfer.util.UserSession - Getting current user: random
+2025-07-12 13:35:06 [ForkJoinPool.commonPool-worker-1] DEBUG com.securetransfer.util.UserSession - Getting current user: random
+2025-07-12 13:35:06 [ForkJoinPool.commonPool-worker-1] INFO  c.s.service.impl.TransferServiceImpl - Connecting to transfer with code: 608035
+2025-07-12 13:35:06 [ForkJoinPool.commonPool-worker-1] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Attempting direct LAN connection...
+2025-07-12 13:35:06 [WebSocketConnectReadThread-111] ERROR c.s.util.WebSocketClientManager - WebSocket error: Connection refused
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.Net.connect0(Native Method)
+	at java.base/sun.nio.ch.Net.connect(Net.java:589)
+	at java.base/sun.nio.ch.Net.connect(Net.java:578)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:583)
+	at java.base/java.net.Socket.connect(Socket.java:751)
+	at org.java_websocket.client.WebSocketClient.run(WebSocketClient.java:475)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-07-12 13:35:06 [WebSocketConnectReadThread-111] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Connection error: Connection refused
+2025-07-12 13:35:06 [WebSocketConnectReadThread-111] INFO  c.s.util.WebSocketClientManager - WebSocket closed: ws://192.168.1.101:8445/transfer?code=608035&role=receiver (-1 - Connection refused)
+2025-07-12 13:35:06 [WebSocketConnectReadThread-111] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Connection closed: Connection refused
+2025-07-12 13:35:06 [JavaFX Application Thread] ERROR c.s.service.impl.TransferServiceImpl - Connection error: Connection refused
+2025-07-12 13:35:06 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - WebSocket closed: Connection refused
+2025-07-12 13:35:09 [ForkJoinPool.commonPool-worker-1] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Trying NAT traversal with STUN...
+2025-07-12 13:35:18 [ForkJoinPool.commonPool-worker-1] INFO  c.securetransfer.util.NetworkUtils - Found working STUN server: stun.freeswitch.org:3478
+2025-07-12 13:35:18 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Gathering candidates for component data.RTP.
+2025-07-12 13:35:18 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.harvest.HostCandidateHarvester - Retrying a bind because of a failure to bind to address /2400:1a00:b080:8b1:5acb:c3f5:c0fc:bb4f%wlo1 and port 5000 (Address already in use)
+2025-07-12 13:35:18 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.harvest.HostCandidateHarvester - Retrying a bind because of a failure to bind to address /fe80:0:0:0:4039:e2be:ac07:7f15%wlo1 and port 5000 (Address already in use)
+2025-07-12 13:35:18 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.harvest.HostCandidateHarvester - Retrying a bind because of a failure to bind to address /192.168.1.101 and port 5000 (Address already in use)
+2025-07-12 13:35:18 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Start ICE connectivity establishment.
+2025-07-12 13:35:18 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Init checklist for stream data
+2025-07-12 13:35:18 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - ICE state changed from Waiting to Running.
+2025-07-12 13:35:18 [ForkJoinPool.commonPool-worker-1] INFO  o.ice4j.ice.ConnectivityCheckClient - Start connectivity checks.
+2025-07-12 13:35:18 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Successfully discovered public IP 27.34.65.131 via pre-tested STUN server stun.freeswitch.org:3478
+2025-07-12 13:35:18 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.WebSocketClientManager - Found public IP via robust STUN discovery: 27.34.65.131
+2025-07-12 13:35:18 [ForkJoinPool.commonPool-worker-1] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Found public IP: 27.34.65.131
+2025-07-12 13:35:18 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.WebSocketClientManager - Selected connection strategy: STUN-discovered public IP - IP: 27.34.65.131
+2025-07-12 13:35:18 [ForkJoinPool.commonPool-worker-1] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Using STUN-discovered public IP: 27.34.65.131
+2025-07-12 13:35:18 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.WebSocketClientManager - Receiver will attempt to connect to sender at: 27.34.65.131
+2025-07-12 13:35:18 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.WebSocketClientManager - Connection strategy 1: Primary host IP 27.34.65.131
+2025-07-12 13:35:50 [ForkJoinPool.commonPool-worker-1] INFO  c.securetransfer.util.NetworkUtils - Found working STUN server: stun.ipfire.org:3478
+2025-07-12 13:35:50 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Gathering candidates for component data.RTP.
+2025-07-12 13:35:50 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.harvest.HostCandidateHarvester - Retrying a bind because of a failure to bind to address /2400:1a00:b080:8b1:5acb:c3f5:c0fc:bb4f%wlo1 and port 5000 (Address already in use)
+2025-07-12 13:35:50 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.harvest.HostCandidateHarvester - Retrying a bind because of a failure to bind to address /2400:1a00:b080:8b1:5acb:c3f5:c0fc:bb4f%wlo1 and port 5001 (Address already in use)
+2025-07-12 13:35:50 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.harvest.HostCandidateHarvester - Retrying a bind because of a failure to bind to address /fe80:0:0:0:4039:e2be:ac07:7f15%wlo1 and port 5000 (Address already in use)
+2025-07-12 13:35:50 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.harvest.HostCandidateHarvester - Retrying a bind because of a failure to bind to address /fe80:0:0:0:4039:e2be:ac07:7f15%wlo1 and port 5001 (Address already in use)
+2025-07-12 13:35:50 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.harvest.HostCandidateHarvester - Retrying a bind because of a failure to bind to address /192.168.1.101 and port 5000 (Address already in use)
+2025-07-12 13:35:50 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.harvest.HostCandidateHarvester - Retrying a bind because of a failure to bind to address /192.168.1.101 and port 5001 (Address already in use)
+2025-07-12 13:35:50 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Start ICE connectivity establishment.
+2025-07-12 13:35:50 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Init checklist for stream data
+2025-07-12 13:35:50 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - ICE state changed from Waiting to Running.
+2025-07-12 13:35:50 [ForkJoinPool.commonPool-worker-1] INFO  o.ice4j.ice.ConnectivityCheckClient - Start connectivity checks.
+2025-07-12 13:35:50 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Successfully discovered public IP 27.34.65.131 via pre-tested STUN server stun.ipfire.org:3478
+2025-07-12 13:35:50 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.WebSocketClientManager - Connection strategy 4: Local network IP 192.168.1.101
+2025-07-12 13:35:50 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.WebSocketClientManager - Attempting 2 connection strategies in parallel
+2025-07-12 13:35:50 [ForkJoinPool.commonPool-worker-1] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Trying 2 connection strategies in parallel for maximum reliability...
+2025-07-12 13:35:50 [WebSocketConnectReadThread-132] ERROR c.s.util.WebSocketClientManager - WebSocket error: Connection refused
+java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.Net.connect0(Native Method)
+	at java.base/sun.nio.ch.Net.connect(Net.java:589)
+	at java.base/sun.nio.ch.Net.connect(Net.java:578)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:583)
+	at java.base/java.net.Socket.connect(Socket.java:751)
+	at org.java_websocket.client.WebSocketClient.run(WebSocketClient.java:475)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-07-12 13:35:50 [WebSocketConnectReadThread-132] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Strategy 2 (192.168.1.101): Connection error: Connection refused
+2025-07-12 13:35:50 [WebSocketConnectReadThread-132] INFO  c.s.util.WebSocketClientManager - WebSocket closed: ws://192.168.1.101:8445/transfer?code=608035&role=receiver (-1 - Connection refused)
+2025-07-12 13:35:50 [WebSocketConnectReadThread-132] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Strategy 2 (192.168.1.101): Connection closed: Connection refused
+2025-07-12 13:35:50 [JavaFX Application Thread] ERROR c.s.service.impl.TransferServiceImpl - Connection error: Connection refused
+2025-07-12 13:35:50 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - WebSocket closed: Connection refused
+2025-07-12 13:35:55 [ForkJoinPool.commonPool-worker-3] INFO  c.s.util.WebSocketClientManager - Strategy 2 (192.168.1.101) failed
+2025-07-12 13:35:55 [ForkJoinPool.commonPool-worker-2] INFO  c.s.util.WebSocketClientManager - Strategy 1 (27.34.65.131) failed
+2025-07-12 13:35:58 [ForkJoinPool.commonPool-worker-2] WARN  c.s.util.WebSocketClientManager - All connection strategies failed
+2025-07-12 13:35:58 [ForkJoinPool.commonPool-worker-2] INFO  c.s.service.impl.TransferServiceImpl - Connection status: All connection strategies failed. Please verify both devices have network connectivity and are not behind restrictive firewalls.
+2025-07-12 13:35:58 [ForkJoinPool.commonPool-worker-1] INFO  c.s.service.impl.TransferServiceImpl - Connection status: Trying UPnP port mapping...
+2025-07-12 13:36:03 [JavaFX Application Thread] INFO  c.s.s.impl.P2PConnectionServiceImpl - P2P server stopped
+2025-07-12 13:36:03 [JavaFX Application Thread] INFO  c.s.s.impl.P2PConnectionServiceImpl - P2P connection service shutdown complete
+2025-07-12 13:36:03 [JavaFX Application Thread] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-12 13:36:03 [JavaFX Application Thread] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-12 13:36:03 [JavaFX Application Thread] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-07-12 13:36:07 [ForkJoinPool.commonPool-worker-1] WARN  c.s.util.WebSocketClientManager - UPnP is not available on this network
+2025-07-12 13:36:07 [ForkJoinPool.commonPool-worker-1] ERROR c.s.service.impl.TransferServiceImpl - Connection error: Could not establish a connection. Both devices may be behind strict NAT/firewall. Try a different network or VPN.
+2025-07-12 13:36:07 [ForkJoinPool.commonPool-worker-1] ERROR c.s.service.impl.TransferServiceImpl - Connection failed for transfer code: 608035
+java.util.concurrent.CompletionException: java.lang.Exception: Could not establish a connection. Both devices may be behind strict NAT/firewall. Try a different network or VPN.
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:332)
+	at java.base/java.util.concurrent.CompletableFuture.uniAcceptNow(CompletableFuture.java:747)
+	at java.base/java.util.concurrent.CompletableFuture.uniAcceptStage(CompletableFuture.java:735)
+	at java.base/java.util.concurrent.CompletableFuture.thenAccept(CompletableFuture.java:2214)
+	at com.securetransfer.service.impl.TransferServiceImpl.connectToTransfer(TransferServiceImpl.java:274)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:385)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717)
+	at com.securetransfer.service.impl.TransferServiceImpl$$SpringCGLIB$$0.connectToTransfer(<generated>)
+	at com.securetransfer.controller.ui.ReceiveFilesController.lambda$onConnectButtonClicked$12(ReceiveFilesController.java:241)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188)
+Caused by: java.lang.Exception: Could not establish a connection. Both devices may be behind strict NAT/firewall. Try a different network or VPN.
+	at com.securetransfer.util.WebSocketClientManager.attemptLegacyConnectionMethods(WebSocketClientManager.java:159)
+	at com.securetransfer.util.WebSocketClientManager.connect(WebSocketClientManager.java:80)
+	at com.securetransfer.service.impl.TransferServiceImpl.connectToTransfer(TransferServiceImpl.java:260)
+	... 21 common frames omitted
+2025-07-12 13:36:12 [pool-11-thread-1] WARN  com.securetransfer.util.UPnPManager - No UPnP gateway device found
+2025-07-12 13:36:12 [pool-11-thread-1] WARN  c.s.s.impl.P2PConnectionServiceImpl - Failed to remove WebSocket server UPnP port mapping
+2025-07-12 14:06:30 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - Starting application using Java 21.0.7 with PID 26191 (started by randomguy in /home/randomguy/IdeaProjects/Secure Transfer)
+2025-07-12 14:06:30 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - No active profile set, falling back to 1 default profile: "default"
+2025-07-12 14:06:30 [JavaFX-Launcher] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-12 14:06:30 [JavaFX-Launcher] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 36 ms. Found 3 JPA repository interfaces.
+2025-07-12 14:06:31 [JavaFX-Launcher] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-07-12 14:06:31 [JavaFX-Launcher] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-07-12 14:06:31 [JavaFX-Launcher] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2025-07-12 14:06:31 [JavaFX-Launcher] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-07-12 14:06:31 [JavaFX-Launcher] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 824 ms
+2025-07-12 14:06:31 [JavaFX-Launcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-12 14:06:31 [JavaFX-Launcher] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/securetransfer user=SA
+2025-07-12 14:06:31 [JavaFX-Launcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-12 14:06:31 [JavaFX-Launcher] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/securetransfer'
+2025-07-12 14:06:31 [JavaFX-Launcher] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-12 14:06:31 [JavaFX-Launcher] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-07-12 14:06:31 [JavaFX-Launcher] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-12 14:06:31 [JavaFX-Launcher] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-12 14:06:31 [JavaFX-Launcher] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-12 14:06:32 [JavaFX-Launcher] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-12 14:06:32 [JavaFX-Launcher] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-12 14:06:32 [JavaFX-Launcher] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-12 14:06:32 [JavaFX-Launcher] INFO  c.s.s.impl.EncryptionServiceImpl - Encryption service initialized with provided key
+2025-07-12 14:06:32 [JavaFX-Launcher] INFO  c.s.s.i.SecureTransferWebSocketServer - Initializing WebSocket server on port 8445 bound to all interfaces
+2025-07-12 14:06:33 [JavaFX-Launcher] WARN  c.s.s.i.SecureTransferWebSocketServer - Could not initialize SSL for WebSocket server, running in non-SSL mode: Unknown object id - S - passed to distinguished name
+2025-07-12 14:06:33 [JavaFX-Launcher] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'receiveFilesController': Unsatisfied dependency expressed through field 'transferService': Error creating bean with name 'transferServiceImpl': Unsatisfied dependency expressed through field 'webSocketClientManager': Error creating bean with name 'webSocketClientManager': Unsatisfied dependency expressed through field 'transferService': Error creating bean with name 'transferServiceImpl': Requested bean is currently in creation: Is there an unresolvable circular reference?
+2025-07-12 14:06:33 [JavaFX-Launcher] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-12 14:06:33 [JavaFX-Launcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-12 14:06:33 [JavaFX-Launcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-07-12 14:06:33 [JavaFX-Launcher] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-07-12 14:06:33 [JavaFX-Launcher] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-07-12 14:06:33 [JavaFX-Launcher] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+   receiveFilesController (field private com.securetransfer.service.TransferService com.securetransfer.controller.ui.ReceiveFilesController.transferService)
+┌─────┐
+|  transferServiceImpl (field private com.securetransfer.util.WebSocketClientManager com.securetransfer.service.impl.TransferServiceImpl.webSocketClientManager)
+↑     ↓
+|  webSocketClientManager (field private com.securetransfer.service.TransferService com.securetransfer.util.WebSocketClientManager.transferService)
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
+2025-07-12 14:09:32 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - Starting application using Java 21.0.7 with PID 26655 (started by randomguy in /home/randomguy/IdeaProjects/Secure Transfer)
+2025-07-12 14:09:32 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - No active profile set, falling back to 1 default profile: "default"
+2025-07-12 14:09:32 [JavaFX-Launcher] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-12 14:09:32 [JavaFX-Launcher] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 34 ms. Found 3 JPA repository interfaces.
+2025-07-12 14:09:32 [JavaFX-Launcher] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-07-12 14:09:32 [JavaFX-Launcher] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-07-12 14:09:32 [JavaFX-Launcher] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2025-07-12 14:09:32 [JavaFX-Launcher] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-07-12 14:09:32 [JavaFX-Launcher] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 698 ms
+2025-07-12 14:09:33 [JavaFX-Launcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-12 14:09:33 [JavaFX-Launcher] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/securetransfer user=SA
+2025-07-12 14:09:33 [JavaFX-Launcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-12 14:09:33 [JavaFX-Launcher] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/securetransfer'
+2025-07-12 14:09:33 [JavaFX-Launcher] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-12 14:09:33 [JavaFX-Launcher] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-07-12 14:09:33 [JavaFX-Launcher] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-12 14:09:33 [JavaFX-Launcher] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-12 14:09:33 [JavaFX-Launcher] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-12 14:09:33 [JavaFX-Launcher] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-12 14:09:33 [JavaFX-Launcher] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-12 14:09:34 [JavaFX-Launcher] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-12 14:09:34 [JavaFX-Launcher] INFO  c.s.s.impl.EncryptionServiceImpl - Encryption service initialized with provided key
+2025-07-12 14:09:34 [JavaFX-Launcher] INFO  c.s.s.i.SecureTransferWebSocketServer - Initializing WebSocket server on port 8445 bound to all interfaces
+2025-07-12 14:09:34 [JavaFX-Launcher] WARN  c.s.s.i.SecureTransferWebSocketServer - Could not initialize SSL for WebSocket server, running in non-SSL mode: Unknown object id - S - passed to distinguished name
+2025-07-12 14:09:34 [JavaFX-Launcher] INFO  c.s.s.impl.P2PConnectionServiceImpl - Initializing P2P connection service
+2025-07-12 14:09:34 [JavaFX-Launcher] INFO  c.s.s.impl.P2PConnectionServiceImpl - P2P server started on port 8444
+2025-07-12 14:09:34 [pool-3-thread-1] INFO  c.s.s.impl.P2PConnectionServiceImpl - Listening for incoming P2P connections
+2025-07-12 14:09:34 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Attempting to discover connection details via STUN
+2025-07-12 14:09:34 [JavaFX-Launcher] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-12 14:09:34 [JavaFX-Launcher] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: f1934528-764f-4f45-b854-d68dcb1d2939
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-07-12 14:09:34 [JavaFX-Launcher] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2a93cba8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@188adc34, org.springframework.security.web.context.SecurityContextHolderFilter@6eaef2f5, org.springframework.security.web.header.HeaderWriterFilter@6dd7ebb0, org.springframework.web.filter.CorsFilter@18995e53, org.springframework.security.web.authentication.logout.LogoutFilter@6903881a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7d89014c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2bea72e1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2ae331c6, org.springframework.security.web.access.ExceptionTranslationFilter@54bdce55, org.springframework.security.web.access.intercept.AuthorizationFilter@162481f7]
+2025-07-12 14:09:35 [JavaFX-Launcher] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2025-07-12 14:09:35 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - Started application in 3.187 seconds (process running for 3.679)
+2025-07-12 14:09:35 [scheduling-1] INFO  c.s.s.impl.EncryptionServiceImpl - Encryption key rotated successfully
+2025-07-12 14:09:35 [JavaFX-Launcher] INFO  c.s.config.DatabaseStartupListener - Application started - checking database health...
+2025-07-12 14:09:35 [scheduling-1] DEBUG c.s.service.impl.TransferServiceImpl - Cleaning up completed transfers
+2025-07-12 14:09:35 [scheduling-1] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        sender_transfers 
+    where
+        start_time<?
+2025-07-12 14:09:35 [scheduling-1] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        receiver_transfers 
+    where
+        received_time<?
+2025-07-12 14:09:35 [JavaFX-Launcher] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.active,
+        u1_0.created_at,
+        u1_0.device_id,
+        u1_0.last_login,
+        u1_0.password_hash,
+        u1_0.user_token,
+        u1_0.username 
+    from
+        users u1_0
+2025-07-12 14:09:35 [JavaFX-Launcher] INFO  c.s.util.DatabaseHealthCheck - Database health check: Found 1 users in database
+2025-07-12 14:09:35 [JavaFX-Launcher] INFO  c.s.util.DatabaseHealthCheck - Existing users: random
+2025-07-12 14:09:35 [JavaFX Application Thread] WARN  javafx.css - CSS Error parsing file:/home/randomguy/IdeaProjects/Secure%20Transfer/target/classes/styles/global.css: Expected '<color>' while parsing '-fx-background-color' at [333,42]
+2025-07-12 14:09:35 [ForkJoinPool.commonPool-worker-1] INFO  c.securetransfer.util.NetworkUtils - Found working STUN server: stun.freeswitch.org:3478
+2025-07-12 14:09:35 [ForkJoinPool.commonPool-worker-1] INFO  JitsiConfig - Initialized newConfig: merge of application.properties @ file:/home/randomguy/IdeaProjects/Secure%20Transfer/target/classes/application.properties,system properties,reference.conf @ jar:file:/home/randomguy/.m2/repository/org/jitsi/ice4j/3.2-9-gb64c86f/ice4j-3.2-9-gb64c86f.jar!/reference.conf: 1
+2025-07-12 14:09:35 [ForkJoinPool.commonPool-worker-1] INFO  o.j.c.ReadOnlyConfigurationService - net.java.sip.communicator.SC_HOME_DIR_LOCATION not set
+2025-07-12 14:09:35 [ForkJoinPool.commonPool-worker-1] INFO  JitsiConfig - Initialized legacyConfig: sip communicator props (no description provided)
+2025-07-12 14:09:35 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.h.MappingCandidateHarvesters - Using AwsCandidateHarvester.
+2025-07-12 14:09:36 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.h.MappingCandidateHarvesters - Discarding a mapping harvester: org.ice4j.ice.harvest.AwsCandidateHarvester@5e8e936c
+2025-07-12 14:09:36 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.h.MappingCandidateHarvesters - Initialized mapping harvesters (delay=582ms).  stunDiscoveryFailed=false
+2025-07-12 14:09:36 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Gathering candidates for component data.RTP.
+2025-07-12 14:09:36 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Start ICE connectivity establishment.
+2025-07-12 14:09:36 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Init checklist for stream data
+2025-07-12 14:09:36 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - ICE state changed from Waiting to Running.
+2025-07-12 14:09:36 [ForkJoinPool.commonPool-worker-1] INFO  o.ice4j.ice.ConnectivityCheckClient - Start connectivity checks.
+2025-07-12 14:09:36 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Successfully discovered public IP 27.34.65.131 via pre-tested STUN server stun.freeswitch.org:3478
+2025-07-12 14:09:36 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Discovered external IP 27.34.65.131 via STUN
+2025-07-12 14:09:36 [ForkJoinPool.commonPool-worker-1] INFO  c.s.s.impl.P2PConnectionServiceImpl - Connection details discovered: ConnectionDetails{localIp='192.168.1.101', externalIp='27.34.65.131', externalPort=8444, portMapped=false, discoveryMethod=STUN}

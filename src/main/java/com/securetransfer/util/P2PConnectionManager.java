@@ -645,6 +645,28 @@ public class P2PConnectionManager {
             tryLocalNetworkIps(targetIp, targetPort, timeoutMs, result);
         }
         
+        // Final fallback - try with alternative ports if the standard port failed
+        CompletableFuture.runAsync(() -> {
+            if (!result.isDone()) {
+                // Try standard alternative ports for WebSockets
+                int[] fallbackPorts = new int[] {80, 443, 8080, 8443, 9000};
+                for (int altPort : fallbackPorts) {
+                    if (altPort == targetPort) continue; // Skip if it's the same as the original port
+                    
+                    logger.info("Trying connection with alternative port {}:{}", targetIp, altPort);
+                    if (testDirectConnection(targetIp, altPort, timeoutMs)) {
+                        logger.info("Connection with alternative port {}:{} successful", targetIp, altPort);
+                        result.complete(Optional.of(targetIp));
+                        return;
+                    }
+                }
+                
+                // If we get here, all connection attempts have failed
+                logger.warn("All connection strategies failed after exhaustive attempts");
+                result.complete(Optional.empty());
+            }
+        });
+        
         return result;
     }
     

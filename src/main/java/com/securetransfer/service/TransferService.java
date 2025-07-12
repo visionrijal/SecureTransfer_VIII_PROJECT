@@ -103,6 +103,21 @@ public interface TransferService {
     void cleanupCompletedTransfers();
     
     /**
+     * Store sender connection details for a transfer code
+     * @param transferCode transfer code
+     * @param ip sender's IP address
+     * @param port sender's WebSocket port
+     */
+    void storeSenderConnectionDetails(String transferCode, String ip, int port);
+    
+    /**
+     * Get sender connection details for a transfer code
+     * @param transferCode transfer code
+     * @return sender's connection details as "ip:port" or null if not found
+     */
+    String getSenderConnectionDetails(String transferCode);
+    
+    /**
      * Transfer progress information
      */
     class TransferProgress {

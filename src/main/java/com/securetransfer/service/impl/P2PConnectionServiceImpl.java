@@ -40,7 +40,7 @@ public class P2PConnectionServiceImpl implements P2PConnectionService {
     
     @Value("${p2p.listen.port:8444}")
     private int listenPort;
-
+    
     @Value("${p2p.listen.port.range:15}")
     private int portRange;
     

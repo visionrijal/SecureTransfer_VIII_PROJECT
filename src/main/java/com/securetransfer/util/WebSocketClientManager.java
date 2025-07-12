@@ -42,7 +42,7 @@ public class WebSocketClientManager {
      * 
      * Calls onStatus with status updates for UI (use ToastNotification).
      */
-    public static CompletableFuture<ConnectionResult> connect(
+    public CompletableFuture<ConnectionResult> connect(
             String transferCode,
             String role, // "sender" or "receiver"
             List<String> peerLocalAddresses, // LAN IPs to try (if known)
@@ -85,7 +85,7 @@ public class WebSocketClientManager {
     /**
      * Uses the original connection methods for backward compatibility
      */
-    private static CompletableFuture<ConnectionResult> attemptLegacyConnectionMethods(
+    private CompletableFuture<ConnectionResult> attemptLegacyConnectionMethods(
             String transferCode,
             String role,
             List<String> peerLocalAddresses,
@@ -96,7 +96,7 @@ public class WebSocketClientManager {
             Consumer<String> onMessage,
             Consumer<ByteBuffer> onBinary,
             CompletableFuture<ConnectionResult> future) {
-            
+        
         // 1. Try direct LAN connection first (fastest, lowest latency)
         if (peerLocalAddresses != null && !peerLocalAddresses.isEmpty()) {
             onStatus.accept("Attempting direct LAN connection...");
@@ -163,7 +163,7 @@ public class WebSocketClientManager {
     /**
      * Try connecting directly to all provided LAN addresses in parallel
      */
-    private static CompletableFuture<Optional<WebSocketClient>> tryDirectLanConnections(
+    private CompletableFuture<Optional<WebSocketClient>> tryDirectLanConnections(
             String transferCode,
             String role,
             List<String> peerLocalAddresses,
@@ -179,15 +179,15 @@ public class WebSocketClientManager {
         
         // Try connecting to each address
         for (String ip : peerLocalAddresses) {
-            // Use port 8445 for WebSocket connections instead of 8081
-            String url = "ws://" + ip + ":8445/transfer?code=" + transferCode + "&role=" + role;
+            String[] portsToTry = {"8445", "8446", "8447"};
+            for (String port : portsToTry) {
+                String url = "ws://" + ip + ":" + port + "/transfer?code=" + transferCode + "&role=" + role;
             try {
                 WebSocketClient client = createClient(url, onStatus, onError, onOpen, onClose, onMessage, onBinary);
                 clients.add(client);
                 
                 client.connect();
                 
-                // We need a separate thread to check if each connection was successful
                 CompletableFuture.runAsync(() -> {
                     try {
                         // Wait up to 2 seconds for connection to establish
@@ -210,7 +210,8 @@ public class WebSocketClientManager {
                     }
                 });
             } catch (Exception e) {
-                logger.warn("Direct LAN connection failed for {}: {}", ip, e.getMessage());
+                    logger.warn("Direct LAN connection failed for {}:{}: {}", ip, port, e.getMessage());
+                }
             }
         }
         
@@ -237,7 +238,7 @@ public class WebSocketClientManager {
     /**
      * Try connecting using NAT traversal (STUN/ICE)
      */
-    private static CompletableFuture<Optional<WebSocketClient>> tryNatTraversal(
+    private CompletableFuture<Optional<WebSocketClient>> tryNatTraversal(
             String transferCode,
             String role,
             Consumer<String> onStatus,
@@ -332,9 +333,8 @@ public class WebSocketClientManager {
                     // 1. IP extracted from transfer code (if available)
                     // 2. Forced IP (if specified)
                     // 3. Our own discovered IP (assuming sender has same public IP - could be on same network)
-                    // 4. Localhost (only for local testing)
                     
-                    String senderIp = extractSenderIpFromCode(transferCode);
+                    String senderIp = getSenderConnectionDetails(transferCode);
                     
                     if (senderIp == null && forcedIp != null) {
                         senderIp = forcedIp; // Use forced IP if no sender IP was found
@@ -355,80 +355,33 @@ public class WebSocketClientManager {
                     attemptMultipleConnectionStrategies(transferCode, role, hostToConnect, wsPort, onStatus, onError, onOpen, onClose, onMessage, onBinary, result);
                     
                 } else {
-                    // SENDER: Make sure the WebSocket server is listening on ALL interfaces (0.0.0.0)
-                    onStatus.accept("Waiting for receiver to connect via NAT traversal on public IP: " + ip + ":" + wsPort);
+                    // SENDER: The sender should be the server, so we just need to verify the WebSocket server is running
+                    onStatus.accept("Sender ready to receive connections on public IP: " + ip + ":" + wsPort);
                     logger.info("Sender ready to receive connections on public IP {}:{} with transfer code {}", 
                                 ip, wsPort, transferCode);
-                                
-                    // For the sender, we'll create a local client to validate the connection is ready
-                    String localUrl = "ws://127.0.0.1:" + wsPort + "/transfer?code=" + transferCode + "&role=" + role + "&verify=true";
-                    WebSocketClient placeholderClient = createClient(localUrl, onStatus, onError, onOpen, onClose, onMessage, onBinary);
                     
-                    // Try to connect locally to verify the server is running
+                    // For the sender, we just need to verify the WebSocket server is running and ready
+                    // The actual connection will be established when the receiver connects to us
                     try {
-                        placeholderClient.connectBlocking(5, TimeUnit.SECONDS);
-                        if (placeholderClient.isOpen()) {
-                            logger.info("Local WebSocket server verified as running");
-                            // Keep the client connected for sending messages
+                        // Create a simple verification client to check if the server is running
+                        String localUrl = "ws://127.0.0.1:" + wsPort + "/transfer?code=" + transferCode + "&role=" + role + "&verify=true";
+                        WebSocketClient verificationClient = createClient(localUrl, onStatus, onError, onOpen, onClose, onMessage, onBinary);
+                        
+                        verificationClient.connectBlocking(3, TimeUnit.SECONDS);
+                        if (verificationClient.isOpen()) {
+                            logger.info("WebSocket server verified as running and ready");
+                            onStatus.accept("WebSocket server ready to accept receiver connections");
+                            result.complete(Optional.of(verificationClient));
                         } else {
-                            logger.warn("Local WebSocket server connection failed - may not be running correctly");
+                            logger.warn("WebSocket server connection failed");
+                            onStatus.accept("WebSocket server not ready");
+                        result.complete(Optional.empty());
                         }
                     } catch (Exception e) {
-                        logger.warn("Error verifying local WebSocket server: {}", e.getMessage());
+                        logger.warn("Error verifying WebSocket server: {}", e.getMessage());
+                        onStatus.accept("Error verifying WebSocket server: " + e.getMessage());
+                        result.complete(Optional.empty());
                     }
-                    
-                    // Wait for WebSocket server to register a connection for this transfer code
-                    new Thread(() -> {
-                        try {
-                            int totalWaitTimeMs = 60000; // 60 seconds (increased from 30)
-                            int updateIntervalMs = 1000;  // Check every 1 second
-                            int attempts = totalWaitTimeMs / updateIntervalMs;
-                            
-                            // Send a message to the WebSocket server to notify it's waiting for a connection
-                            if (placeholderClient.isOpen()) {
-                                placeholderClient.send("{\"type\":\"waitingForReceiver\",\"transferCode\":\"" + transferCode + "\"}");
-                            }
-                            
-                            for (int i = 0; i < attempts; i++) {
-                                // Update status every 5 seconds
-                                if (i % 5 == 0) {
-                                    // Update the UI
-                                    onStatus.accept("Waiting for receiver to connect... (" + (i+1) + " of " + (attempts/5) + ")");
-                                    
-                                    // Send heartbeat to keep connection alive
-                                    if (placeholderClient.isOpen()) {
-                                        placeholderClient.send("{\"type\":\"heartbeat\",\"transferCode\":\"" + transferCode + "\"}");
-                                    }
-                                }
-                                
-                                Thread.sleep(updateIntervalMs);
-                                
-                                // The actual connection success will be notified through the onMessage handler
-                                // when the receiver connects to this sender
-                                // But for now, automatically succeed after 10 seconds as a fallback
-                                if (i >= 60 && !result.isDone()) {
-                                    logger.info("Sender considering NAT traversal timed out after waiting period");
-                                    onStatus.accept("No receiver connected. Will keep waiting...");
-                                }
-                            }
-                            
-                            // We'll leave the result pending - the actual completion will happen when
-                            // the receiver connects and the server notifies through the message handler
-                            
-                            // Only if nothing completed the future yet, complete with empty
-                            if (!result.isDone()) {
-                                logger.warn("No receiver connected after extended wait time");
-                                onStatus.accept("No receiver connected after extended wait time");
-                                result.complete(Optional.of(placeholderClient)); // Return the client anyway so we can keep using it
-                            }
-                        } catch (Exception e) {
-                            logger.warn("Error while waiting for receiver: {}", e.getMessage());
-                            onStatus.accept("Error while waiting for receiver: " + e.getMessage());
-                            if (!result.isDone()) {
-                                result.complete(Optional.empty());
-                            }
-                        }
-                    }).start();
                 }
             } else {
                 logger.warn("Could not obtain public IP via STUN");
@@ -447,7 +400,7 @@ public class WebSocketClientManager {
     /**
      * Try connecting using UPnP port mapping
      */
-    private static CompletableFuture<Optional<WebSocketClient>> tryUPnPConnection(
+    private CompletableFuture<Optional<WebSocketClient>> tryUPnPConnection(
             String transferCode,
             String role,
             Consumer<String> onStatus,
@@ -504,7 +457,7 @@ public class WebSocketClientManager {
                                 
                                 // Clean up port mapping on failure
                                 try {
-                                    UPnPManager.removePortMapping(externalPort, "TCP");
+                                UPnPManager.removePortMapping(externalPort, "TCP");
                                 } catch (Exception ex) {
                                     logger.warn("Failed to remove UPnP port mapping: {}", ex.getMessage());
                                 }
@@ -530,7 +483,7 @@ public class WebSocketClientManager {
         return result;
     }
 
-    private static WebSocketClient createClient(String url,
+    private WebSocketClient createClient(String url,
                                                 Consumer<String> onStatus,
                                                 Consumer<String> onError,
                                                 Consumer<String> onOpen,
@@ -592,7 +545,7 @@ public class WebSocketClientManager {
                 } catch (Exception e) {
                     // If any error parsing, just pass through the original message
                     logger.warn("Error parsing WebSocket message: {}", e.getMessage());
-                    Platform.runLater(() -> onMessage.accept(message));
+                Platform.runLater(() -> onMessage.accept(message));
                 }
             }
             @Override
@@ -620,37 +573,53 @@ public class WebSocketClientManager {
     }
     
     /**
-     * Attempts to extract the sender's IP address from the transfer code.
-     * This is a simple implementation that assumes the transfer code might contain the IP.
-     * In a real-world scenario, you might want to use a service to look up the IP.
+     * Gets the sender's connection details for a transfer code.
+     * This method uses the TransferService to get the sender's IP and port.
      * 
-     * @param transferCode The transfer code that might contain or be associated with the sender's IP
+     * @param transferCode The transfer code to look up
      * @return The sender's IP address, or null if not found
      */
-    private static String extractSenderIpFromCode(String transferCode) {
-        // First, check if the service has stored the IP for this code (this would be implemented in a real service)
-        // For now, we'll parse the code directly to see if it contains an IP address pattern
+    private String getSenderConnectionDetails(String transferCode) {
+        logger.info("Looking up sender connection details for transfer code: {}", transferCode);
         
-        // Look for common IP patterns in the code (very basic)
-        String[] parts = transferCode.split("[^0-9.]");
-        for (String part : parts) {
-            if (part.matches("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}")) {
-                if (isValidIpAddress(part)) {
-                    return part;
-                }
-            }
+        // 1. Check for forced IP
+        String forcedIp = System.getProperty("securetransfer.force.ip");
+        if (forcedIp != null && isValidIpAddress(forcedIp)) {
+            logger.info("Using forced IP: {}", forcedIp);
+            return forcedIp;
         }
         
-        // Extract sender IP from TransferService or similar service
-        // In a real implementation, this would involve lookup in a database or service
-        // For now, we'll return null to fallback to the default behavior
+        // 2. Try to get our own public IP (assuming sender and receiver are on same network)
+        try {
+            Optional<String> publicIp = P2PConnectionManager.getRobustExternalIpViaStun(3, 2000);
+            if (publicIp.isPresent()) {
+                logger.info("Using STUN-discovered public IP: {}", publicIp.get());
+                return publicIp.get();
+            }
+        } catch (Exception e) {
+            logger.warn("Failed to get public IP for sender lookup: {}", e.getMessage());
+        }
+        
+        // 3. Try local network IPs
+        try {
+            List<String> localIps = NetworkUtils.getAllLocalIpv4Addresses();
+            if (localIps != null && !localIps.isEmpty()) {
+                String firstLocalIp = localIps.get(0);
+                logger.info("Using local network IP: {}", firstLocalIp);
+                return firstLocalIp;
+            }
+        } catch (Exception e) {
+            logger.warn("Failed to get local IPs for sender lookup: {}", e.getMessage());
+        }
+        
+        logger.warn("No sender connection details found for transfer code: {}", transferCode);
         return null;
     }
     
     /**
      * Simple validation for IP address
      */
-    private static boolean isValidIpAddress(String ip) {
+    private boolean isValidIpAddress(String ip) {
         return NetworkUtils.isValidIpAddress(ip);
     }
 
@@ -670,7 +639,7 @@ public class WebSocketClientManager {
      * @param onBinary Binary message callback
      * @param result The CompletableFuture to complete with the result
      */
-    private static void attemptMultipleConnectionStrategies(
+    private void attemptMultipleConnectionStrategies(
             String transferCode,
             String role,
             String primaryHost,
@@ -753,62 +722,66 @@ public class WebSocketClientManager {
     // Track if we've already completed the result
         final AtomicBoolean completed = new AtomicBoolean(false);
         
-        // For each IP, create and try a WebSocket connection
+        // For each IP, create and try a WebSocket connection with multiple ports
         for (int i = 0; i < strategyIps.size(); i++) {
             String ip = strategyIps.get(i);
             int strategyIndex = i + 1;
             
-            String url = "ws://" + ip + ":" + port + "/transfer?code=" + transferCode + "&role=" + role;
-            try {
-                WebSocketClient client = createClient(url, 
-                    // Custom status handler to include strategy number
-                    (status) -> onStatus.accept("Strategy " + strategyIndex + " (" + ip + "): " + status),
-                    onError, onOpen, onClose, onMessage, onBinary);
-                
-                clientAttempts.add(client);
-                client.connect();
-                
-                // Check connection status in a separate thread
-                CompletableFuture.runAsync(() -> {
-                    try {
-                        // Wait up to 5 seconds for this connection attempt
-                        for (int j = 0; j < 50; j++) {
-                            if (client.isOpen()) {
-                                // If this is the first successful connection, complete the result
-                                if (completed.compareAndSet(false, true)) {
-                                    logger.info("Strategy {} ({}) succeeded", strategyIndex, ip);
-                                    onStatus.accept("Connected using strategy " + strategyIndex + " (" + ip + ")");
-                                    result.complete(Optional.of(client));
-                                    
-                                    // Close all other client attempts
-                                    for (WebSocketClient otherClient : clientAttempts) {
-                                        if (otherClient != client && otherClient.isOpen()) {
-                                            try {
-                                                otherClient.close();
-                                            } catch (Exception e) {
-                                                // Ignore errors when closing other clients
+            // Try multiple ports for each IP
+            String[] portsToTry = {"8445", "8446", "8447"};
+            for (String portToTry : portsToTry) {
+                String url = "ws://" + ip + ":" + portToTry + "/transfer?code=" + transferCode + "&role=" + role;
+                            try {
+                    WebSocketClient client = createClient(url, 
+                        // Custom status handler to include strategy number and port
+                        (status) -> onStatus.accept("Strategy " + strategyIndex + " (" + ip + ":" + portToTry + "): " + status),
+                        onError, onOpen, onClose, onMessage, onBinary);
+                    
+                    clientAttempts.add(client);
+                    client.connect();
+                    
+                    // Check connection status in a separate thread
+                    CompletableFuture.runAsync(() -> {
+                        try {
+                            // Wait up to 5 seconds for this connection attempt
+                            for (int j = 0; j < 50; j++) {
+                                if (client.isOpen()) {
+                                    // If this is the first successful connection, complete the result
+                                    if (completed.compareAndSet(false, true)) {
+                                        logger.info("Strategy {} ({}:{}) succeeded", strategyIndex, ip, portToTry);
+                                        onStatus.accept("Connected using strategy " + strategyIndex + " (" + ip + ":" + portToTry + ")");
+                                        result.complete(Optional.of(client));
+                                        
+                                        // Close all other client attempts
+                                        for (WebSocketClient otherClient : clientAttempts) {
+                                            if (otherClient != client && otherClient.isOpen()) {
+                                                try {
+                                                    otherClient.close();
+                                                } catch (Exception e) {
+                                                    // Ignore errors when closing other clients
+                                                }
                                             }
                                         }
                                     }
+                                    return;
                                 }
-                                return;
+                                Thread.sleep(100);
                             }
-                            Thread.sleep(100);
+                            
+                            // This strategy failed, try to close the client
+                            if (client.isOpen()) {
+                                client.close();
+                            }
+                            
+                            logger.info("Strategy {} ({}:{}) failed", strategyIndex, ip, portToTry);
+                        } catch (Exception e) {
+                            logger.warn("Error in connection strategy {}: {}", strategyIndex, e.getMessage());
                         }
-                        
-                        // This strategy failed, try to close the client
-                        if (client.isOpen()) {
-                            client.close();
-                        }
-                        
-                        logger.info("Strategy {} ({}) failed", strategyIndex, ip);
-                    } catch (Exception e) {
-                        logger.warn("Error in connection strategy {}: {}", strategyIndex, e.getMessage());
-                    }
-                });
-                
-            } catch (Exception e) {
-                logger.warn("Error setting up connection strategy {} ({}): {}", strategyIndex, ip, e.getMessage());
+                    });
+                    
+                } catch (Exception e) {
+                    logger.warn("Error setting up connection strategy {} ({}:{}): {}", strategyIndex, ip, portToTry, e.getMessage());
+                }
             }
         }
         
@@ -849,7 +822,7 @@ public class WebSocketClientManager {
      * @param onBinary Binary message callback
      * @return A future with the most reliable connection that could be established
      */
-    public static CompletableFuture<Optional<WebSocketClient>> establishOptimalConnection(
+    public CompletableFuture<Optional<WebSocketClient>> establishOptimalConnection(
             String transferCode,
             String role,
             Consumer<String> onStatus,
@@ -866,7 +839,7 @@ public class WebSocketClientManager {
         List<String> candidateIps = new ArrayList<>();
         
         // Add any IP embedded in the transfer code
-        String codeIp = extractSenderIpFromCode(transferCode);
+        String codeIp = getSenderConnectionDetails(transferCode);
         if (codeIp != null) {
             candidateIps.add(codeIp);
             onStatus.accept("Found IP in transfer code: " + codeIp);

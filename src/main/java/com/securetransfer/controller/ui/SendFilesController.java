@@ -547,7 +547,7 @@ private String getFileIconPath(String fileName) {
     // --- POPUP LOGIC REFACTOR ---
     // Remove any FXML-based popup remnants (codePopup, transferCodeText, etc.)
     // All popups are built in Java using VBox/HBox and styled with your CSS
-
+    
     @FXML
     public void startDirectTransfer() {
         if (selectedFiles.isEmpty()) {
@@ -559,7 +559,7 @@ private String getFileIconPath(String fileName) {
         showEncryptionPopup();
         startEncryptionForTransfer();
     }
-
+    
     private void showEncryptionPopup() {
         transferStage = new Stage();
         transferStage.initModality(Modality.APPLICATION_MODAL);
@@ -635,8 +635,8 @@ private String getFileIconPath(String fileName) {
                         final int fileIndex = i;
                         File inputFile = selectedFiles.get(i);
                         File outputFile = new File(inputFile.getParent(), inputFile.getName() + ".enc");
-                        encryptionService.encryptFile(inputFile, outputFile, aesKey, iv, percent -> {
-                            double progress = (fileIndex + percent) / total;
+                            encryptionService.encryptFile(inputFile, outputFile, aesKey, iv, percent -> {
+                                double progress = (fileIndex + percent) / total;
                             Platform.runLater(() -> {
                                 if (encryptionProgressBar.progressProperty().isBound()) {
                                     encryptionProgressBar.progressProperty().unbind();
@@ -695,56 +695,56 @@ private String getFileIconPath(String fileName) {
                 return null;
             });
     }
-
+    
     private void showCodeDetailsInPopup(String transferCode) {
-        VBox content = new VBox(20);
-        content.setAlignment(Pos.CENTER);
-        content.setPadding(new Insets(32, 32, 32, 32));
+            VBox content = new VBox(20);
+            content.setAlignment(Pos.CENTER);
+            content.setPadding(new Insets(32, 32, 32, 32));
         content.getStyleClass().add("transfer-popup-pane");
         content.setMinWidth(900);
         content.setMinHeight(600);
-        Label icon = new Label("\uD83D\uDCE4"); // 📤
-        icon.setFont(Font.font("Segoe UI Emoji", 48));
-        icon.setAlignment(Pos.CENTER);
-        Label heading = new Label("Share This Code");
-        heading.setFont(Font.font("Inter", FontWeight.BOLD, 24));
-        heading.setTextFill(Color.web("#059669"));
-        heading.setAlignment(Pos.CENTER);
-        heading.setMaxWidth(700);
-        heading.setWrapText(true);
-        Label status = new Label("Share this code with the receiver and wait for them to connect.\nKeep this window open until the transfer is complete.");
-        status.setFont(Font.font("Inter", 16));
-        status.setTextFill(Color.web("#374151"));
-        status.setAlignment(Pos.CENTER);
-        status.setMaxWidth(700);
-        status.setWrapText(true);
-        Label code = new Label(transferCode);
-        code.getStyleClass().add("code-label");
-        code.setFont(Font.font("Consolas", FontWeight.BOLD, 36));
-        code.setTextFill(Color.web("#059669"));
-        code.setAlignment(Pos.CENTER);
-        code.setWrapText(true);
-        code.setMaxWidth(700);
-        code.setStyle("-fx-background-color: #f0fdf4; -fx-border-color: #059669; -fx-border-width: 3; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 20 40; -fx-font-size: 36px;");
-        Region divider = new Region();
-        divider.setMinWidth(700);
-        divider.setPrefHeight(2);
-        divider.setStyle("-fx-background-color: #e5e7eb;");
-        Label note = new Label("Do not close this window until the transfer is complete.\nThe code is valid for 30 minutes.");
-        note.setFont(Font.font("Inter", 14));
-        note.setTextFill(Color.web("#6b7280"));
-        note.setAlignment(Pos.CENTER);
-        note.setWrapText(true);
-        note.setMaxWidth(700);
+            Label icon = new Label("\uD83D\uDCE4"); // 📤
+            icon.setFont(Font.font("Segoe UI Emoji", 48));
+            icon.setAlignment(Pos.CENTER);
+            Label heading = new Label("Share This Code");
+            heading.setFont(Font.font("Inter", FontWeight.BOLD, 24));
+            heading.setTextFill(Color.web("#059669"));
+            heading.setAlignment(Pos.CENTER);
+            heading.setMaxWidth(700);
+            heading.setWrapText(true);
+            Label status = new Label("Share this code with the receiver and wait for them to connect.\nKeep this window open until the transfer is complete.");
+            status.setFont(Font.font("Inter", 16));
+            status.setTextFill(Color.web("#374151"));
+            status.setAlignment(Pos.CENTER);
+            status.setMaxWidth(700);
+            status.setWrapText(true);
+            Label code = new Label(transferCode);
+            code.getStyleClass().add("code-label");
+            code.setFont(Font.font("Consolas", FontWeight.BOLD, 36));
+            code.setTextFill(Color.web("#059669"));
+            code.setAlignment(Pos.CENTER);
+            code.setWrapText(true);
+            code.setMaxWidth(700);
+            code.setStyle("-fx-background-color: #f0fdf4; -fx-border-color: #059669; -fx-border-width: 3; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 20 40; -fx-font-size: 36px;");
+            Region divider = new Region();
+            divider.setMinWidth(700);
+            divider.setPrefHeight(2);
+            divider.setStyle("-fx-background-color: #e5e7eb;");
+            Label note = new Label("Do not close this window until the transfer is complete.\nThe code is valid for 30 minutes.");
+            note.setFont(Font.font("Inter", 14));
+            note.setTextFill(Color.web("#6b7280"));
+            note.setAlignment(Pos.CENTER);
+            note.setWrapText(true);
+            note.setMaxWidth(700);
         Button cancelBtn = new Button("Cancel");
         cancelBtn.getStyleClass().add("popup-btn-red");
         cancelBtn.setMinWidth(160);
         cancelBtn.setFont(Font.font("Inter", FontWeight.BOLD, 15));
         cancelBtn.setOnAction(e -> handlePopupCancel());
         HBox buttonRow = new HBox(16, cancelBtn);
-        buttonRow.setAlignment(Pos.CENTER);
-        content.getChildren().addAll(icon, heading, status, code, note, divider, buttonRow);
-        transferStage.getScene().setRoot(content);
+            buttonRow.setAlignment(Pos.CENTER);
+            content.getChildren().addAll(icon, heading, status, code, note, divider, buttonRow);
+            transferStage.getScene().setRoot(content);
     }
     
     private void registerForReceiverConnection() {
@@ -1144,7 +1144,7 @@ private String getFileIconPath(String fileName) {
                 showToast("Encryption cancelled.", ToastNotification.NotificationType.INFO);
             } else {
                 showToast("Transfer cancelled.", ToastNotification.NotificationType.INFO);
-            }
+        }
         });
     }
 }

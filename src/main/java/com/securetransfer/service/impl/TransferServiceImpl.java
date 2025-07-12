@@ -194,14 +194,19 @@ public class TransferServiceImpl implements TransferService {
                 logger.info("Connecting sender to WebSocket server for transfer code: {}", transferCode);
                 try {
                     int websocketPort = webSocketServer.getActualPort();
-                    logger.info("WebSocket server is running on port: {}", websocketPort);
-                    List<String> localhostAddresses = Arrays.asList("127.0.0.1:" + websocketPort);
-                    logger.info("Attempting to connect to: {}", localhostAddresses);
+                    List<String> connectAddresses = new ArrayList<>();
+                    connectAddresses.add("127.0.0.1:" + websocketPort);
+                    // Add LAN IP
+                    Optional<String> localIp = NetworkUtils.getLocalIpAddress();
+                    localIp.ifPresent(ip -> connectAddresses.add(ip + ":" + websocketPort));
+                    // Optionally add public IP if available (for NAT traversal, etc.)
+                    // You can add logic here to fetch public IP if needed
+                    logger.info("Attempting to connect to: {}", connectAddresses);
                     
                     webSocketClientManager.connect(
                         transferCode,
                         "sender",
-                        localhostAddresses, // Connect to localhost with actual port
+                        connectAddresses, // Connect to all possible addresses
                         msg -> logger.info("Sender connection status: {}", msg),
                         err -> logger.error("Sender connection error: {}", err),
                         url -> logger.info("Sender WebSocket open: {}", url),

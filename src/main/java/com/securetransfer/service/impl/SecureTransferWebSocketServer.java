@@ -18,6 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.KeyManagerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import com.securetransfer.util.KeystoreManager;
 import java.security.KeyStore;
 
@@ -26,6 +27,9 @@ public class SecureTransferWebSocketServer extends org.java_websocket.server.Web
     private static final Logger logger = LoggerFactory.getLogger(SecureTransferWebSocketServer.class);
     private final Map<String, TransferSession> activeSessions = new ConcurrentHashMap<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
+    
+    @Autowired
+    private com.securetransfer.service.TransferService transferService;
 
     public SecureTransferWebSocketServer(@Value("${websocket.port:8445}") int preferredPort) {
         // Bind to all network interfaces (0.0.0.0) to allow external connections
@@ -242,6 +246,18 @@ public class SecureTransferWebSocketServer extends org.java_websocket.server.Web
                     } catch (Exception e) {
                         logger.error("Error sending peer connection notification: {}", e.getMessage());
                     }
+                }
+                
+                // Trigger the receiver connection callback to notify the sender
+                // This will show the confirmation dialog on the sender side
+                try {
+                    if (transferService != null) {
+                        // Trigger the callback that was registered by the sender
+                        transferService.triggerReceiverConnectionCallback(transferCode);
+                        logger.info("Triggered receiver connection callback for transfer code: {}", transferCode);
+                    }
+                } catch (Exception e) {
+                    logger.warn("Could not trigger receiver connection callback: {}", e.getMessage());
                 }
             }
         } else {

@@ -41,6 +41,9 @@ import java.util.function.Consumer;
 import org.java_websocket.client.WebSocketClient;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ButtonBar;
 
 /**
  * Implementation of transfer service for secure file transfer operations.
@@ -952,27 +955,97 @@ public class TransferServiceImpl implements TransferService {
         receiverConnectionCallbacks.put(transferCode, callback);
         logger.info("Registered receiver connection callback for transfer code: {}", transferCode);
     }
+    
+    @Override
+    public void triggerReceiverConnectionCallback(String transferCode) {
+        Runnable callback = receiverConnectionCallbacks.get(transferCode);
+        if (callback != null) {
+            logger.info("Triggering receiver connection callback for transfer code: {}", transferCode);
+            callback.run();
+        } else {
+            logger.warn("No receiver connection callback found for transfer code: {}", transferCode);
+        }
+    }
 
     @Override
     public void connectSenderWebSocketClient(String transferCode, String username) {
-        logger.info("Connecting sender as WebSocket client for transfer code: {}", transferCode);
-        Consumer<String> toast = msg -> ToastNotification.show(null, msg, ToastNotification.NotificationType.INFO, javafx.util.Duration.seconds(3), 70);
-        webSocketClientManager.connect(
-            transferCode,
-            "sender",
-            discoverLocalLANAddresses(),
-            toast,
-            err -> ToastNotification.show(null, "Connection error: " + err, ToastNotification.NotificationType.ERROR, javafx.util.Duration.seconds(3), 70),
-            url -> logger.info("Sender WebSocket open: {}", url),
-            reason -> logger.info("Sender WebSocket closed: {}", reason),
-            msg -> handleIncomingMessage(transferCode, msg),
-            bytes -> handleIncomingBinary(transferCode, bytes)
-        ).thenAccept(connResult -> {
-            activeClients.put(transferCode, connResult.client);
-            logger.info("Sender WebSocket client connected for transfer code: {}", transferCode);
-        }).exceptionally(ex -> {
-            logger.error("Failed to connect sender WebSocket client: {}", ex.getMessage());
-            return null;
+        logger.info("Setting up sender notification for transfer code: {}", transferCode);
+        
+        // Register a callback to be notified when receiver connects
+        // This will be called by the WebSocket server when a receiver connects
+        registerReceiverConnectionCallback(transferCode, () -> {
+            logger.info("Receiver connected - showing confirmation dialog for transfer code: {}", transferCode);
+            
+            // Show confirmation dialog on JavaFX thread
+            javafx.application.Platform.runLater(() -> {
+                try {
+                    // Get the transfer session to show file details
+                    TransferSession session = activeSessions.get(transferCode);
+                    if (session != null) {
+                        String fileName = session.getFileName();
+                        long fileSize = session.getFileSize();
+                        
+                        // Show confirmation dialog
+                        showTransferConfirmationDialog(transferCode, fileName, fileSize);
+                    } else {
+                        logger.warn("No transfer session found for code: {}", transferCode);
+                        ToastNotification.show(null, "Transfer session not found", 
+                            ToastNotification.NotificationType.ERROR, javafx.util.Duration.seconds(3), 70);
+                    }
+                } catch (Exception e) {
+                    logger.error("Error showing confirmation dialog: {}", e.getMessage());
+                    ToastNotification.show(null, "Error showing confirmation: " + e.getMessage(), 
+                        ToastNotification.NotificationType.ERROR, javafx.util.Duration.seconds(3), 70);
+                }
+            });
         });
+        
+        logger.info("Sender notification setup complete for transfer code: {}", transferCode);
+    }
+    
+    private void showTransferConfirmationDialog(String transferCode, String fileName, long fileSize) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Receiver Connected");
+        alert.setHeaderText("Receiver is ready to receive file");
+        alert.setContentText(String.format("File: %s\nSize: %s\n\nDo you want to start the transfer?", 
+            fileName, formatFileSize(fileSize)));
+        
+        ButtonType startButton = new ButtonType("Start Transfer");
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(startButton, cancelButton);
+        
+        alert.showAndWait().ifPresent(response -> {
+            if (response == startButton) {
+                logger.info("User confirmed transfer start for code: {}", transferCode);
+                // Start the file transfer
+                startFileTransfer(transferCode, 
+                    progress -> {
+                        // Update progress
+                        logger.info("Transfer progress: {}%", progress.getProgress() * 100);
+                    },
+                    completion -> {
+                        if (completion.isSuccess()) {
+                            logger.info("Transfer completed successfully for code: {}", transferCode);
+                            ToastNotification.show(null, "File transfer completed successfully!", 
+                                ToastNotification.NotificationType.SUCCESS, javafx.util.Duration.seconds(5), 70);
+                        } else {
+                            logger.error("Transfer failed for code {}: {}", transferCode, completion.getErrorMessage());
+                            ToastNotification.show(null, "Transfer failed: " + completion.getErrorMessage(), 
+                                ToastNotification.NotificationType.ERROR, javafx.util.Duration.seconds(5), 70);
+                        }
+                    });
+            } else {
+                logger.info("User cancelled transfer for code: {}", transferCode);
+                ToastNotification.show(null, "Transfer cancelled by user", 
+                    ToastNotification.NotificationType.INFO, javafx.util.Duration.seconds(3), 70);
+            }
+        });
+    }
+    
+    private String formatFileSize(long bytes) {
+        if (bytes < 1024) return bytes + " B";
+        if (bytes < 1024 * 1024) return String.format("%.1f KB", bytes / 1024.0);
+        if (bytes < 1024 * 1024 * 1024) return String.format("%.1f MB", bytes / (1024.0 * 1024.0));
+        return String.format("%.1f GB", bytes / (1024.0 * 1024.0 * 1024.0));
     }
 }

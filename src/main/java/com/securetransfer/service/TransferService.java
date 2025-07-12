@@ -132,6 +132,13 @@ public interface TransferService {
     void connectSenderWebSocketClient(String transferCode, String username);
     
     /**
+     * Trigger the receiver connection callback for a transfer code.
+     * This is called by the WebSocket server when a receiver connects.
+     * @param transferCode the transfer code
+     */
+    void triggerReceiverConnectionCallback(String transferCode);
+    
+    /**
      * Transfer progress information
      */
     class TransferProgress {

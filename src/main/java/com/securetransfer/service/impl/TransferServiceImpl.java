@@ -430,15 +430,25 @@ public class TransferServiceImpl implements TransferService {
             peerAddresses.add(senderConnectionDetails);
             logger.info("Using sender's connection details for connection: {}", senderConnectionDetails);
         } else {
-            // No sender transfer record found - this means the transfer hasn't been initiated yet
-            logger.error("Transfer code {} not found in database. Please ensure the sender has initiated a transfer with this code first.", transferCode);
-            ToastNotification.show(null, 
-                "Transfer code " + transferCode + " not found. Please ensure the sender has initiated a transfer with this code first.", 
-                ToastNotification.NotificationType.ERROR, 
-                javafx.util.Duration.seconds(5), 
-                70);
-            future.completeExceptionally(new RuntimeException("Transfer code not found: " + transferCode));
-            return future;
+            // No sender transfer record found - try to discover sender on the network
+            logger.info("No sender connection details found for transfer code: {}. Attempting network discovery...", transferCode);
+            
+            // Generate possible sender addresses to try
+            List<String> possibleAddresses = generatePossibleSenderAddresses(transferCode);
+            peerAddresses.addAll(possibleAddresses);
+            
+            logger.info("Generated {} possible sender addresses to try: {}", possibleAddresses.size(), possibleAddresses);
+            
+            if (possibleAddresses.isEmpty()) {
+                logger.error("No possible sender addresses found for transfer code: {}", transferCode);
+                ToastNotification.show(null, 
+                    "Unable to find sender on the network. Please ensure the sender has initiated a transfer with code: " + transferCode, 
+                    ToastNotification.NotificationType.ERROR, 
+                    javafx.util.Duration.seconds(5), 
+                    70);
+                future.completeExceptionally(new RuntimeException("No sender addresses found for transfer code: " + transferCode));
+                return future;
+            }
         }
         
         webSocketClientManager.connect(
@@ -1024,6 +1034,80 @@ public class TransferServiceImpl implements TransferService {
             logger.warn("Failed to discover LAN IPs: {}", e.getMessage());
         }
         return ips;
+    }
+    
+    /**
+     * Generate possible sender addresses to try when connecting to a transfer
+     * This method tries common LAN IP ranges and the local machine's network
+     */
+    private List<String> generatePossibleSenderAddresses(String transferCode) {
+        List<String> addresses = new ArrayList<>();
+        
+        try {
+            // Get the local IP to determine the network range
+            Optional<String> localIp = NetworkUtils.getLocalIpAddress();
+            if (localIp.isPresent()) {
+                String localIpStr = localIp.get();
+                logger.info("Local IP detected: {}", localIpStr);
+                
+                // Extract network prefix (e.g., "192.168.1" from "192.168.1.101")
+                String[] parts = localIpStr.split("\\.");
+                if (parts.length == 4) {
+                    String networkPrefix = parts[0] + "." + parts[1] + "." + parts[2];
+                    logger.info("Network prefix detected: {}", networkPrefix);
+                    
+                    // Try common ports for WebSocket server
+                    List<Integer> commonPorts = Arrays.asList(8445, 8446, 8447, 8448, 8449, 8450);
+                    
+                    // Generate addresses in the same network range
+                    for (int i = 1; i <= 254; i++) {
+                        String candidateIp = networkPrefix + "." + i;
+                        // Skip our own IP
+                        if (!candidateIp.equals(localIpStr)) {
+                            for (int port : commonPorts) {
+                                addresses.add(candidateIp + ":" + port);
+                            }
+                        }
+                    }
+                    
+                    logger.info("Generated {} possible sender addresses in network range {}", addresses.size(), networkPrefix);
+                }
+            }
+            
+            // Also try some common LAN ranges if we couldn't determine the local network
+            if (addresses.isEmpty()) {
+                logger.info("Could not determine local network, trying common LAN ranges");
+                List<String> commonRanges = Arrays.asList(
+                    "192.168.1", "192.168.0", "192.168.2", "192.168.10", "192.168.100",
+                    "10.0.0", "10.0.1", "10.1.1", "10.10.10",
+                    "172.16.0", "172.16.1", "172.17.0", "172.18.0"
+                );
+                
+                List<Integer> commonPorts = Arrays.asList(8445, 8446, 8447, 8448, 8449, 8450);
+                
+                for (String range : commonRanges) {
+                    for (int i = 1; i <= 254; i++) {
+                        String candidateIp = range + "." + i;
+                        for (int port : commonPorts) {
+                            addresses.add(candidateIp + ":" + port);
+                        }
+                    }
+                }
+                
+                logger.info("Generated {} possible sender addresses using common LAN ranges", addresses.size());
+            }
+            
+            // Limit the number of addresses to try to avoid overwhelming the system
+            if (addresses.size() > 1000) {
+                logger.info("Limiting addresses to first 1000 to avoid overwhelming the system");
+                addresses = addresses.subList(0, 1000);
+            }
+            
+        } catch (Exception e) {
+            logger.warn("Error generating possible sender addresses: {}", e.getMessage());
+        }
+        
+        return addresses;
     }
     
     // Store sender connection details

@@ -230,6 +230,27 @@ public class TransferServiceImpl implements TransferService {
                     logger.error("Error saving transfer record for file: {}", fileName, e);
                 }
             })
+            .thenRun(() -> {
+                // Establish WebSocket connection for sender to receive peerConnected messages
+                logger.info("Establishing WebSocket connection for sender to receive notifications");
+                webSocketClientManager.connect(
+                    transferCode,
+                    "sender",
+                    discoverLocalLANAddresses(),
+                    msg -> logger.info("Sender connection status: {}", msg),
+                    err -> logger.error("Sender connection error: {}", err),
+                    url -> logger.info("Sender WebSocket open: {}", url),
+                    reason -> logger.info("Sender WebSocket closed: {}", reason),
+                    msg -> handleIncomingMessage(transferCode, msg),
+                    bytes -> handleIncomingBinary(transferCode, bytes)
+                ).thenAccept(connResult -> {
+                    logger.info("Sender WebSocket connection established for transfer code: {}", transferCode);
+                    activeClients.put(transferCode + "_sender", connResult.client);
+                }).exceptionally(ex -> {
+                    logger.error("Failed to establish sender WebSocket connection: {}", ex.getMessage());
+                    return null;
+                });
+            })
             .thenAccept(v -> {
                 // Get the session information from the WebSocket service
                 TransferSession session = webSocketService.getActiveSessions().get(transferCode);

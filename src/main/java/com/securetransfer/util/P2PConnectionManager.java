@@ -8,20 +8,15 @@ import org.ice4j.ice.IceProcessingState;
 import org.ice4j.ice.LocalCandidate;
 import org.ice4j.ice.harvest.StunCandidateHarvester;
 import org.ice4j.ice.harvest.TurnCandidateHarvester;
-import org.ice4j.socket.IceSocketWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.URI;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Consumer;
 import org.ice4j.security.LongTermCredential;
 
 /**
@@ -229,7 +224,14 @@ public class P2PConnectionManager {
                 details.setLocalIp(localIp.get());
             } else {
                 // If getLocalIpAddress fails, try our more aggressive method
-                details.setLocalIp(NetworkUtils.getBestLocalIpAddress());
+                Optional<String> bestLocalIp = NetworkUtils.getBestLocalIpAddress();
+                if (bestLocalIp.isPresent()) {
+                    details.setLocalIp(bestLocalIp.get());
+                } else {
+                    // Last resort fallback to localhost
+                    details.setLocalIp("127.0.0.1");
+                    logger.warn("Could not determine any local IP, falling back to localhost");
+                }
             }
             
             // Try STUN first (preferred for NAT traversal) with our robust method

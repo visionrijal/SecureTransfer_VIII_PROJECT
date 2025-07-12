@@ -213,6 +213,9 @@ public class TransferServiceImpl implements TransferService {
             .thenRun(() -> {
                 logger.info("Sender registered successfully for transfer code: {}", transferCode);
                 
+                // Store the sender's local IP for receiver connection
+                storeSenderLocalIp(transferCode);
+                
                 // Create and save a sender transfer record for the file
                 try {
                     SenderTransfer transfer = new SenderTransfer();
@@ -294,10 +297,23 @@ public class TransferServiceImpl implements TransferService {
             ToastNotification.show(null, "Connection error: " + err, ToastNotification.NotificationType.ERROR, javafx.util.Duration.seconds(3), 70);
         };
         
+        // Try to get the sender's local IP if available
+        String senderLocalIp = getSenderLocalIp(transferCode);
+        List<String> peerAddresses = new ArrayList<>();
+        
+        if (senderLocalIp != null) {
+            peerAddresses.add(senderLocalIp);
+            logger.info("Using sender's local IP for connection: {}", senderLocalIp);
+        } else {
+            // Fall back to discovered local addresses
+            peerAddresses = discoverLocalLANAddresses();
+            logger.info("No sender local IP found, using discovered addresses: {}", peerAddresses);
+        }
+        
         webSocketClientManager.connect(
             transferCode,
             "receiver",
-            discoverLocalLANAddresses(),
+            peerAddresses,
             statusUpdater,
             errorHandler,
             url -> {
@@ -890,6 +906,23 @@ public class TransferServiceImpl implements TransferService {
         logger.info("Stored sender connection details for {}: {}", transferCode, details);
     }
     
+    /**
+     * Store the sender's local IP address when initiating a transfer
+     */
+    private void storeSenderLocalIp(String transferCode) {
+        try {
+            // Get the local IP address of this device
+            Optional<String> localIp = NetworkUtils.getLocalIpAddress();
+            if (localIp.isPresent()) {
+                String ip = localIp.get();
+                senderConnectionDetails.put(transferCode + "_local_ip", ip);
+                logger.info("Stored sender local IP for {}: {}", transferCode, ip);
+            }
+        } catch (Exception e) {
+            logger.warn("Failed to store sender local IP: {}", e.getMessage());
+        }
+    }
+    
     @Override
     public String getSenderConnectionDetails(String transferCode) {
         String details = senderConnectionDetails.get(transferCode);
@@ -899,6 +932,19 @@ public class TransferServiceImpl implements TransferService {
             logger.warn("No sender connection details found for transfer code: {}", transferCode);
         }
         return details;
+    }
+    
+    /**
+     * Get the sender's local IP address for a transfer code
+     */
+    public String getSenderLocalIp(String transferCode) {
+        String localIp = senderConnectionDetails.get(transferCode + "_local_ip");
+        if (localIp != null) {
+            logger.info("Retrieved sender local IP for {}: {}", transferCode, localIp);
+        } else {
+            logger.warn("No sender local IP found for transfer code: {}", transferCode);
+        }
+        return localIp;
     }
     
     @Override

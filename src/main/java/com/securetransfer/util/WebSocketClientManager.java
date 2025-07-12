@@ -334,25 +334,15 @@ public class WebSocketClientManager {
                     // 2. Forced IP (if specified)
                     // 3. Our own discovered IP (assuming sender has same public IP - could be on same network)
                     
-                    String senderIp = getSenderConnectionDetails(transferCode);
+                    // For receiver, we need to connect to the sender
+                    // Since we don't have the sender's actual IP, we'll try multiple strategies
                     
-                    if (senderIp == null && forcedIp != null) {
-                        senderIp = forcedIp; // Use forced IP if no sender IP was found
-                        logger.info("Using forced IP for sender connection: {}", senderIp);
-                    }
-                    
-                    if (senderIp == null && localTestMode) {
-                        senderIp = "127.0.0.1"; // In local test mode, use localhost as last resort
-                        logger.info("Using localhost for local test mode");
-                    }
-                    
-                    // If we still don't have a sender IP, try using our own public IP
-                    // (useful when both devices are behind the same NAT)
-                    String hostToConnect = senderIp != null ? senderIp : ip;
-                    logger.info("Receiver will attempt to connect to sender at: {}", hostToConnect);
+                    // Strategy 1: Try using our own public IP (if both devices are behind same NAT)
+                    String primaryHost = ip; // Use the discovered public IP
+                    logger.info("Receiver will attempt to connect to sender using public IP: {}", primaryHost);
                     
                     // Try multiple connection strategies in parallel for better success rate
-                    attemptMultipleConnectionStrategies(transferCode, role, hostToConnect, wsPort, onStatus, onError, onOpen, onClose, onMessage, onBinary, result);
+                    attemptMultipleConnectionStrategies(transferCode, role, primaryHost, wsPort, onStatus, onError, onOpen, onClose, onMessage, onBinary, result);
                     
                 } else {
                     // SENDER: The sender should be the server, so we just need to verify the WebSocket server is running
@@ -573,10 +563,10 @@ public class WebSocketClientManager {
     }
     
     /**
-     * Gets the sender's connection details for a transfer code.
-     * This method uses the TransferService to get the sender's IP and port.
+     * Gets the sender's IP address for a given transfer code.
+     * This method tries to extract the sender's IP from the transfer code or use fallback methods.
      * 
-     * @param transferCode The transfer code to look up
+     * @param transferCode The transfer code
      * @return The sender's IP address, or null if not found
      */
     private String getSenderConnectionDetails(String transferCode) {
@@ -675,6 +665,7 @@ public class WebSocketClientManager {
         }
         
         // 3. Try to get public IP via STUN (if not in local test mode)
+        // This should be prioritized for cross-network connections
         boolean localTestMode = Boolean.getBoolean("securetransfer.local.test");
         if (!localTestMode) {
             try {
@@ -690,14 +681,17 @@ public class WebSocketClientManager {
             }
         }
         
-        // 4. Try all local network IPs
-        List<String> localIps = NetworkUtils.getAllLocalIpv4Addresses();
-        if (localIps != null && !localIps.isEmpty()) {
-            for (String localIp : localIps) {
-                if (!uniqueIps.contains(localIp)) {
-                    strategyIps.add(localIp);
-                    uniqueIps.add(localIp);
-                    logger.info("Connection strategy 4: Local network IP {}", localIp);
+        // 4. Try all local network IPs (only if we're in local test mode or if public IP failed)
+        // For cross-network connections, local IPs are unlikely to work
+        if (localTestMode || strategyIps.size() <= 2) { // Only try local IPs if we don't have many other options
+            List<String> localIps = NetworkUtils.getAllLocalIpv4Addresses();
+            if (localIps != null && !localIps.isEmpty()) {
+                for (String localIp : localIps) {
+                    if (!uniqueIps.contains(localIp)) {
+                        strategyIps.add(localIp);
+                        uniqueIps.add(localIp);
+                        logger.info("Connection strategy 4: Local network IP {}", localIp);
+                    }
                 }
             }
         }

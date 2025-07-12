@@ -144,7 +144,9 @@ public class TransferServiceImpl implements TransferService {
         }
         
         // Register sender with the WebSocket service
-        webSocketService.registerSender(transferCode, senderInfo, displayFileName, totalFileSize)
+        CompletableFuture<Void> regFuture = webSocketService.registerSender(transferCode, senderInfo, displayFileName, totalFileSize);
+        logger.info("registerSender future returned for transfer code: {}", transferCode);
+        regFuture
             .thenRun(() -> {
                 logger.info("Sender registered successfully for transfer code: {}", transferCode);
                 
@@ -188,6 +190,7 @@ public class TransferServiceImpl implements TransferService {
             })
             .thenRun(() -> {
                 // Connect sender to its own WebSocket server to receive notifications
+                logger.info("=== SECOND THENRUN BLOCK EXECUTING ===");
                 logger.info("Connecting sender to WebSocket server for transfer code: {}", transferCode);
                 try {
                     int websocketPort = webSocketServer.getActualPort();
@@ -283,15 +286,19 @@ public class TransferServiceImpl implements TransferService {
         SenderInfo senderInfo = new SenderInfo(deviceId, username, sessionId);
         
         // Register sender with the WebSocket service
-        webSocketService.registerSender(transferCode, senderInfo, fileName, fileSize)
+        CompletableFuture<Void> regFuture = webSocketService.registerSender(transferCode, senderInfo, fileName, fileSize);
+        logger.info("registerSender future returned for transfer code: {}", transferCode);
+        regFuture
             .thenRun(() -> {
+                logger.info("=== FIRST THENRUN BLOCK EXECUTING ===");
                 logger.info("Sender registered successfully for transfer code: {}", transferCode);
                 
-                // Store the sender's local IP for receiver connection
-                storeSenderLocalIp(transferCode);
-                
-                // Create and save a sender transfer record for the file
                 try {
+                    // Store the sender's local IP for receiver connection
+                    storeSenderLocalIp(transferCode);
+                    logger.info("Stored sender local IP for transfer code: {}", transferCode);
+                    
+                    // Create and save a sender transfer record for the file
                     SenderTransfer transfer = new SenderTransfer();
                     transfer.setSessionId(sessionId);
                     transfer.setReceiverCode(transferCode);
@@ -303,12 +310,16 @@ public class TransferServiceImpl implements TransferService {
                     
                     // Save to repository
                     senderTransferRepository.save(transfer);
+                    logger.info("Saved sender transfer record for transfer code: {}", transferCode);
+                    logger.info("=== FIRST THENRUN BLOCK COMPLETED SUCCESSFULLY ===");
                 } catch (Exception e) {
-                    logger.error("Error saving transfer record for file: {}", fileName, e);
+                    logger.error("Error in first thenRun block for transfer code {}: {}", transferCode, e.getMessage(), e);
+                    throw e; // Re-throw to prevent the next thenRun from executing
                 }
             })
             .thenRun(() -> {
                 // Connect sender to its own WebSocket server to receive notifications
+                logger.info("=== SECOND THENRUN BLOCK EXECUTING ===");
                 logger.info("Connecting sender to WebSocket server for transfer code: {}", transferCode);
                 try {
                     int websocketPort = webSocketServer.getActualPort();

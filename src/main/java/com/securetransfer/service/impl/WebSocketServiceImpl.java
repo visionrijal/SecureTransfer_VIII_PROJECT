@@ -40,7 +40,7 @@ public class WebSocketServiceImpl implements WebSocketService {
     
     @Override
     public CompletableFuture<Void> registerSender(String transferCode, SenderInfo senderInfo, String fileName, long fileSize) {
-        logger.info("Registering sender for transfer code: {} (file: {}, size: {})", transferCode, fileName, fileSize);
+        logger.info("registerSender called for transfer code: {}", transferCode);
         
         CompletableFuture<Void> future = new CompletableFuture<>();
         
@@ -54,18 +54,14 @@ public class WebSocketServiceImpl implements WebSocketService {
             
             // Create new transfer session
             TransferSession session = new TransferSession(transferCode, senderInfo, null, fileName, fileSize);
+            session.setStatus(TransferStatus.PENDING);
             activeSessions.put(transferCode, session);
-            
-            // Complete the future immediately - sender registration is complete
+            logger.info("registerSender completing future for transfer code: {}", transferCode);
             future.complete(null);
-            
-            logger.info("Sender registered successfully for transfer code: {}", transferCode);
-            
         } catch (Exception e) {
-            logger.error("Failed to register sender for transfer code: {}", transferCode, e);
+            logger.error("Error in registerSender for transfer code {}: {}", transferCode, e.getMessage(), e);
             future.completeExceptionally(e);
         }
-        
         return future;
     }
     

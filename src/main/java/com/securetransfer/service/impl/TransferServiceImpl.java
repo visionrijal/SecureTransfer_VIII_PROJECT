@@ -38,6 +38,7 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
+import java.util.Arrays;
 import org.java_websocket.client.WebSocketClient;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -120,114 +121,119 @@ public class TransferServiceImpl implements TransferService {
     public CompletableFuture<TransferSession> initiateTransfer(String transferCode, List<File> files, String username) {
         logger.info("Initiating transfer for code: {}", transferCode);
         CompletableFuture<TransferSession> future = new CompletableFuture<>();
-        Consumer<String> toast = msg -> ToastNotification.show(null, msg, ToastNotification.NotificationType.INFO, javafx.util.Duration.seconds(3), 70);
-        webSocketClientManager.connect(
-            transferCode,
-            "sender",
-            discoverLocalLANAddresses(),
-            toast,
-            err -> ToastNotification.show(null, "Connection error: " + err, ToastNotification.NotificationType.ERROR, javafx.util.Duration.seconds(3), 70),
-            url -> logger.info("WebSocket open: {}", url),
-            reason -> logger.info("WebSocket closed: {}", reason),
-            msg -> handleIncomingMessage(transferCode, msg),
-            bytes -> handleIncomingBinary(transferCode, bytes)
-        ).thenAccept(connResult -> {
-            activeClients.put(transferCode, connResult.client);
-            
-            // Store sender connection details for receiver lookup
-            try {
-                // Get the sender's IP and WebSocket port
-                String senderIp = NetworkUtils.getLocalIpAddress().orElse("127.0.0.1");
-                int websocketPort = 8445; // Default WebSocket port
+        
+        // Create a unique session ID for this transfer
+        String sessionId = UUID.randomUUID().toString();
+        
+        // Create sender info for registration
+        SenderInfo senderInfo = new SenderInfo(
+            UUID.randomUUID().toString(), // Generate device ID
+            username, // Username passed from the UI
+            sessionId // Unique session ID
+        );
+        
+        // Calculate total file size
+        final long totalFileSize = calculateTotalFileSize(files);
+        
+        // Get the first file name (or combined name if multiple)
+        String displayFileName;
+        if (files.size() == 1) {
+            displayFileName = files.get(0).getName();
+        } else {
+            displayFileName = files.size() + " files";
+        }
+        
+        // Register sender with the WebSocket service
+        webSocketService.registerSender(transferCode, senderInfo, displayFileName, totalFileSize)
+            .thenRun(() -> {
+                logger.info("Sender registered successfully for transfer code: {}", transferCode);
                 
-                // Store the connection details
-                storeSenderConnectionDetails(transferCode, senderIp, websocketPort);
-                logger.info("Stored sender connection details for transfer {}: {}:{}", transferCode, senderIp, websocketPort);
-            } catch (Exception e) {
-                logger.warn("Failed to store sender connection details: {}", e.getMessage());
-            }
-            
-            // Create a unique session ID for this transfer
-            String sessionId = UUID.randomUUID().toString();
-            
-            // Create sender info for registration
-            SenderInfo senderInfo = new SenderInfo(
-                UUID.randomUUID().toString(), // Generate device ID
-                username, // Username passed from the UI
-                sessionId // Unique session ID
-            );
-            
-            // Calculate total file size
-            final long totalFileSize = calculateTotalFileSize(files);
-            
-            // Get the first file name (or combined name if multiple)
-            String displayFileName;
-            if (files.size() == 1) {
-                displayFileName = files.get(0).getName();
-            } else {
-                displayFileName = files.size() + " files";
-            }
-            
-            // Register sender with the WebSocket service
-            webSocketService.registerSender(transferCode, senderInfo, displayFileName, totalFileSize)
-                .thenRun(() -> {
-                    logger.info("Sender registered successfully for transfer code: {}", transferCode);
+                // Store sender connection details for receiver lookup
+                try {
+                    // Get the sender's IP and WebSocket port
+                    String senderIp = NetworkUtils.getLocalIpAddress().orElse("127.0.0.1");
+                    int websocketPort = 8445; // Default WebSocket port
                     
-                    // Save transfer records for each file
-                    for (File file : files) {
-                        try {
-                            // Create and save a sender transfer record
-                            SenderTransfer transfer = new SenderTransfer();
-                            transfer.setSessionId(sessionId);
-                            transfer.setReceiverCode(transferCode);
-                            transfer.setFileName(file.getName());
-                            transfer.setFileSize(file.length());
-                            transfer.setStartTime(LocalDateTime.now());
-                            transfer.setReceiverUsername(username);
-                            transfer.setTransferStatus(SenderTransfer.TransferStatus.PENDING);
-                            
-                            // Generate checksum for verification
-                            String checksum = calculateChecksum(file);
-                            transfer.setChecksum(checksum);
-                            
-                            // Save to repository
-                            senderTransferRepository.save(transfer);
-                            
-                        } catch (Exception e) {
-                            logger.error("Error saving transfer record for file: {}", file.getName(), e);
-                        }
+                    // Store the connection details
+                    storeSenderConnectionDetails(transferCode, senderIp, websocketPort);
+                    logger.info("Stored sender connection details for transfer {}: {}:{}", transferCode, senderIp, websocketPort);
+                } catch (Exception e) {
+                    logger.warn("Failed to store sender connection details: {}", e.getMessage());
+                }
+                
+                // Save transfer records for each file
+                for (File file : files) {
+                    try {
+                        // Create and save a sender transfer record
+                        SenderTransfer transfer = new SenderTransfer();
+                        transfer.setSessionId(sessionId);
+                        transfer.setReceiverCode(transferCode);
+                        transfer.setFileName(file.getName());
+                        transfer.setFileSize(file.length());
+                        transfer.setStartTime(LocalDateTime.now());
+                        transfer.setReceiverUsername(username);
+                        transfer.setTransferStatus(SenderTransfer.TransferStatus.PENDING);
+                        
+                        // Generate checksum for verification
+                        String checksum = calculateChecksum(file);
+                        transfer.setChecksum(checksum);
+                        
+                        // Save to repository
+                        senderTransferRepository.save(transfer);
+                        
+                    } catch (Exception e) {
+                        logger.error("Error saving transfer record for file: {}", file.getName(), e);
                     }
-                })
-                .thenAccept(v -> {
-                    // Get the latest session information from the WebSocket service
-                    TransferSession session = webSocketService.getActiveSessions().get(transferCode);
-                    if (session != null) {
-                        // Store in our local active sessions
-                        activeSessions.put(transferCode, session);
-                        future.complete(session);
-                    } else {
-                        // Create a basic session with available information if not found
-                        TransferSession basicSession = new TransferSession(
-                            transferCode, 
-                            senderInfo,
-                            null, // receiver info not available yet
-                            displayFileName,
-                            totalFileSize
-                        );
-                        activeSessions.put(transferCode, basicSession);
-                        future.complete(basicSession);
-                    }
-                })
-                .exceptionally(ex -> {
-                    logger.error("Error registering sender: {}", ex.getMessage(), ex);
-                    future.completeExceptionally(new RuntimeException("Failed to register sender: " + ex.getMessage()));
+                }
+            })
+            .thenRun(() -> {
+                // Connect sender to its own WebSocket server to receive notifications
+                logger.info("Connecting sender to WebSocket server for transfer code: {}", transferCode);
+                webSocketClientManager.connect(
+                    transferCode,
+                    "sender",
+                    Arrays.asList("127.0.0.1"), // Connect to localhost
+                    msg -> logger.info("Sender connection status: {}", msg),
+                    err -> logger.error("Sender connection error: {}", err),
+                    url -> logger.info("Sender WebSocket open: {}", url),
+                    reason -> logger.info("Sender WebSocket closed: {}", reason),
+                    msg -> handleIncomingMessage(transferCode, msg),
+                    bytes -> handleIncomingBinary(transferCode, bytes)
+                ).thenAccept(connResult -> {
+                    activeClients.put(transferCode, connResult.client);
+                    logger.info("Sender connected to WebSocket server for transfer code: {}", transferCode);
+                    
+                    // Create and store the transfer session
+                    TransferSession session = new TransferSession(
+                        transferCode, 
+                        senderInfo,
+                        null, // receiver info not available yet
+                        displayFileName,
+                        totalFileSize
+                    );
+                    activeSessions.put(transferCode, session);
+                    future.complete(session);
+                }).exceptionally(ex -> {
+                    logger.error("Failed to connect sender to WebSocket server: {}", ex.getMessage());
+                    // Still complete the future with a session, but log the error
+                    TransferSession session = new TransferSession(
+                        transferCode,
+                        senderInfo,
+                        null,
+                        displayFileName,
+                        totalFileSize
+                    );
+                    activeSessions.put(transferCode, session);
+                    future.complete(session);
                     return null;
                 });
-        }).exceptionally(ex -> {
-            ToastNotification.show(null, "Failed to connect: " + ex.getMessage(), ToastNotification.NotificationType.ERROR, javafx.util.Duration.seconds(3), 70);
-            future.completeExceptionally(ex);
-            return null;
-        });
+            })
+            .exceptionally(ex -> {
+                logger.error("Error registering sender: {}", ex.getMessage(), ex);
+                future.completeExceptionally(new RuntimeException("Failed to register sender: " + ex.getMessage()));
+                return null;
+            });
+        
         return future;
     }
     
@@ -269,12 +275,12 @@ public class TransferServiceImpl implements TransferService {
                 }
             })
             .thenRun(() -> {
-                // Establish WebSocket connection for sender to receive peerConnected messages
-                logger.info("Establishing WebSocket connection for sender to receive notifications");
+                // Connect sender to its own WebSocket server to receive notifications
+                logger.info("Connecting sender to WebSocket server for transfer code: {}", transferCode);
                 webSocketClientManager.connect(
                     transferCode,
                     "sender",
-                    discoverLocalLANAddresses(),
+                    Arrays.asList("127.0.0.1"), // Connect to localhost
                     msg -> logger.info("Sender connection status: {}", msg),
                     err -> logger.error("Sender connection error: {}", err),
                     url -> logger.info("Sender WebSocket open: {}", url),
@@ -282,39 +288,40 @@ public class TransferServiceImpl implements TransferService {
                     msg -> handleIncomingMessage(transferCode, msg),
                     bytes -> handleIncomingBinary(transferCode, bytes)
                 ).thenAccept(connResult -> {
-                    logger.info("Sender WebSocket connection established for transfer code: {}", transferCode);
-                    activeClients.put(transferCode + "_sender", connResult.client);
-                }).exceptionally(ex -> {
-                    logger.error("Failed to establish sender WebSocket connection: {}", ex.getMessage());
-                    return null;
-                });
-            })
-            .thenAccept(v -> {
-                // Get the session information from the WebSocket service
-                TransferSession session = webSocketService.getActiveSessions().get(transferCode);
-                if (session != null) {
-                    // Store in our local active sessions
-                    activeSessions.put(transferCode, session);
-                    future.complete(session);
-                } else {
-                    // Create a basic session with available information
-                    TransferSession basicSession = new TransferSession(
-                        transferCode, 
+                    activeClients.put(transferCode, connResult.client);
+                    logger.info("Sender connected to WebSocket server for transfer code: {}", transferCode);
+                    
+                    // Create and store the transfer session
+                    TransferSession session = new TransferSession(
+                        transferCode,
                         senderInfo,
                         null, // receiver info not available yet
                         fileName,
                         fileSize
                     );
-                    activeSessions.put(transferCode, basicSession);
-                    future.complete(basicSession);
-                }
+                    activeSessions.put(transferCode, session);
+                    future.complete(session);
+                }).exceptionally(ex -> {
+                    logger.error("Failed to connect sender to WebSocket server: {}", ex.getMessage());
+                    // Still complete the future with a session, but log the error
+                    TransferSession session = new TransferSession(
+                        transferCode,
+                        senderInfo,
+                        null,
+                        fileName,
+                        fileSize
+                    );
+                    activeSessions.put(transferCode, session);
+                    future.complete(session);
+                    return null;
+                });
             })
             .exceptionally(ex -> {
                 logger.error("Error registering sender: {}", ex.getMessage(), ex);
                 future.completeExceptionally(new RuntimeException("Failed to register sender: " + ex.getMessage()));
                 return null;
             });
-            
+        
         return future;
     }
     

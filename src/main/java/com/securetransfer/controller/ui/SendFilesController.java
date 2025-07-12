@@ -675,9 +675,13 @@ private String getFileIconPath(String fileName) {
     }
 
     private void showTransferCodeInPopup() {
+        logger.info("showTransferCodeInPopup called - starting transfer process");
         currentTransferCode = generateTransferCode();
+        logger.info("Generated transfer code: {}", currentTransferCode);
         String fileName = encryptedFiles.size() == 1 ? encryptedFiles.get(0).getName() : "MultipleFiles.zip";
         long fileSize = encryptedFiles.size() == 1 ? encryptedFiles.get(0).length() : encryptedFiles.stream().mapToLong(File::length).sum();
+        logger.info("File info - name: {}, size: {}", fileName, fileSize);
+        logger.info("About to call initiateTransfer with code: {}", currentTransferCode);
         transferService.initiateTransfer(currentTransferCode, selectedFiles, UserSession.getInstance().getCurrentUser().getUsername(), fileName, fileSize)
             .thenAccept(session -> {
                 Platform.runLater(() -> {

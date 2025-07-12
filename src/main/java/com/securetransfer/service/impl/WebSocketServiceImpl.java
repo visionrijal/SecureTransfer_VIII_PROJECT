@@ -54,7 +54,7 @@ public class WebSocketServiceImpl implements WebSocketService {
             
             // Create new transfer session
             TransferSession session = new TransferSession(transferCode, senderInfo, null, fileName, fileSize);
-            session.setStatus(TransferStatus.PENDING);
+            session.setStatus(TransferStatus.CONNECTING);
             activeSessions.put(transferCode, session);
             logger.info("registerSender completing future for transfer code: {}", transferCode);
             future.complete(null);

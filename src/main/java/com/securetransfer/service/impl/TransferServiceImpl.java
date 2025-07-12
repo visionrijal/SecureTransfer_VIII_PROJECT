@@ -371,17 +371,18 @@ public class TransferServiceImpl implements TransferService {
             ToastNotification.show(null, "Connection error: " + err, ToastNotification.NotificationType.ERROR, javafx.util.Duration.seconds(3), 70);
         };
         
-        // Try to get the sender's local IP if available
-        String senderLocalIp = getSenderLocalIp(transferCode);
+        // Try to get the sender's connection details if available
+        String senderConnectionDetails = getSenderConnectionDetails(transferCode);
         List<String> peerAddresses = new ArrayList<>();
         
-        if (senderLocalIp != null) {
-            peerAddresses.add(senderLocalIp);
-            logger.info("Using sender's local IP for connection: {}", senderLocalIp);
+        if (senderConnectionDetails != null) {
+            // senderConnectionDetails contains "ip:port" format
+            peerAddresses.add(senderConnectionDetails);
+            logger.info("Using sender's connection details for connection: {}", senderConnectionDetails);
         } else {
             // Fall back to discovered local addresses
             peerAddresses = discoverLocalLANAddresses();
-            logger.info("No sender local IP found, using discovered addresses: {}", peerAddresses);
+            logger.info("No sender connection details found, using discovered addresses: {}", peerAddresses);
         }
         
         webSocketClientManager.connect(

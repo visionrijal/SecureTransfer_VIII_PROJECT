@@ -15565,3 +15565,773 @@ This generated password is for development use only. Your security configuration
 2025-07-12 17:57:51 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-07-12 17:57:51 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2025-07-12 17:57:51 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-07-12 17:58:18 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - Starting application using Java 21.0.7 with PID 53955 (started by randomguy in /home/randomguy/IdeaProjects/Secure Transfer)
+2025-07-12 17:58:18 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - No active profile set, falling back to 1 default profile: "default"
+2025-07-12 17:58:18 [JavaFX-Launcher] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-12 17:58:18 [JavaFX-Launcher] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 37 ms. Found 3 JPA repository interfaces.
+2025-07-12 17:58:18 [JavaFX-Launcher] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-07-12 17:58:18 [JavaFX-Launcher] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-07-12 17:58:18 [JavaFX-Launcher] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2025-07-12 17:58:18 [JavaFX-Launcher] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-07-12 17:58:18 [JavaFX-Launcher] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 735 ms
+2025-07-12 17:58:18 [JavaFX-Launcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-12 17:58:18 [JavaFX-Launcher] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/securetransfer user=SA
+2025-07-12 17:58:18 [JavaFX-Launcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-12 17:58:18 [JavaFX-Launcher] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/securetransfer'
+2025-07-12 17:58:19 [JavaFX-Launcher] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-12 17:58:19 [JavaFX-Launcher] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-07-12 17:58:19 [JavaFX-Launcher] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-12 17:58:19 [JavaFX-Launcher] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-12 17:58:19 [JavaFX-Launcher] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-12 17:58:19 [JavaFX-Launcher] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-12 17:58:19 [JavaFX-Launcher] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-12 17:58:19 [JavaFX-Launcher] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-12 17:58:20 [JavaFX-Launcher] INFO  c.s.s.impl.EncryptionServiceImpl - Encryption service initialized with provided key
+2025-07-12 17:58:20 [JavaFX-Launcher] INFO  c.s.s.i.SecureTransferWebSocketServer - Preferred port 8445 is in use, using alternative port 8446
+2025-07-12 17:58:20 [JavaFX-Launcher] INFO  c.s.s.i.SecureTransferWebSocketServer - Initializing WebSocket server on port 8446 bound to all interfaces
+2025-07-12 17:58:20 [JavaFX-Launcher] WARN  c.s.s.i.SecureTransferWebSocketServer - Could not initialize SSL for WebSocket server, running in non-SSL mode: Unknown object id - S - passed to distinguished name
+2025-07-12 17:58:20 [JavaFX-Launcher] INFO  c.s.s.impl.P2PConnectionServiceImpl - Initializing P2P connection service
+2025-07-12 17:58:20 [JavaFX-Launcher] INFO  c.s.s.impl.P2PConnectionServiceImpl - P2P server started on port 8444
+2025-07-12 17:58:20 [pool-3-thread-1] INFO  c.s.s.impl.P2PConnectionServiceImpl - Listening for incoming P2P connections
+2025-07-12 17:58:20 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Attempting to discover connection details via STUN
+2025-07-12 17:58:20 [JavaFX-Launcher] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-12 17:58:20 [JavaFX-Launcher] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 2ba7359d-1ed0-4eae-978e-ea8c8cae5c13
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-07-12 17:58:20 [JavaFX-Launcher] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4b96482b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7120b761, org.springframework.security.web.context.SecurityContextHolderFilter@6950a160, org.springframework.security.web.header.HeaderWriterFilter@719bc272, org.springframework.web.filter.CorsFilter@46702f26, org.springframework.security.web.authentication.logout.LogoutFilter@c16f625, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4542208e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@261ee6ec, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4ea5e2e8, org.springframework.security.web.access.ExceptionTranslationFilter@2f5f31e6, org.springframework.security.web.access.intercept.AuthorizationFilter@6d5aeac2]
+2025-07-12 17:58:20 [JavaFX-Launcher] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2025-07-12 17:58:20 [JavaFX-Launcher] INFO  o.s.boot.SpringApplication - Started application in 3.117 seconds (process running for 3.628)
+2025-07-12 17:58:20 [scheduling-1] INFO  c.s.s.impl.EncryptionServiceImpl - Encryption key rotated successfully
+2025-07-12 17:58:20 [JavaFX-Launcher] INFO  c.s.config.WebSocketConfig - WebSocket server started successfully on port 8446
+2025-07-12 17:58:20 [JavaFX-Launcher] INFO  c.s.config.DatabaseStartupListener - Application started - checking database health...
+2025-07-12 17:58:20 [WebSocketSelector-91] INFO  c.s.s.i.SecureTransferWebSocketServer - WebSocket server started successfully on port 8446
+2025-07-12 17:58:20 [scheduling-1] DEBUG c.s.service.impl.TransferServiceImpl - Cleaning up completed transfers
+2025-07-12 17:58:20 [scheduling-1] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        sender_transfers 
+    where
+        start_time<?
+2025-07-12 17:58:20 [scheduling-1] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        receiver_transfers 
+    where
+        received_time<?
+2025-07-12 17:58:20 [JavaFX-Launcher] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.active,
+        u1_0.created_at,
+        u1_0.device_id,
+        u1_0.last_login,
+        u1_0.password_hash,
+        u1_0.user_token,
+        u1_0.username 
+    from
+        users u1_0
+2025-07-12 17:58:20 [JavaFX-Launcher] INFO  c.s.util.DatabaseHealthCheck - Database health check: Found 1 users in database
+2025-07-12 17:58:20 [JavaFX-Launcher] INFO  c.s.util.DatabaseHealthCheck - Existing users: random
+2025-07-12 17:58:21 [JavaFX Application Thread] WARN  javafx.css - CSS Error parsing file:/home/randomguy/IdeaProjects/Secure%20Transfer/target/classes/styles/global.css: Expected '<color>' while parsing '-fx-background-color' at [333,42]
+2025-07-12 17:58:33 [JavaFX Application Thread] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.active,
+        u1_0.created_at,
+        u1_0.device_id,
+        u1_0.last_login,
+        u1_0.password_hash,
+        u1_0.user_token,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-07-12 17:58:33 [JavaFX Application Thread] DEBUG org.hibernate.SQL - 
+    update
+        users 
+    set
+        active=?,
+        created_at=?,
+        device_id=?,
+        last_login=?,
+        password_hash=?,
+        user_token=?,
+        username=? 
+    where
+        id=?
+2025-07-12 17:58:33 [JavaFX Application Thread] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.active,
+        u1_0.created_at,
+        u1_0.device_id,
+        u1_0.last_login,
+        u1_0.password_hash,
+        u1_0.user_token,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-07-12 17:58:33 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - New UserSession instance created
+2025-07-12 17:58:33 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - Created new UserSession instance
+2025-07-12 17:58:33 [JavaFX Application Thread] INFO  com.securetransfer.util.UserSession - Force resetting UserSession instance
+2025-07-12 17:58:33 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - New UserSession instance created
+2025-07-12 17:58:33 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - Created new UserSession instance
+2025-07-12 17:58:33 [JavaFX Application Thread] INFO  com.securetransfer.util.UserSession - Setting current user to: random
+2025-07-12 17:58:33 [JavaFX Application Thread] INFO  c.s.controller.ui.LoginController - User session set for: random
+2025-07-12 17:58:33 [JavaFX Application Thread] DEBUG c.s.controller.ui.LoginController - Loading main screen with toast
+2025-07-12 17:58:33 [JavaFX Application Thread] DEBUG c.s.controller.ui.BaseController - Creating FXML loader for path: /fxml/main.fxml
+2025-07-12 17:58:33 [JavaFX Application Thread] INFO  c.s.controller.ui.MainController - SecureTransfer main page initialized successfully
+2025-07-12 17:58:36 [JavaFX Application Thread] INFO  c.s.controller.ui.MainController - Showing send files content
+2025-07-12 17:58:36 [JavaFX Application Thread] DEBUG c.s.controller.ui.BaseController - Creating FXML loader for path: /fxml/send-files.fxml
+2025-07-12 17:58:36 [JavaFX Application Thread] INFO  c.s.c.ui.SendFilesController - SendFilesController initialized
+2025-07-12 17:58:36 [JavaFX Application Thread] INFO  c.s.c.ui.SendFilesController - MainController reference set in SendFilesController
+2025-07-12 17:58:36 [JavaFX Application Thread] INFO  c.s.controller.ui.MainController - Send files content loaded successfully
+2025-07-12 17:58:36 [JavaFX Application Thread] DEBUG c.s.controller.ui.MainController - Active page changed to: send-files
+2025-07-12 17:58:39 [ForkJoinPool.commonPool-worker-1] INFO  c.securetransfer.util.NetworkUtils - Found working STUN server: stun.freeswitch.org:3478
+2025-07-12 17:58:39 [ForkJoinPool.commonPool-worker-1] INFO  JitsiConfig - Initialized newConfig: merge of application.properties @ file:/home/randomguy/IdeaProjects/Secure%20Transfer/target/classes/application.properties,system properties,reference.conf @ jar:file:/home/randomguy/.m2/repository/org/jitsi/ice4j/3.2-9-gb64c86f/ice4j-3.2-9-gb64c86f.jar!/reference.conf: 1
+2025-07-12 17:58:39 [ForkJoinPool.commonPool-worker-1] INFO  o.j.c.ReadOnlyConfigurationService - net.java.sip.communicator.SC_HOME_DIR_LOCATION not set
+2025-07-12 17:58:39 [ForkJoinPool.commonPool-worker-1] INFO  JitsiConfig - Initialized legacyConfig: sip communicator props (no description provided)
+2025-07-12 17:58:39 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.h.MappingCandidateHarvesters - Using AwsCandidateHarvester.
+2025-07-12 17:58:40 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.h.MappingCandidateHarvesters - Discarding a mapping harvester: org.ice4j.ice.harvest.AwsCandidateHarvester@7c6662f9
+2025-07-12 17:58:40 [ForkJoinPool.commonPool-worker-1] INFO  o.i.i.h.MappingCandidateHarvesters - Initialized mapping harvesters (delay=611ms).  stunDiscoveryFailed=false
+2025-07-12 17:58:40 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Gathering candidates for component data.RTP.
+2025-07-12 17:58:40 [JavaFX Application Thread] INFO  c.s.c.ui.SendFilesController - Added file: anthem.mp3 (1247954 bytes)
+2025-07-12 17:58:40 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Start ICE connectivity establishment.
+2025-07-12 17:58:40 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - Init checklist for stream data
+2025-07-12 17:58:40 [ForkJoinPool.commonPool-worker-1] INFO  org.ice4j.ice.Agent - ICE state changed from Waiting to Running.
+2025-07-12 17:58:40 [ForkJoinPool.commonPool-worker-1] INFO  o.ice4j.ice.ConnectivityCheckClient - Start connectivity checks.
+2025-07-12 17:58:40 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Successfully discovered public IP 27.34.65.131 via pre-tested STUN server stun.freeswitch.org:3478
+2025-07-12 17:58:40 [ForkJoinPool.commonPool-worker-1] INFO  c.s.util.P2PConnectionManager - Discovered external IP 27.34.65.131 via STUN
+2025-07-12 17:58:40 [ForkJoinPool.commonPool-worker-1] INFO  c.s.s.impl.P2PConnectionServiceImpl - Connection details discovered: ConnectionDetails{localIp='192.168.1.101', externalIp='27.34.65.131', externalPort=8444, portMapped=false, discoveryMethod=STUN}
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Running on thread: Thread-24
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Input: /home/randomguy/Downloads/pathshala music/anthem.mp3 (1247954 bytes) Output: /home/randomguy/Downloads/pathshala music/anthem.mp3.enc
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.0
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.006564344519108877
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.013128689038217754
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.01969303355732663
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.02625737807643551
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.03282172259554439
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.03938606711465326
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.045950411633762143
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.05251475615287102
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.0590791006719799
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.06564344519108878
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.07220778971019765
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.07877213422930653
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.0853364787484154
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.09190082326752429
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.09846516778663317
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.10502951230574203
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.11159385682485091
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.1181582013439598
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.12472254586306868
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.13128689038217756
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.13785123490128642
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.1444155794203953
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.15097992393950418
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.15754426845861305
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.16410861297772195
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.1706729574968308
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.17723730201593968
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.18380164653504857
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.19036599105415744
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.19693033557326634
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.2034946800923752
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.21005902461148407
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.21662336913059296
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.22318771364970183
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.2297520581688107
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.2363164026879196
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.24288074720702846
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.24944509172613735
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.2560094362452462
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.2625737807643551
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.269138125283464
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.27570246980257285
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.2822668143216817
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.2888311588407906
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.2953955033598995
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.30195984787900837
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.30852419239811724
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.3150885369172261
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.32165288143633497
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.3282172259554439
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.33478157047455276
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.3413459149936616
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.3479102595127705
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.35447460403187936
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.3610389485509883
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.36760329307009715
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.374167637589206
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.3807319821083149
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.38729632662742375
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.39386067114653267
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.40042501566564154
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4069893601847504
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.41355370470385927
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.42011804922296814
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.426682393742077
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4332467382611859
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4398110827802948
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.44637542729940366
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4529397718185125
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4595041163376214
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4660684608567303
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4726328053758392
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.47919714989494805
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4857614944140569
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4923258389331658
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.4988901834522747
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5054545279713836
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5120188724904924
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5185832170096013
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5251475615287102
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.531711906047819
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.538276250566928
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5448405950860368
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5514049396051457
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5579692841242546
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5645336286433634
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5710979731624723
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5776623176815812
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5842266622006901
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.590791006719799
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.5973553512389078
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6039196957580167
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6104840402771256
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6170483847962345
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6236127293153434
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6301770738344522
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6367414183535611
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6433057628726699
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6498701073917789
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6564344519108878
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6629987964299966
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6695631409491055
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6761274854682143
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6826918299873233
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.6892561745064322
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.695820519025541
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7023848635446499
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7089492080637587
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7155135525828676
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7220778971019766
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7286422416210854
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7352065861401943
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7417709306593031
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.748335275178412
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.754899619697521
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7614639642166298
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7680283087357387
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7745926532548475
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7811569977739564
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7877213422930653
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.7942856868121742
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8008500313312831
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8074143758503919
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8139787203695008
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8205430648886097
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8271074094077185
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8336717539268275
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8402360984459363
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8468004429650452
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.853364787484154
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8599291320032629
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8664934765223719
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8730578210414807
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8796221655605896
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8861865100796984
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8927508545988073
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.8993151991179162
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.905879543637025
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.912443888156134
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9190082326752428
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9255725771943517
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9321369217134606
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9387012662325694
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9452656107516784
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9518299552707872
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9583942997898961
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.964958644309005
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9715229888281138
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9780873333472228
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9846516778663316
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9912160223854405
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 8192 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 8192 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 0.9977803669045494
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Read 2770 bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote 2768 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 1.0
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Wrote final 16 encrypted bytes
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Progress callback: 1.0
+2025-07-12 17:59:00 [Thread-24] INFO  c.s.s.impl.EncryptionServiceImpl - [ENCRYPTFILE] Finished successfully
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.c.ui.SendFilesController - Encryption completed - generated transfer code: 388154
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.c.ui.SendFilesController - About to call initiateTransfer with code: 388154
+2025-07-12 17:59:00 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - Getting current user: random
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - Initiating transfer for code: 388154 with explicit file info
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.s.impl.WebSocketServiceImpl - registerSender called for transfer code: 388154
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.s.impl.WebSocketServiceImpl - registerSender completing future for transfer code: 388154
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - registerSender future returned for transfer code: 388154
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - === FIRST THENRUN BLOCK EXECUTING ===
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - Sender registered successfully for transfer code: 388154
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - Stored sender local IP for 388154: 192.168.1.101
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - Stored sender local IP for transfer code: 388154
+2025-07-12 17:59:00 [JavaFX Application Thread] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        sender_transfers
+        (checksum, end_time, error_message, file_name, file_size, receiver_code, receiver_username, sender_ip, sender_port, session_id, start_time, transfer_status, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - Saved sender transfer record for transfer code: 388154
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - === FIRST THENRUN BLOCK COMPLETED SUCCESSFULLY ===
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - === SECOND THENRUN BLOCK EXECUTING ===
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - Connecting sender to WebSocket server for transfer code: 388154
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - WebSocket server is running on port: 8446
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - Attempting to connect to: [127.0.0.1:8446]
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - Sender connection status: Attempting direct LAN connection...
+2025-07-12 17:59:00 [WebSocketWorker-60] INFO  c.s.s.i.SecureTransferWebSocketServer - New WebSocket connection from: /127.0.0.1:48048
+2025-07-12 17:59:00 [WebSocketWorker-60] INFO  c.s.s.i.SecureTransferWebSocketServer - Registering sender WebSocket for transfer code: 388154 from /127.0.0.1:48048
+2025-07-12 17:59:00 [WebSocketConnectReadThread-113] INFO  c.s.util.WebSocketClientManager - WebSocket opened: ws://127.0.0.1:8446/transfer?code=388154&role=sender
+2025-07-12 17:59:00 [WebSocketWorker-60] INFO  c.s.s.i.SecureTransferWebSocketServer - Creating new transfer session for code: 388154
+2025-07-12 17:59:00 [WebSocketConnectReadThread-113] INFO  c.s.service.impl.TransferServiceImpl - Sender connection status: WebSocket connection established
+2025-07-12 17:59:00 [WebSocketWorker-60] INFO  c.s.s.i.SecureTransferWebSocketServer - registerSession called for transfer code: 388154 with isSender: true
+2025-07-12 17:59:00 [WebSocketWorker-60] INFO  c.s.s.i.SecureTransferWebSocketServer - Found existing session for transfer code: 388154
+2025-07-12 17:59:00 [WebSocketWorker-60] INFO  c.s.s.i.SecureTransferWebSocketServer - Sender WebSocket registered for code 388154
+2025-07-12 17:59:00 [WebSocketWorker-60] INFO  c.s.s.i.SecureTransferWebSocketServer - Receiver not yet connected for transfer code: 388154
+2025-07-12 17:59:00 [WebSocketWorker-60] INFO  c.s.s.i.SecureTransferWebSocketServer - Sent connection confirmation to sender for transfer code: 388154
+2025-07-12 17:59:00 [WebSocketConnectReadThread-113] INFO  c.s.util.WebSocketClientManager - WebSocket message: {"role":"sender","type":"connected","transferCode":"388154","timestamp":1752322440304}
+2025-07-12 17:59:00 [WebSocketConnectReadThread-113] INFO  c.s.service.impl.TransferServiceImpl - Sender connection status: Connection confirmed by server
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - Sender connection status: Connected via direct LAN
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - Sender connected to WebSocket server for transfer code: 388154
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - Registered receiver connection callback for transfer code: 388154
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - Sender WebSocket open: ws://127.0.0.1:8446/transfer?code=388154&role=sender
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.c.ui.SendFilesController - Transfer initiated successfully - session ID: eaa937a8-1181-4fc0-ba73-4252b21732d2
+2025-07-12 17:59:00 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - Registered receiver connection callback for transfer code: 388154
+2025-07-12 17:59:00 [JavaFX Application Thread] DEBUG com.securetransfer.util.UserSession - Getting current user: random
+2025-07-12 17:59:06 [WebSocketWorker-61] INFO  c.s.s.i.SecureTransferWebSocketServer - New WebSocket connection from: /192.168.1.78:40430
+2025-07-12 17:59:06 [WebSocketWorker-61] INFO  c.s.s.i.SecureTransferWebSocketServer - Registering receiver WebSocket for transfer code: 388154 from /192.168.1.78:40430
+2025-07-12 17:59:06 [WebSocketWorker-61] INFO  c.s.s.i.SecureTransferWebSocketServer - registerSession called for transfer code: 388154 with isSender: false
+2025-07-12 17:59:06 [WebSocketWorker-61] INFO  c.s.s.i.SecureTransferWebSocketServer - Found existing session for transfer code: 388154
+2025-07-12 17:59:06 [WebSocketWorker-61] INFO  c.s.s.i.SecureTransferWebSocketServer - Receiver WebSocket registered for code 388154
+2025-07-12 17:59:06 [WebSocketWorker-61] INFO  c.s.s.i.SecureTransferWebSocketServer - Sender already connected, notifying both parties for transfer code: 388154
+2025-07-12 17:59:06 [WebSocketWorker-61] INFO  c.s.s.i.SecureTransferWebSocketServer - Both peers now connected for transfer code: 388154
+2025-07-12 17:59:06 [WebSocketWorker-61] INFO  c.s.s.i.SecureTransferWebSocketServer - Calling receiverConnectedCallback for transfer code: 388154
+2025-07-12 17:59:06 [WebSocketWorker-61] INFO  c.s.service.impl.TransferServiceImpl - Receiver connected (callback) - showing confirmation dialog for transfer code: 388154
+2025-07-12 17:59:06 [WebSocketConnectReadThread-113] INFO  c.s.util.WebSocketClientManager - WebSocket message: {"role":"receiver","type":"peerConnected","transferCode":"388154","timestamp":1752322446230}
+2025-07-12 17:59:06 [WebSocketWorker-61] INFO  c.s.s.i.SecureTransferWebSocketServer - receiverConnectedCallback executed successfully for transfer code: 388154
+2025-07-12 17:59:06 [WebSocketWorker-61] INFO  c.s.s.i.SecureTransferWebSocketServer - Sent connection confirmation to receiver for transfer code: 388154
+2025-07-12 17:59:06 [WebSocketConnectReadThread-113] INFO  c.s.service.impl.TransferServiceImpl - Sender connection status: Peer connected: receiver
+2025-07-12 17:59:12 [WebSocketSelector-91] INFO  c.s.s.i.SecureTransferWebSocketServer - WebSocket connection closed: /192.168.1.78:40430 (code: 1000, reason: )
+2025-07-12 17:59:49 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - User cancelled transfer for code: 388154
+2025-07-12 18:00:20 [WebSocketWorker-62] INFO  c.s.s.i.SecureTransferWebSocketServer - New WebSocket connection from: /192.168.1.78:35656
+2025-07-12 18:00:20 [WebSocketWorker-62] INFO  c.s.s.i.SecureTransferWebSocketServer - Registering receiver WebSocket for transfer code: 388154 from /192.168.1.78:35656
+2025-07-12 18:00:20 [WebSocketWorker-62] INFO  c.s.s.i.SecureTransferWebSocketServer - registerSession called for transfer code: 388154 with isSender: false
+2025-07-12 18:00:20 [WebSocketWorker-62] INFO  c.s.s.i.SecureTransferWebSocketServer - Found existing session for transfer code: 388154
+2025-07-12 18:00:20 [WebSocketWorker-62] INFO  c.s.s.i.SecureTransferWebSocketServer - Receiver WebSocket registered for code 388154
+2025-07-12 18:00:20 [WebSocketWorker-62] INFO  c.s.s.i.SecureTransferWebSocketServer - Sender already connected, notifying both parties for transfer code: 388154
+2025-07-12 18:00:20 [WebSocketWorker-62] INFO  c.s.s.i.SecureTransferWebSocketServer - Both peers now connected for transfer code: 388154
+2025-07-12 18:00:20 [WebSocketWorker-62] INFO  c.s.s.i.SecureTransferWebSocketServer - Calling receiverConnectedCallback for transfer code: 388154
+2025-07-12 18:00:20 [WebSocketWorker-62] INFO  c.s.service.impl.TransferServiceImpl - Receiver connected (callback) - showing confirmation dialog for transfer code: 388154
+2025-07-12 18:00:20 [WebSocketWorker-62] INFO  c.s.s.i.SecureTransferWebSocketServer - receiverConnectedCallback executed successfully for transfer code: 388154
+2025-07-12 18:00:20 [WebSocketWorker-62] INFO  c.s.s.i.SecureTransferWebSocketServer - Sent connection confirmation to receiver for transfer code: 388154
+2025-07-12 18:00:20 [WebSocketConnectReadThread-113] INFO  c.s.util.WebSocketClientManager - WebSocket message: {"role":"receiver","type":"peerConnected","transferCode":"388154","timestamp":1752322520318}
+2025-07-12 18:00:20 [WebSocketConnectReadThread-113] INFO  c.s.service.impl.TransferServiceImpl - Sender connection status: Peer connected: receiver
+2025-07-12 18:00:26 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - User confirmed transfer start for code: 388154
+2025-07-12 18:00:26 [JavaFX Application Thread] INFO  c.s.service.impl.TransferServiceImpl - Starting file transfer for code: 388154
+2025-07-12 18:00:26 [JavaFX Application Thread] DEBUG org.hibernate.SQL - 
+    select
+        st1_0.id,
+        st1_0.checksum,
+        st1_0.end_time,
+        st1_0.error_message,
+        st1_0.file_name,
+        st1_0.file_size,
+        st1_0.receiver_code,
+        st1_0.receiver_username,
+        st1_0.sender_ip,
+        st1_0.sender_port,
+        st1_0.session_id,
+        st1_0.start_time,
+        st1_0.transfer_status 
+    from
+        sender_transfers st1_0 
+    where
+        st1_0.session_id=? 
+    order by
+        st1_0.start_time desc
+2025-07-12 18:00:27 [ForkJoinPool.commonPool-worker-2] DEBUG org.hibernate.SQL - 
+    select
+        st1_0.id,
+        st1_0.checksum,
+        st1_0.end_time,
+        st1_0.error_message,
+        st1_0.file_name,
+        st1_0.file_size,
+        st1_0.receiver_code,
+        st1_0.receiver_username,
+        st1_0.sender_ip,
+        st1_0.sender_port,
+        st1_0.session_id,
+        st1_0.start_time,
+        st1_0.transfer_status 
+    from
+        sender_transfers st1_0 
+    where
+        st1_0.id=?
+2025-07-12 18:00:27 [ForkJoinPool.commonPool-worker-2] DEBUG org.hibernate.SQL - 
+    update
+        sender_transfers 
+    set
+        checksum=?,
+        end_time=?,
+        error_message=?,
+        file_name=?,
+        file_size=?,
+        receiver_code=?,
+        receiver_username=?,
+        sender_ip=?,
+        sender_port=?,
+        session_id=?,
+        start_time=?,
+        transfer_status=? 
+    where
+        id=?
+2025-07-12 18:00:27 [ForkJoinPool.commonPool-worker-2] ERROR c.s.service.impl.TransferServiceImpl - Error during file transfer for code: 388154
+java.io.FileNotFoundException: Could not locate encrypted file for: anthem.mp3.enc
+	at com.securetransfer.service.impl.TransferServiceImpl.lambda$transferFiles$36(TransferServiceImpl.java:616)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188)
+2025-07-12 18:00:28 [WebSocketSelector-91] INFO  c.s.s.i.SecureTransferWebSocketServer - WebSocket connection closed: /192.168.1.78:35656 (code: 1000, reason: )
+2025-07-12 18:03:20 [scheduling-1] DEBUG c.s.service.impl.TransferServiceImpl - Cleaning up completed transfers
+2025-07-12 18:03:20 [scheduling-1] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        sender_transfers 
+    where
+        start_time<?
+2025-07-12 18:03:20 [scheduling-1] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        receiver_transfers 
+    where
+        received_time<?
+2025-07-12 18:03:25 [SpringApplicationShutdownHook] INFO  c.s.s.impl.P2PConnectionServiceImpl - P2P server stopped
+2025-07-12 18:03:25 [SpringApplicationShutdownHook] INFO  c.s.s.impl.P2PConnectionServiceImpl - P2P connection service shutdown complete
+2025-07-12 18:03:25 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-12 18:03:25 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-12 18:03:25 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

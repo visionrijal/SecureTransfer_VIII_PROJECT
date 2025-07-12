@@ -413,12 +413,18 @@ public class TransferServiceImpl implements TransferService {
         CompletableFuture<TransferSession> future = new CompletableFuture<>();
         Consumer<String> statusUpdater = msg -> {
             logger.info("Connection status: {}", msg);
-            ToastNotification.show(null, msg, ToastNotification.NotificationType.INFO, javafx.util.Duration.seconds(3), 70);
+            // Only show toast for important status messages, not every connection attempt
+            if (msg.contains("Connected") || msg.contains("Attempting") || msg.contains("Trying")) {
+                ToastNotification.show(null, msg, ToastNotification.NotificationType.INFO, javafx.util.Duration.seconds(3), 70);
+            }
         };
         
         Consumer<String> errorHandler = err -> {
             logger.error("Connection error: {}", err);
-            ToastNotification.show(null, "Connection error: " + err, ToastNotification.NotificationType.ERROR, javafx.util.Duration.seconds(3), 70);
+            // Only show error toast for non-connection-refused errors to avoid spam
+            if (!err.contains("No route to host") && !err.contains("Connection refused")) {
+                ToastNotification.show(null, "Connection error: " + err, ToastNotification.NotificationType.ERROR, javafx.util.Duration.seconds(3), 70);
+            }
         };
         
         // Try to get the sender's connection details if available
@@ -1059,18 +1065,26 @@ public class TransferServiceImpl implements TransferService {
                     // Try common ports for WebSocket server
                     List<Integer> commonPorts = Arrays.asList(8445, 8446, 8447, 8448, 8449, 8450);
                     
-                    // Generate addresses in the same network range
-                    for (int i = 1; i <= 254; i++) {
-                        String candidateIp = networkPrefix + "." + i;
-                        // Skip our own IP
-                        if (!candidateIp.equals(localIpStr)) {
-                            for (int port : commonPorts) {
-                                addresses.add(candidateIp + ":" + port);
+                    // Generate addresses in the same network range, but limit to a smaller range
+                    // Try IPs close to our own IP first (more likely to be on same network)
+                    int ownLastOctet = Integer.parseInt(parts[3]);
+                    
+                    // Try IPs in a range around our own IP (±20)
+                    for (int offset = -20; offset <= 20; offset++) {
+                        int candidateLastOctet = ownLastOctet + offset;
+                        if (candidateLastOctet >= 1 && candidateLastOctet <= 254) {
+                            String candidateIp = networkPrefix + "." + candidateLastOctet;
+                            // Skip our own IP
+                            if (!candidateIp.equals(localIpStr)) {
+                                for (int port : commonPorts) {
+                                    addresses.add(candidateIp + ":" + port);
+                                }
                             }
                         }
                     }
                     
-                    logger.info("Generated {} possible sender addresses in network range {}", addresses.size(), networkPrefix);
+                    logger.info("Generated {} possible sender addresses in network range {} (around IP {})", 
+                        addresses.size(), networkPrefix, localIpStr);
                 }
             }
             
@@ -1078,15 +1092,14 @@ public class TransferServiceImpl implements TransferService {
             if (addresses.isEmpty()) {
                 logger.info("Could not determine local network, trying common LAN ranges");
                 List<String> commonRanges = Arrays.asList(
-                    "192.168.1", "192.168.0", "192.168.2", "192.168.10", "192.168.100",
-                    "10.0.0", "10.0.1", "10.1.1", "10.10.10",
-                    "172.16.0", "172.16.1", "172.17.0", "172.18.0"
+                    "192.168.1", "192.168.0", "192.168.2"
                 );
                 
                 List<Integer> commonPorts = Arrays.asList(8445, 8446, 8447, 8448, 8449, 8450);
                 
+                // Only try a few IPs from each range to avoid overwhelming
                 for (String range : commonRanges) {
-                    for (int i = 1; i <= 254; i++) {
+                    for (int i = 1; i <= 50; i++) { // Limit to first 50 IPs
                         String candidateIp = range + "." + i;
                         for (int port : commonPorts) {
                             addresses.add(candidateIp + ":" + port);
@@ -1098,9 +1111,9 @@ public class TransferServiceImpl implements TransferService {
             }
             
             // Limit the number of addresses to try to avoid overwhelming the system
-            if (addresses.size() > 1000) {
-                logger.info("Limiting addresses to first 1000 to avoid overwhelming the system");
-                addresses = addresses.subList(0, 1000);
+            if (addresses.size() > 100) {
+                logger.info("Limiting addresses to first 100 to avoid overwhelming the system");
+                addresses = addresses.subList(0, 100);
             }
             
         } catch (Exception e) {

@@ -18,6 +18,10 @@ public class JavaFXApplication extends Application {
     private Parent rootNode;
 
     public static void main(String[] args) {
+        // Set ICE port range globally for all ICE agents before anything else
+        System.setProperty("org.ice4j.ice.MIN_PORT", "5000");
+        System.setProperty("org.ice4j.ice.MAX_PORT", "5100");
+        System.setProperty("org.ice4j.ice.harvest.PREFERRED_PORT", "5000");
         launch(args);
     }
 

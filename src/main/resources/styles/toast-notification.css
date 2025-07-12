@@ -1,0 +1,44 @@
+.toast-pane {
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 3);
+    -fx-padding: 12 16 12 16;
+    -fx-max-width: 320px;
+    -fx-min-height: 60px;
+    -fx-max-height: 70px;
+}
+
+.toast-text {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-fill: white;
+    -fx-text-alignment: left;
+}
+
+.toast-icon {
+    -fx-fill: white;
+}
+
+.toast-success {
+    -fx-background-color: #86efac; /* Light green */
+}
+
+.toast-error {
+    -fx-background-color: #ef4444;
+}
+
+.toast-warning {
+    -fx-background-color: #f59e0b;
+}
+
+.toast-info {
+    -fx-background-color: #3b82f6;
+}
+
+/* Animation classes for sliding effect */
+.slide-in {
+    -fx-translate-x: 0;
+}
+
+.slide-out {
+    -fx-translate-x: -100%;
+}

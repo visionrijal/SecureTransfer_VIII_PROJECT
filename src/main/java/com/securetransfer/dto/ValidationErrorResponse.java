@@ -3,13 +3,14 @@ package com.securetransfer.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ValidationErrorResponse {
-    private int status;
-    private String message;
-    private List<String> errors;
+    private String field;
+    private String error;
 } 

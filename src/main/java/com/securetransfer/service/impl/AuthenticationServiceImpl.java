@@ -7,16 +7,11 @@ import com.securetransfer.exception.ResourceNotFoundException;
 import com.securetransfer.exception.UnauthorizedException;
 import com.securetransfer.model.User;
 import com.securetransfer.repository.UserRepository;
-import com.securetransfer.security.JwtTokenProvider;
-import com.securetransfer.security.UserPrincipal;
 import com.securetransfer.service.AuthenticationService;
 import com.securetransfer.service.EncryptionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,12 +26,6 @@ import java.util.UUID;
 @Transactional
 public class AuthenticationServiceImpl implements AuthenticationService {
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationServiceImpl.class);
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JwtTokenProvider tokenProvider;
 
     @Autowired
     private UserRepository userRepository;

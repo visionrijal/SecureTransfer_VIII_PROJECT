@@ -21,6 +21,9 @@ import javafx.stage.Stage;
 import com.securetransfer.util.UserSession;
 import javafx.application.Platform;
 import com.securetransfer.model.User;
+import com.securetransfer.util.ToastNotification;
+import com.securetransfer.controller.ui.ReceiveFilesController;
+import javafx.scene.layout.Priority;
 
 @Controller
 public class MainController extends BaseController {
@@ -30,7 +33,6 @@ public class MainController extends BaseController {
     @FXML private VBox heroSection;
     @FXML private VBox featuresSection;
     @FXML private VBox securitySection;
-    @FXML private VBox testimonialsSection;
     @FXML private VBox pricingSection;
     @FXML private VBox contentArea;
     @FXML private VBox sendFilesContent;
@@ -104,27 +106,8 @@ public class MainController extends BaseController {
 
     @FXML
     public void showReceiveFiles() {
-        Dialog<ButtonType> dialog = createStyledDialog(
-            "📥 Receive Files Securely",
-            "Choose how you want to receive files:\n\n" +
-            "• Wait for incoming transfer\n" +
-            "• Enter transfer code\n" +
-            "• Scan QR code\n" +
-            "• Access secure link\n\n" +
-            "All files are automatically encrypted.",
-            "primary"
-        );
-        
-        ButtonType waitTransfer = new ButtonType("Wait for Transfer", ButtonBar.ButtonData.OK_DONE);
-        ButtonType enterCode = new ButtonType("Enter Code", ButtonBar.ButtonData.OTHER);
-        ButtonType scanQR = new ButtonType("Scan QR Code", ButtonBar.ButtonData.OTHER);
-        ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-        
-        dialog.getDialogPane().getButtonTypes().setAll(waitTransfer, enterCode, scanQR, cancel);
-        
-        dialog.showAndWait().ifPresent(result -> {
-            logger.info("User selected receive method: " + result.getText());
-        });
+        logger.info("Showing receive files content");
+        showReceiveFilesContent();
     }
 
     @FXML
@@ -307,7 +290,7 @@ public class MainController extends BaseController {
             "• Vision Rijal\n" +
             "• Priyanka Kumari\n\n" +
             "🔧 TECHNICAL DETAILS:\n" +
-            "• Secure file transfer over relay server\n" +
+            "• Secure peer-to-peer file transfer\n" +
             "• TLS and SSL encryption\n" +
             "• AES IV encryption\n" +
             "• RSA encryption\n" +
@@ -457,7 +440,27 @@ public void logout() {
         if (result == ButtonType.OK) {
             logger.info("User logged out");
             UserSession.getInstance().clearSession(); // Clear the session
-            loadLoginScreen();
+            
+            // Get the current stage before changing scenes
+            Stage currentStage = (Stage) mainScrollPane.getScene().getWindow();
+            
+            // Load login screen
+            try {
+                FXMLLoader loader = createFxmlLoader("/fxml/login.fxml");
+                Parent root = loader.load();
+                Object controller = loader.getController();
+                if (controller instanceof BaseController) {
+                    ((BaseController) controller).setSpringContext(springContext);
+                }
+                Scene scene = new Scene(root);
+                currentStage.setScene(scene);
+                
+                // Show logout success toast on the login screen
+                ToastNotification.show(currentStage, "Logged out successfully!", 
+                    ToastNotification.NotificationType.SUCCESS, Duration.seconds(3));
+            } catch (Exception e) {
+                logger.error("Failed to load login screen", e);
+            }
         }
     });
 }
@@ -472,6 +475,10 @@ public void logout() {
         try {
             FXMLLoader loader = createFxmlLoader("/fxml/login.fxml");
             Parent root = loader.load();
+            Object controller = loader.getController();
+            if (controller instanceof BaseController) {
+                ((BaseController) controller).setSpringContext(springContext);
+            }
             Stage stage = (Stage) mainScrollPane.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -493,46 +500,41 @@ public void logout() {
     // ================================================
     
     private void showWelcomeContent() {
-        if (mainScrollPane != null) {
-            mainScrollPane.setVisible(true);
-            mainScrollPane.setManaged(true);
-        }
-        if (sendFilesContent != null) {
-            sendFilesContent.setVisible(false);
-            sendFilesContent.setManaged(false);
-        }
+        contentArea.getChildren().clear();
+        contentArea.getChildren().add(mainScrollPane);
+        VBox.setVgrow(mainScrollPane, Priority.ALWAYS);
+        sendFilesContent.setVisible(false);
         updateNavbarActiveState("welcome");
     }
     
     private void showSendFilesContent() {
-        if (mainScrollPane != null) {
-            mainScrollPane.setVisible(false);
-            mainScrollPane.setManaged(false);
-        }
-        if (sendFilesContent != null) {
-            sendFilesContent.setVisible(true);
-            sendFilesContent.setManaged(true);
-            loadSendFilesContent();
-        }
+        contentArea.getChildren().clear();
+        contentArea.getChildren().add(sendFilesContent);
+        VBox.setVgrow(sendFilesContent, Priority.ALWAYS);
+        sendFilesContent.setVisible(true);
+        loadSendFilesContent();
         updateNavbarActiveState("send-files");
     }
     
     private void loadSendFilesContent() {
         try {
-            // Load the send files FXML content
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/send-files.fxml"));
+            // Use Spring-aware loader
+            FXMLLoader loader = createFxmlLoader("/fxml/send-files.fxml");
             Parent sendFilesRoot = loader.load();
-            
+
             // Clear existing content and add new content
             sendFilesContent.getChildren().clear();
             sendFilesContent.getChildren().add(sendFilesRoot);
-            
+
             // Get the controller and set up any necessary references
             SendFilesController controller = loader.getController();
             if (controller != null) {
                 controller.setMainController(this);
+                if (controller instanceof BaseController) {
+                    ((BaseController) controller).setSpringContext(springContext);
+                }
             }
-            
+
             logger.info("Send files content loaded successfully");
         } catch (Exception e) {
             logger.error("Failed to load send files content", e);
@@ -540,6 +542,41 @@ public void logout() {
                 Alert.AlertType.ERROR,
                 "Error",
                 "Failed to load send files page",
+                "Please try again or contact support."
+            ).showAndWait();
+        }
+    }
+    
+    private void showReceiveFilesContent() {
+        try {
+            // Use Spring-aware loader
+            FXMLLoader loader = createFxmlLoader("/fxml/receive-files.fxml");
+            Parent receiveFilesRoot = loader.load();
+
+            // Clear existing content and add new content
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(receiveFilesRoot);
+            VBox.setVgrow(receiveFilesRoot, Priority.ALWAYS);
+            
+            // Hide send files content
+            sendFilesContent.setVisible(false);
+
+            // Get the controller and set up any necessary references
+            ReceiveFilesController controller = loader.getController();
+            if (controller != null) {
+                if (controller instanceof BaseController) {
+                    ((BaseController) controller).setSpringContext(springContext);
+                }
+            }
+
+            updateNavbarActiveState("receive-files");
+            logger.info("Receive files content loaded successfully");
+        } catch (Exception e) {
+            logger.error("Failed to load receive files content", e);
+            createStyledAlert(
+                Alert.AlertType.ERROR,
+                "Error",
+                "Failed to load receive files page",
                 "Please try again or contact support."
             ).showAndWait();
         }
@@ -567,6 +604,16 @@ public void logout() {
                             if (node instanceof Button) {
                                 Button button = (Button) node;
                                 if ("Send Files".equals(button.getText())) {
+                                    button.getStyleClass().add("active");
+                                }
+                            }
+                        });
+                        break;
+                    case "receive-files":
+                        navbar.lookupAll(".nav-link").forEach(node -> {
+                            if (node instanceof Button) {
+                                Button button = (Button) node;
+                                if ("Receive Files".equals(button.getText())) {
                                     button.getStyleClass().add("active");
                                 }
                             }

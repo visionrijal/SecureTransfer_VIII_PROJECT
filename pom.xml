@@ -120,24 +120,6 @@
             <version>5.7.1</version>
         </dependency>
 
-        <!-- JWT -->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-            <version>0.11.5</version>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-            <version>0.11.5</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
-            <version>0.11.5</version>
-            <scope>runtime</scope>
-        </dependency>
 
         <!-- Jakarta EE -->
         <dependency>
@@ -165,7 +147,36 @@
             <artifactId>javafx-swing</artifactId>
             <version>21.0.2</version>
         </dependency>
+
+        <!-- WebSocket -->
+        <dependency>
+            <groupId>org.java-websocket</groupId>
+            <artifactId>Java-WebSocket</artifactId>
+            <version>1.5.5</version>
+        </dependency>
+        
+        <!-- ice4j for NAT traversal (STUN/ICE) -->
+        <dependency>
+            <groupId>org.jitsi</groupId>
+            <artifactId>ice4j</artifactId>
+            <version>3.2-9-gb64c86f</version>
+        </dependency>
+        
+        <!-- UPnP library for port mapping -->
+        <dependency>
+            <groupId>org.bitlet</groupId>
+            <artifactId>weupnp</artifactId>
+            <version>0.1.4</version>
+        </dependency>
+
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>jitsi-maven-repository</id>
+            <url>https://github.com/jitsi/jitsi-maven-repository/raw/master/releases</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
@@ -215,4 +226,4 @@
             </plugin>
         </plugins>
     </build>
-</project> 
+</project>

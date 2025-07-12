@@ -8,6 +8,7 @@ import javafx.scene.text.Text;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import javafx.animation.ScaleTransition;
 import javafx.animation.FadeTransition;
@@ -20,6 +21,16 @@ import javafx.application.Platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import com.securetransfer.util.ToastNotification;
+import com.securetransfer.util.UserSession;
+import com.securetransfer.service.EncryptionService;
+import com.securetransfer.service.TransferService;
+import org.springframework.beans.factory.annotation.Autowired;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
+import javafx.concurrent.Task;
+import java.security.SecureRandom;
 
 import java.io.File;
 import java.net.URL;
@@ -27,15 +38,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.geometry.Pos;
+import javafx.stage.WindowEvent;
+import javafx.geometry.Insets;
+import javafx.stage.Modality;
+import javafx.scene.Scene;
+import javafx.scene.layout.Priority;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import javafx.scene.text.TextAlignment;
 
 @Controller
 public class SendFilesController extends BaseController implements Initializable {
     
     private static final Logger logger = LoggerFactory.getLogger(SendFilesController.class);
     
-    private static final int MAX_FILES = 5;
-    private static final long MAX_TOTAL_SIZE = 100 * 1024 * 1024; 
-    private static final long MAX_FILE_SIZE = 100 * 1024 * 1024; 
+    private static final int MAX_FILES = 10;
+    private static final long MAX_TOTAL_SIZE = 500 * 1024 * 1024; 
+    private static final long MAX_FILE_SIZE = 500 * 1024 * 1024; 
     
     @FXML private VBox selectedFilesList;
     @FXML private Text fileCountText;
@@ -45,11 +71,44 @@ public class SendFilesController extends BaseController implements Initializable
     @FXML private Button selectFilesBtn;
     @FXML private Button clearAllBtn;
     @FXML private Button directTransferBtn;
-    @FXML private Button generateLinkBtn;
     
     private List<File> selectedFiles = new ArrayList<>();
     private long totalSize = 0;
     private MainController mainController;
+    
+    @Autowired
+    private EncryptionService encryptionService;
+    
+    @Autowired
+    private TransferService transferService;
+
+    private List<File> encryptedFiles = new ArrayList<>();
+    
+    private String currentTransferCode;
+    private boolean waitingForReceiver = false;
+    private String currentSessionId;
+    
+    private Stage transferStage;
+    private ProgressBar encryptionProgressBar;
+    private Button transferButton;
+    private Label popupStatusLabel;
+    private Label codeLabel;
+    private Button cancelButton;
+    private Task<Void> encryptionTask;
+    
+    private enum PopupState { ENCRYPTING, READY_TO_TRANSFER }
+    private PopupState popupState;
+    
+    private HBox buttonRow;
+    
+    private Label popupIcon;
+    private Label popupHeading;
+    private Label popupNote;
+    private Region popupDivider;
+    
+    // Remove FXML codePopup and transferCodeText for modal popups
+    
+    private boolean encryptionCompleted = false;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -60,10 +119,12 @@ public class SendFilesController extends BaseController implements Initializable
     }
     
     private void setupAnimations() {
-        // Add subtle fade-in animation to the container when files are selected
         selectedFilesContainer.setOpacity(0);
         selectedFilesContainer.setVisible(false);
         selectedFilesContainer.setManaged(false);
+        selectedFilesContainer.setCacheHint(javafx.scene.CacheHint.SPEED);
+        fileDropZone.setCacheHint(javafx.scene.CacheHint.SPEED);
+        selectedFilesList.setCacheHint(javafx.scene.CacheHint.SPEED);
     }
     
     private void setupButtonHoverEffects() {
@@ -71,7 +132,6 @@ public class SendFilesController extends BaseController implements Initializable
         setupButtonHoverEffect(selectFilesBtn);
         setupButtonHoverEffect(clearAllBtn);
         setupButtonHoverEffect(directTransferBtn);
-        setupButtonHoverEffect(generateLinkBtn);
     }
     
     private void setupButtonHoverEffect(Button button) {
@@ -119,7 +179,7 @@ public class SendFilesController extends BaseController implements Initializable
             addFiles(files);
         }
     }
-    
+
 @FXML
 public void handleDragOver(javafx.scene.input.DragEvent event) {
     if (event.getDragboard().hasFiles()) {
@@ -181,9 +241,14 @@ public void handleDragExited(javafx.scene.input.DragEvent event) {
     private void addFiles(List<File> files) {
         List<File> validFiles = new ArrayList<>();
         List<String> errors = new ArrayList<>();
+        int availableSlots = MAX_FILES - selectedFiles.size();
         
         for (File file : files) {
-            String errorMessage = validateFile(file);
+            if (validFiles.size() >= availableSlots) {
+                errors.add(file.getName() + ": Maximum " + MAX_FILES + " files allowed");
+                continue;
+            }
+            String errorMessage = validateFile(file, validFiles);
             if (errorMessage == null) {
                 validFiles.add(file);
             } else {
@@ -196,32 +261,35 @@ public void handleDragExited(javafx.scene.input.DragEvent event) {
             logger.info("Added file: {} ({} bytes)", file.getName(), file.length());
         }
         if (!errors.isEmpty()) {
-            showMultipleFileErrors(errors);
+            if (errors.size() == 1) {
+                showToast(errors.get(0), ToastNotification.NotificationType.ERROR);
+            } else {
+                showToast(errors.size() + " files could not be added. Max: " + MAX_FILES + " files, " + formatFileSize(MAX_TOTAL_SIZE) + " total.", ToastNotification.NotificationType.ERROR);
         }
-        
+        }
         if (!validFiles.isEmpty()) {
             updateFileDisplay();
             animateFileListAppearance();
         }
     }
     
-    private String validateFile(File file) {
-        if (selectedFiles.size() >= MAX_FILES) {
+    private String validateFile(File file, List<File> batch) {
+        if (selectedFiles.size() + batch.size() >= MAX_FILES) {
             return "Maximum " + MAX_FILES + " files allowed";
         }
         if (file.length() > MAX_FILE_SIZE) {
-            return "File too large (max 100MB)";
+            return "File too large (max 500MB)";
         }
-        if (totalSize + file.length() > MAX_TOTAL_SIZE) {
-            return "Would exceed 100MB total limit";
+        if (totalSize + batch.stream().mapToLong(File::length).sum() + file.length() > MAX_TOTAL_SIZE) {
+            return "Would exceed 500MB total limit";
         }
-        if (selectedFiles.stream().anyMatch(f -> f.getName().equals(file.getName()))) {
+        if (selectedFiles.stream().anyMatch(f -> f.getName().equals(file.getName())) ||
+            batch.stream().anyMatch(f -> f.getName().equals(file.getName()))) {
             return "File already selected";
         }
         if (!file.canRead()) {
             return "Cannot read file";
         }
-        
         return null;
     }
     
@@ -263,8 +331,8 @@ public void handleDragExited(javafx.scene.input.DragEvent event) {
     }
     
     private void updateFileDisplay() {
+        selectedFilesList.setCacheHint(javafx.scene.CacheHint.SPEED);
         selectedFilesList.getChildren().clear();
-        
         if (selectedFiles.isEmpty()) {
             animateFileListDisappearance();
         } else {
@@ -273,33 +341,21 @@ public void handleDragExited(javafx.scene.input.DragEvent event) {
                 selectedFilesContainer.setManaged(true);
                 selectedFilesContainer.setOpacity(1);
             }
-            AtomicInteger index = new AtomicInteger(0);
             for (File file : selectedFiles) {
                 HBox fileItem = createFileItem(file);
+                fileItem.setOpacity(1);
                 selectedFilesList.getChildren().add(fileItem);
-                Platform.runLater(() -> {
-                    Timeline timeline = new Timeline(
-                        new KeyFrame(Duration.millis(50 * index.getAndIncrement()), e -> {
-                            animateFileItemAppearance(fileItem);
-                        })
-                    );
-                    timeline.play();
-                });
             }
         }
-        
         fileCountText.setText(String.format("(%d/%d)", selectedFiles.size(), MAX_FILES));
         totalSizeText.setText(String.format("Total: %s", formatFileSize(totalSize)));
         updateProgressColors();
-        // Hide scrollbars 
-        javafx.scene.Node parent = selectedFilesList.getParent();
-        while (parent != null && !(parent instanceof ScrollPane)) {
-            parent = parent.getParent();
+        ScrollPane scrollPane = findScrollPane(selectedFilesList);
+        if (scrollPane != null) {
+            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         }
-        if (parent instanceof ScrollPane) {
-            ((ScrollPane) parent).setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-            ((ScrollPane) parent).setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        }
+        selectedFilesList.setCacheHint(javafx.scene.CacheHint.DEFAULT);
     }
     
     private void animateFileListDisappearance() {
@@ -317,28 +373,12 @@ public void handleDragExited(javafx.scene.input.DragEvent event) {
     
     private void animateFileItemAppearance(HBox fileItem) {
         fileItem.setOpacity(0);
-        fileItem.setTranslateX(-20);
-        fileItem.setScaleX(0.95);
-        fileItem.setScaleY(0.95);
-        
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(200), fileItem);
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(150), fileItem);
         fadeTransition.setFromValue(0);
         fadeTransition.setToValue(1);
-        
-        TranslateTransition slideTransition = new TranslateTransition(Duration.millis(200), fileItem);
-        slideTransition.setFromX(-20);
-        slideTransition.setToX(0);
-        
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), fileItem);
-        scaleTransition.setFromX(0.95);
-        scaleTransition.setFromY(0.95);
-        scaleTransition.setToX(1.0);
-        scaleTransition.setToY(1.0);
-        
-        ParallelTransition parallelTransition = new ParallelTransition(
-            fadeTransition, slideTransition, scaleTransition
-        );
-        parallelTransition.play();
+        fileItem.setCacheHint(javafx.scene.CacheHint.SPEED);
+        fadeTransition.setOnFinished(e -> fileItem.setCacheHint(javafx.scene.CacheHint.DEFAULT));
+        fadeTransition.play();
     }
     
 private void updateProgressColors() {
@@ -362,8 +402,6 @@ private void updateProgressColors() {
         fileCountText.getStyleClass().add("file-count");
     }
 }
-
-
 
 private HBox createFileItem(File file) {
     HBox fileItem = new HBox(12);
@@ -404,7 +442,6 @@ private HBox createFileItem(File file) {
     
     return fileItem;
     }
-    
     
 private String getFileIconPath(String fileName) {
     String extension = getFileExtension(fileName).toLowerCase();
@@ -450,6 +487,7 @@ private String getFileIconPath(String fileName) {
         
         if (fileItemToRemove != null) {
             animateFileItemRemoval(fileItemToRemove, () -> {
+                showToast("Removed: " + file.getName(), ToastNotification.NotificationType.INFO);
                 selectedFiles.remove(file);
                 totalSize -= file.length();
                 updateFileDisplay();
@@ -459,44 +497,24 @@ private String getFileIconPath(String fileName) {
     }
     
     private void animateFileItemRemoval(HBox fileItem, Runnable onComplete) {
-        TranslateTransition slideTransition = new TranslateTransition(Duration.millis(200), fileItem);
-        slideTransition.setFromX(0);
-        slideTransition.setToX(20);
-        
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(200), fileItem);
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(150), fileItem);
         fadeTransition.setFromValue(1);
         fadeTransition.setToValue(0);
-        
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), fileItem);
-        scaleTransition.setFromX(1.0);
-        scaleTransition.setFromY(1.0);
-        scaleTransition.setToX(0.8);
-        scaleTransition.setToY(0.8);
-        
-        ParallelTransition parallelTransition = new ParallelTransition(
-            slideTransition, fadeTransition, scaleTransition
-        );
-        parallelTransition.setOnFinished(e -> onComplete.run());
-        parallelTransition.play();
+        fileItem.setCacheHint(javafx.scene.CacheHint.SPEED);
+        fadeTransition.setOnFinished(e -> {
+            fileItem.setCacheHint(javafx.scene.CacheHint.DEFAULT);
+            onComplete.run();
+        });
+        fadeTransition.play();
     }
     
     @FXML
     public void clearAllFiles() {
         if (selectedFiles.isEmpty()) return;
-        
         animateButton(clearAllBtn);
-        
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Clear All Files");
-        alert.setHeaderText("Remove all selected files?");
-        alert.setContentText("This will remove all " + selectedFiles.size() + " selected files from the list.");
-        
-        alert.getDialogPane().getStyleClass().add("dialog-pane");
-        
-        alert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
+        int fileCount = selectedFiles.size();
+        showToast("Cleared " + fileCount + " file" + (fileCount > 1 ? "s" : ""), ToastNotification.NotificationType.INFO);
                 animateFileListDisappearance();
-                
                 Timeline timeline = new Timeline(
                     new KeyFrame(Duration.millis(250), e -> {
                         selectedFiles.clear();
@@ -506,8 +524,6 @@ private String getFileIconPath(String fileName) {
                     })
                 );
                 timeline.play();
-            }
-        });
     }
     
     private String formatFileSize(long bytes) {
@@ -528,41 +544,355 @@ private String getFileIconPath(String fileName) {
         alert.showAndWait();
     }
     
+    // --- POPUP LOGIC REFACTOR ---
+    // Remove any FXML-based popup remnants (codePopup, transferCodeText, etc.)
+    // All popups are built in Java using VBox/HBox and styled with your CSS
+
     @FXML
     public void startDirectTransfer() {
         if (selectedFiles.isEmpty()) {
             showAlert("No Files Selected", "Please select files to transfer.", "");
             return;
         }
-        
         animateButton(directTransferBtn);
-        
-        logger.info("Starting direct transfer with {} files", selectedFiles.size());
-        
-        showTransferProgress("Direct Transfer", "Preparing files for transfer...");
-        
-        // TODO: Implement direct transfer logic
-        // For now, simulate transfer progress
-        simulateTransferProgress();
+        disableFileUI(true);
+        showEncryptionPopup();
+        startEncryptionForTransfer();
+    }
+
+    private void showEncryptionPopup() {
+        transferStage = new Stage();
+        transferStage.initModality(Modality.APPLICATION_MODAL);
+        transferStage.setTitle("Direct Transfer");
+        transferStage.setResizable(true);
+        transferStage.setAlwaysOnTop(true);
+        VBox content = new VBox(20);
+        content.setAlignment(Pos.CENTER);
+        content.setPadding(new Insets(32, 32, 32, 32));
+        content.getStyleClass().add("transfer-popup-pane");
+        content.setMinWidth(900);
+        content.setMinHeight(600);
+
+        Label icon = new Label("\uD83D\uDD12"); // Lock icon
+        icon.getStyleClass().add("popup-icon");
+        icon.setFont(Font.font("Segoe UI Emoji", 48));
+        icon.setAlignment(Pos.CENTER);
+
+        Label status = new Label("Encrypting files...");
+        status.getStyleClass().add("label");
+        status.setFont(Font.font("Inter", FontWeight.BOLD, 18));
+        status.setTextFill(Color.web("#333"));
+        status.setWrapText(true);
+        status.setMaxWidth(700);
+        status.setAlignment(Pos.CENTER);
+
+        ProgressBar progressBar = new ProgressBar(0);
+        progressBar.setPrefWidth(600);
+        progressBar.getStyleClass().add("transfer-progress-bar");
+
+        Button cancelBtn = new Button("Cancel");
+        cancelBtn.getStyleClass().add("popup-btn-red");
+        cancelBtn.setMinWidth(160);
+        cancelBtn.setFont(Font.font("Inter", FontWeight.BOLD, 15));
+        cancelBtn.setOnAction(e -> handlePopupCancel());
+
+        HBox buttonRow = new HBox(20, cancelBtn);
+        buttonRow.setAlignment(Pos.CENTER);
+
+        content.getChildren().addAll(icon, status, progressBar, buttonRow);
+        Scene scene = new Scene(content);
+        scene.getStylesheets().add(getClass().getResource("/styles/send-files.css").toExternalForm());
+        transferStage.setScene(scene);
+        transferStage.setMinWidth(900);
+        transferStage.setMinHeight(600);
+        transferStage.setOnCloseRequest(event -> {
+            event.consume();
+            handlePopupCancel();
+        });
+        transferStage.show();
+        popupState = PopupState.ENCRYPTING;
+        // Save references for later updates
+        this.popupStatusLabel = status;
+        this.encryptionProgressBar = progressBar;
+        this.cancelButton = cancelBtn;
+        this.buttonRow = buttonRow;
+    }
+
+    private void startEncryptionForTransfer() {
+        try {
+            KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+            keyGen.init(256);
+            SecretKey aesKey = keyGen.generateKey();
+            byte[] ivBytes = new byte[16];
+            new java.security.SecureRandom().nextBytes(ivBytes);
+            IvParameterSpec iv = new IvParameterSpec(ivBytes);
+            encryptionTask = new Task<>() {
+                @Override
+                protected Void call() throws Exception {
+                    encryptedFiles.clear();
+                    int total = selectedFiles.size();
+                    for (int i = 0; i < total; i++) {
+                        final int fileIndex = i;
+                        File inputFile = selectedFiles.get(i);
+                        File outputFile = new File(inputFile.getParent(), inputFile.getName() + ".enc");
+                        encryptionService.encryptFile(inputFile, outputFile, aesKey, iv, percent -> {
+                            double progress = (fileIndex + percent) / total;
+                            Platform.runLater(() -> {
+                                if (encryptionProgressBar.progressProperty().isBound()) {
+                                    encryptionProgressBar.progressProperty().unbind();
+                                }
+                                encryptionProgressBar.setProgress(progress);
+                            });
+                        }, () -> encryptionTask.isCancelled());
+                        encryptedFiles.add(outputFile);
+                    }
+                    return null;
+                }
+            };
+            encryptionProgressBar.progressProperty().bind(encryptionTask.progressProperty());
+            encryptionTask.setOnSucceeded(e -> {
+                popupState = PopupState.READY_TO_TRANSFER;
+                encryptionProgressBar.progressProperty().unbind();
+                encryptionProgressBar.setProgress(1.0);
+                // Generate and show code immediately after encryption
+                currentTransferCode = generateTransferCode();
+                showCodeDetailsInPopup(currentTransferCode);
+                // Start waiting for receiver in background
+                registerForReceiverConnection();
+            });
+            encryptionTask.setOnFailed(e -> {
+                encryptionProgressBar.progressProperty().unbind();
+                showToast("Encryption failed: " + encryptionTask.getException().getMessage(), ToastNotification.NotificationType.ERROR);
+                if (transferStage != null) transferStage.close();
+                disableFileUI(false);
+            });
+            new Thread(encryptionTask).start();
+        } catch (Exception ex) {
+            showToast("Encryption setup failed: " + ex.getMessage(), ToastNotification.NotificationType.ERROR);
+            if (transferStage != null) transferStage.close();
+            disableFileUI(false);
+        }
+    }
+
+    private void showTransferCodeInPopup() {
+        currentTransferCode = generateTransferCode();
+        String fileName = encryptedFiles.size() == 1 ? encryptedFiles.get(0).getName() : "MultipleFiles.zip";
+        long fileSize = encryptedFiles.size() == 1 ? encryptedFiles.get(0).length() : encryptedFiles.stream().mapToLong(File::length).sum();
+        transferService.initiateTransfer(currentTransferCode, selectedFiles, UserSession.getInstance().getCurrentUser().getUsername(), fileName, fileSize)
+            .thenAccept(session -> {
+                Platform.runLater(() -> {
+                    currentSessionId = session.getSender().getSessionId();
+                    showCodeDetailsInPopup(currentTransferCode);
+                    registerForReceiverConnection();
+                });
+            })
+            .exceptionally(throwable -> {
+                Platform.runLater(() -> {
+                    showToast("Failed to initialize transfer: " + throwable.getMessage(), ToastNotification.NotificationType.ERROR);
+                    if (transferStage != null) transferStage.close();
+                    disableFileUI(false);
+                });
+                return null;
+            });
+    }
+
+    private void showCodeDetailsInPopup(String transferCode) {
+        VBox content = new VBox(20);
+        content.setAlignment(Pos.CENTER);
+        content.setPadding(new Insets(32, 32, 32, 32));
+        content.getStyleClass().add("transfer-popup-pane");
+        content.setMinWidth(900);
+        content.setMinHeight(600);
+        Label icon = new Label("\uD83D\uDCE4"); // 📤
+        icon.setFont(Font.font("Segoe UI Emoji", 48));
+        icon.setAlignment(Pos.CENTER);
+        Label heading = new Label("Share This Code");
+        heading.setFont(Font.font("Inter", FontWeight.BOLD, 24));
+        heading.setTextFill(Color.web("#059669"));
+        heading.setAlignment(Pos.CENTER);
+        heading.setMaxWidth(700);
+        heading.setWrapText(true);
+        Label status = new Label("Share this code with the receiver and wait for them to connect.\nKeep this window open until the transfer is complete.");
+        status.setFont(Font.font("Inter", 16));
+        status.setTextFill(Color.web("#374151"));
+        status.setAlignment(Pos.CENTER);
+        status.setMaxWidth(700);
+        status.setWrapText(true);
+        Label code = new Label(transferCode);
+        code.getStyleClass().add("code-label");
+        code.setFont(Font.font("Consolas", FontWeight.BOLD, 36));
+        code.setTextFill(Color.web("#059669"));
+        code.setAlignment(Pos.CENTER);
+        code.setWrapText(true);
+        code.setMaxWidth(700);
+        code.setStyle("-fx-background-color: #f0fdf4; -fx-border-color: #059669; -fx-border-width: 3; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 20 40; -fx-font-size: 36px;");
+        Region divider = new Region();
+        divider.setMinWidth(700);
+        divider.setPrefHeight(2);
+        divider.setStyle("-fx-background-color: #e5e7eb;");
+        Label note = new Label("Do not close this window until the transfer is complete.\nThe code is valid for 30 minutes.");
+        note.setFont(Font.font("Inter", 14));
+        note.setTextFill(Color.web("#6b7280"));
+        note.setAlignment(Pos.CENTER);
+        note.setWrapText(true);
+        note.setMaxWidth(700);
+        Button cancelBtn = new Button("Cancel");
+        cancelBtn.getStyleClass().add("popup-btn-red");
+        cancelBtn.setMinWidth(160);
+        cancelBtn.setFont(Font.font("Inter", FontWeight.BOLD, 15));
+        cancelBtn.setOnAction(e -> handlePopupCancel());
+        HBox buttonRow = new HBox(16, cancelBtn);
+        buttonRow.setAlignment(Pos.CENTER);
+        content.getChildren().addAll(icon, heading, status, code, note, divider, buttonRow);
+        transferStage.getScene().setRoot(content);
     }
     
-    @FXML
-    public void generateSecureLink() {
-        if (selectedFiles.isEmpty()) {
-            showAlert("No Files Selected", "Please select files to generate link.", "");
-            return;
-        }
+    private void registerForReceiverConnection() {
+        // Check for receiver connection every 2 seconds, with timeout and error handling
+        final Timeline[] connectionChecker = new Timeline[1];
+        final int[] elapsedSeconds = {0};
+        final int timeoutSeconds = 180; // 3 minutes
+        connectionChecker[0] = new Timeline(
+            new KeyFrame(Duration.seconds(2), e -> {
+                elapsedSeconds[0] += 2;
+                if (transferService.isTransferActive(currentTransferCode)) {
+                    showReceiverConnectionDialog();
+                    connectionChecker[0].stop();
+                } else if (elapsedSeconds[0] >= timeoutSeconds) {
+                    showToast("No receiver connected within 3 minutes. Please try again.", ToastNotification.NotificationType.ERROR);
+                    if (transferStage != null) transferStage.close();
+                    disableFileUI(false);
+                    connectionChecker[0].stop();
+                }
+            })
+        );
+        connectionChecker[0].setCycleCount(Timeline.INDEFINITE);
+        connectionChecker[0].play();
+    }
+    
+    private void showReceiverConnectionDialog() {
+        Platform.runLater(() -> {
+            Alert approvalAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            approvalAlert.setTitle("Receiver Connected");
+            approvalAlert.setHeaderText("A receiver has connected with your transfer code.");
+            approvalAlert.setContentText("Do you want to proceed with the file transfer?");
+            approvalAlert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+            
+            approvalAlert.showAndWait().ifPresent(result -> {
+                if (result == ButtonType.YES) {
+                    startActualFileTransfer();
+                } else {
+                    transferService.cancelTransfer(currentTransferCode);
+                    showToast("Transfer cancelled.", ToastNotification.NotificationType.INFO);
+                    if (transferStage != null) transferStage.close();
+                    disableFileUI(false);
+                }
+            });
+        });
+    }
+    
+    private void startActualFileTransfer() {
+        popupStatusLabel.setText("Transferring files...");
+        // transferButton.setVisible(false); // This line is removed as per the new_code
+        buttonRow.getChildren().setAll(cancelButton);
         
-        animateButton(generateLinkBtn);
-        
-        logger.info("Generating secure link for {} files", selectedFiles.size());
-        
-        // Show progress dialog
-        showTransferProgress("Generate Secure Link", "Uploading files and generating secure link...");
-        
-        // TODO: Implement secure link generation
-        // For now, simulate link generation progress
-        simulateTransferProgress();
+        transferService.startFileTransfer(currentTransferCode, 
+            progress -> {
+                Platform.runLater(() -> {
+                    if (encryptionProgressBar.progressProperty().isBound()) {
+                        encryptionProgressBar.progressProperty().unbind();
+                    }
+                    encryptionProgressBar.setProgress(progress.getProgress());
+                    popupStatusLabel.setText(String.format("Transferring: %.1f%%", progress.getProgress() * 100));
+                });
+            },
+            complete -> {
+                Platform.runLater(() -> {
+                    if (encryptionProgressBar.progressProperty().isBound()) {
+                        encryptionProgressBar.progressProperty().unbind();
+                    }
+                    if (complete.isSuccess()) {
+                        popupStatusLabel.setText("Transfer completed successfully!");
+                        encryptionProgressBar.setProgress(1.0);
+                        showToast("Files transferred successfully!", ToastNotification.NotificationType.SUCCESS);
+                        
+                        // Close popup after 2 seconds
+                        new Timeline(new KeyFrame(Duration.seconds(2), e -> {
+                            if (transferStage != null) transferStage.close();
+                            disableFileUI(false);
+                        })).play();
+                    } else {
+                        popupStatusLabel.setText("Transfer failed: " + complete.getErrorMessage());
+                        showToast("Transfer failed: " + complete.getErrorMessage(), ToastNotification.NotificationType.ERROR);
+                        cancelButton.setText("Close");
+                    }
+                });
+            }
+        ).exceptionally(throwable -> {
+            Platform.runLater(() -> {
+                showToast("Transfer failed: " + throwable.getMessage(), ToastNotification.NotificationType.ERROR);
+                if (transferStage != null) transferStage.close();
+                disableFileUI(false);
+            });
+            return null;
+        });
+    }
+
+    private void disableFileUI(boolean disable) {
+        selectFilesBtn.setDisable(disable);
+        clearAllBtn.setDisable(disable);
+        directTransferBtn.setDisable(disable);
+        selectedFilesList.setDisable(disable);
+        fileDropZone.setDisable(disable);
+    }
+    
+    private String generateTransferCode() {
+        SecureRandom random = new SecureRandom();
+        int code = 100000 + random.nextInt(900000); // 6-digit
+        return String.valueOf(code);
+    }
+
+    // This method should be called when a receiver connects with the code
+    private void onReceiverConnectionRequest(String receiverInfo) {
+        Platform.runLater(() -> {
+            Alert approvalAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            approvalAlert.setTitle("File Transfer Request");
+            approvalAlert.setHeaderText("Device " + receiverInfo + " requests your files.");
+            approvalAlert.setContentText("Do you want to send the files?");
+            approvalAlert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+            approvalAlert.showAndWait().ifPresent(result -> {
+                if (result == ButtonType.OK) {
+                    // Start file transfer logic
+                    transferService.startFileTransfer(currentTransferCode, progress -> {
+                        // Optionally update UI with progress
+                        logger.info("Transfer progress: {}%", progress.getProgress() * 100);
+                    }, complete -> {
+                        Platform.runLater(() -> {
+                            if (complete.isSuccess()) {
+                                showToast("Transfer complete!", ToastNotification.NotificationType.SUCCESS);
+                            } else {
+                                showToast("Transfer failed: " + complete.getErrorMessage(), ToastNotification.NotificationType.ERROR);
+                            }
+                        });
+                    });
+                    showTransferProgress("Transferring Files", "Sending files to receiver...");
+                } else {
+                    // Reject connection logic (could notify receiver via WebSocket or update status)
+                    showToast("Transfer cancelled.", ToastNotification.NotificationType.INFO);
+                    // TODO: Optionally notify receiver of rejection
+                }
+            });
+        });
+    }
+    
+
+    private void showSuccessDialogWithLink(String link) {
+        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+        successAlert.setTitle("Secure Link Generated");
+        successAlert.setHeaderText("Your secure link is ready!");
+        successAlert.setContentText(link);
+        successAlert.getDialogPane().getStyleClass().add("dialog-pane");
+        successAlert.showAndWait();
     }
     
     private void showTransferProgress(String title, String message) {
@@ -625,6 +955,197 @@ private String getFileIconPath(String fileName) {
     @Override
     protected Stage getCurrentStage() {
         return getStage();
+    }
+    
+    private void showToast(String message, ToastNotification.NotificationType type) {
+        Stage stage = (Stage) selectedFilesList.getScene().getWindow();
+        ToastNotification.show(stage, message, type, Duration.seconds(3), 70);
+    }
+    
+    private ScrollPane findScrollPane(javafx.scene.Node node) {
+        javafx.scene.Node parent = node.getParent();
+        while (parent != null) {
+            if (parent instanceof ScrollPane) {
+                return (ScrollPane) parent;
+            }
+            parent = parent.getParent();
+        }
+        return null;
+    }
+    
+    private void encryptSelectedFiles() {
+        if (selectedFiles.isEmpty()) return;
+        try {
+            // Generate AES key and IV for this session
+            KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+            keyGen.init(256);
+            SecretKey aesKey = keyGen.generateKey();
+            byte[] ivBytes = new byte[16];
+            new java.security.SecureRandom().nextBytes(ivBytes);
+            IvParameterSpec iv = new IvParameterSpec(ivBytes);
+
+            // Prepare progress dialog
+            Alert progressAlert = new Alert(Alert.AlertType.INFORMATION);
+            progressAlert.setTitle("Encrypting Files");
+            progressAlert.setHeaderText("Encryption in Progress");
+            ProgressBar progressBar = new ProgressBar(0);
+            progressBar.setPrefWidth(300);
+            progressAlert.getDialogPane().setContent(progressBar);
+            progressAlert.getDialogPane().getButtonTypes().clear();
+            progressAlert.show();
+
+            Task<Void> encryptionTask = new Task<>() {
+                @Override
+                protected Void call() throws Exception {
+                    encryptedFiles.clear();
+                    int total = selectedFiles.size();
+                    for (int i = 0; i < total; i++) {
+                        final int fileIndex = i;
+                        File inputFile = selectedFiles.get(i);
+                        File outputFile = new File(inputFile.getParent(), inputFile.getName() + ".enc");
+                        encryptionService.encryptFile(inputFile, outputFile, aesKey, iv, percent -> {
+                            updateProgress(fileIndex + percent, total);
+                        }, () -> false);
+                        encryptedFiles.add(outputFile);
+                    }
+                    return null;
+                }
+            };
+
+            progressBar.progressProperty().bind(encryptionTask.progressProperty());
+
+            encryptionTask.setOnSucceeded(e -> {
+                progressAlert.setHeaderText("Encryption Complete");
+                progressAlert.setContentText("All files encrypted. Ready to transfer.");
+                progressBar.progressProperty().unbind();
+                progressBar.setProgress(1.0);
+                // Optionally close dialog after short delay
+                new Timeline(new KeyFrame(Duration.seconds(1.5), ev -> progressAlert.close())).play();
+                showToast("Encryption complete. Ready to transfer.", ToastNotification.NotificationType.SUCCESS);
+            });
+            encryptionTask.setOnFailed(e -> {
+                progressAlert.close();
+                showToast("Encryption failed: " + encryptionTask.getException().getMessage(), ToastNotification.NotificationType.ERROR);
+            });
+
+            new Thread(encryptionTask).start();
+        } catch (Exception ex) {
+            showToast("Encryption setup failed: " + ex.getMessage(), ToastNotification.NotificationType.ERROR);
+        }
+    }
+
+    private void showReadyToTransferFiles() {
+        VBox content = new VBox(20);
+        content.setAlignment(Pos.CENTER);
+        content.setPadding(new Insets(32, 32, 32, 32));
+        content.getStyleClass().add("transfer-popup-pane");
+        content.setMinWidth(900);
+        content.setMinHeight(600);
+
+        Label icon = new Label("\uD83D\uDCE6"); // 📦
+        icon.getStyleClass().add("popup-icon");
+        icon.setFont(Font.font("Segoe UI Emoji", 48));
+        icon.setAlignment(Pos.CENTER);
+
+        Label heading = new Label("Ready to Transfer");
+        heading.setFont(Font.font("Inter", FontWeight.BOLD, 24));
+        heading.setTextFill(Color.web("#6366f1"));
+        heading.setAlignment(Pos.CENTER);
+        heading.setMaxWidth(700);
+        heading.setWrapText(true);
+
+        Label status = new Label("The following files are encrypted and are now ready to transfer.");
+        status.setFont(Font.font("Inter", 16));
+        status.setTextFill(Color.web("#374151"));
+        status.setAlignment(Pos.CENTER);
+        status.setMaxWidth(700);
+        status.setWrapText(true);
+
+        VBox fileList = new VBox(8);
+        fileList.getStyleClass().add("file-list-section");
+        fileList.setAlignment(Pos.CENTER_LEFT);
+        fileList.setPadding(new Insets(12, 0, 12, 0));
+        fileList.setMaxWidth(700);
+        fileList.setMaxHeight(200);
+        for (File f : selectedFiles) {
+            HBox fileRow = new HBox(12);
+            fileRow.getStyleClass().add("file-list-item");
+            fileRow.setAlignment(Pos.CENTER_LEFT);
+            fileRow.setPadding(new Insets(4, 8, 4, 8));
+            Label fileIcon = new Label("\uD83D\uDCC4"); // 📄
+            fileIcon.setFont(Font.font("Segoe UI Emoji", 18));
+            fileIcon.setMinWidth(24);
+            Label fileLabel = new Label(f.getName());
+            fileLabel.setFont(Font.font("Inter", 14));
+            fileLabel.setTextFill(Color.web("#374151"));
+            fileLabel.setWrapText(true);
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
+            Label fileSize = new Label(formatFileSize(f.length()));
+            fileSize.setFont(Font.font("Inter", FontWeight.NORMAL, 13));
+            fileSize.setTextFill(Color.web("#64748b"));
+            fileSize.setMinWidth(80);
+            fileRow.getChildren().addAll(fileIcon, fileLabel, spacer, fileSize);
+            fileList.getChildren().add(fileRow);
+        }
+        ScrollPane scrollPane = null;
+        if (selectedFiles.size() > 5) {
+            scrollPane = new ScrollPane(fileList);
+            scrollPane.setFitToWidth(true);
+            scrollPane.setFitToHeight(true);
+            scrollPane.setMaxHeight(200);
+            scrollPane.setPrefHeight(200);
+            scrollPane.getStyleClass().add("file-list-scroll");
+        }
+        Region divider = new Region();
+        divider.getStyleClass().add("popup-divider");
+        divider.setMinWidth(700);
+        divider.setPrefHeight(2);
+        divider.setStyle("-fx-background-color: #e5e7eb;");
+        Label note = new Label("Your files are encrypted with AES-256 and ready for secure transfer.");
+        note.getStyleClass().add("popup-note");
+        note.setFont(Font.font("Inter", 14));
+        note.setTextFill(Color.web("#6b7280"));
+        note.setAlignment(Pos.CENTER);
+        note.setWrapText(true);
+        note.setMaxWidth(700);
+        Button transferBtn = new Button("Transfer");
+        transferBtn.getStyleClass().add("popup-btn-green");
+        transferBtn.setMinWidth(160);
+        transferBtn.setFont(Font.font("Inter", FontWeight.BOLD, 15));
+        transferBtn.setOnAction(e -> showTransferCodeInPopup());
+        Button cancelBtn = new Button("Cancel");
+        cancelBtn.getStyleClass().add("popup-btn-red");
+        cancelBtn.setMinWidth(160);
+        cancelBtn.setFont(Font.font("Inter", FontWeight.BOLD, 15));
+        cancelBtn.setOnAction(e -> handlePopupCancel());
+        HBox buttonRow = new HBox(20, transferBtn, cancelBtn);
+        buttonRow.setAlignment(Pos.CENTER);
+        if (scrollPane != null) {
+            content.getChildren().addAll(icon, heading, status, scrollPane, note, divider, buttonRow);
+        } else {
+            content.getChildren().addAll(icon, heading, status, fileList, note, divider, buttonRow);
+        }
+        transferStage.getScene().setRoot(content);
+    }
+
+    private void handlePopupCancel() {
+        Platform.runLater(() -> {
+            if (transferStage != null) {
+                transferStage.close();
+                transferStage = null;
+            }
+            disableFileUI(false);
+            if (popupState == PopupState.ENCRYPTING) {
+                if (encryptionTask != null && encryptionTask.isRunning()) {
+                    logger.info("Cancelling encryption task...");
+                    encryptionTask.cancel();
+                }
+                showToast("Encryption cancelled.", ToastNotification.NotificationType.INFO);
+            } else {
+                showToast("Transfer cancelled.", ToastNotification.NotificationType.INFO);
+            }
+        });
     }
 }
 

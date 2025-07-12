@@ -442,3 +442,30 @@
     -fx-text-fill: #374151;
     -fx-border-color: #9ca3af;
 }
+
+/* Code Popup Styles */
+.code-popup {
+    -fx-background-color: #fff;
+    -fx-background-radius: 16;
+    -fx-padding: 32 32 24 32;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.10), 16, 0, 0, 4);
+    -fx-spacing: 16;
+    -fx-alignment: center;
+    -fx-max-width: 340;
+    -fx-min-width: 260;
+}
+.code-lock-icon {
+    -fx-fill: #667eea;
+    -fx-scale-x: 2.2;
+    -fx-scale-y: 2.2;
+    -fx-padding: 0 0 8 0;
+}
+.transfer-code-text {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-fill: #111827;
+    -fx-text-alignment: center;
+    -fx-padding: 8 0 8 0;
+    -fx-font-family: "Segoe UI", "SF Pro Display", "Roboto", Arial, sans-serif;
+    -fx-letter-spacing: 2px;
+}

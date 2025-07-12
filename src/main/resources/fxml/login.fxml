@@ -9,7 +9,7 @@
 
 <VBox spacing="50" alignment="CENTER" 
       styleClass="login-container"
-      stylesheets="/styles/login.css"
+      stylesheets="/styles/login.css,/styles/toast-notification.css"
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.securetransfer.controller.ui.LoginController">

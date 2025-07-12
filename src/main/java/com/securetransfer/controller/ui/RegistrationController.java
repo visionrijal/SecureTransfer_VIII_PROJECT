@@ -1,6 +1,7 @@
 package com.securetransfer.controller.ui;
 
 import com.securetransfer.service.UserService;
+import com.securetransfer.util.ToastNotification;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -117,7 +119,8 @@ public class RegistrationController extends BaseController {
         try {
             userService.register(username, password);
             showSuccess("Registration successful! Redirecting to login...");
-            loadLoginScreen();
+            showToast("Registration successful! Please login.", ToastNotification.NotificationType.SUCCESS);
+            loadLoginScreenWithToast();
         } catch (IllegalArgumentException e) {
             showError(e.getMessage());
         } catch (Exception e) {
@@ -258,6 +261,30 @@ public class RegistrationController extends BaseController {
         } catch (Exception e) {
             logger.error("Failed to load registration screen", e);
             errorLabel.setText("Failed to load registration screen: " + e.getMessage());
+        }
+    }
+
+    private void showToast(String message, ToastNotification.NotificationType type) {
+        ToastNotification.show((Stage) registerButton.getScene().getWindow(), message, type, Duration.seconds(3));
+    }
+
+    private void loadLoginScreenWithToast() {
+        try {
+            logger.debug("Loading login screen with toast");
+            FXMLLoader loader = createFxmlLoader("/fxml/login.fxml");
+            Parent root = loader.load();
+            Object controller = loader.getController();
+            if (controller instanceof BaseController) {
+                ((BaseController) controller).setSpringContext(springContext);
+            }
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) registerButton.getScene().getWindow();
+            stage.setScene(scene);
+            // Show toast on login screen after scene is set
+            ToastNotification.show(stage, "Registration successful! Please login.", ToastNotification.NotificationType.SUCCESS, Duration.seconds(3));
+        } catch (Exception e) {
+            logger.error("Failed to load login screen", e);
+            errorLabel.setText("Failed to load login screen: " + e.getMessage());
         }
     }
 } 

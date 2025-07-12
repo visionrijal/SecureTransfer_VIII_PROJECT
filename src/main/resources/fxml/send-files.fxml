@@ -11,7 +11,7 @@
             xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <content>
     <VBox styleClass="send-files-content"
-          stylesheets="@../styles/send-files.css">
+          stylesheets="@../styles/send-files.css,@../styles/toast-notification.css">
       <VBox styleClass="hero-section" alignment="CENTER">
         <VBox alignment="CENTER" spacing="8">
           <Text text="Send Files Securely" styleClass="hero-title"/>
@@ -20,11 +20,11 @@
         <HBox styleClass="limits-info" alignment="CENTER">
           <VBox styleClass="limit-item" alignment="CENTER">
             <SVGPath content="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z" styleClass="limit-icon"/>
-            <Text text="5 Files Max" styleClass="limit-label"/>
+            <Text text="10 Files Max" styleClass="limit-label"/>
           </VBox>
           <VBox styleClass="limit-item" alignment="CENTER">
             <SVGPath content="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6z" styleClass="limit-icon"/>
-            <Text text="100MB Total" styleClass="limit-label"/>
+            <Text text="500MB Total" styleClass="limit-label"/>
           </VBox>
           <VBox styleClass="limit-item" alignment="CENTER">
             <SVGPath content="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z" styleClass="limit-icon"/>
@@ -47,13 +47,13 @@
         <VBox fx:id="selectedFilesContainer" styleClass="selected-files-container" visible="false" managed="false">
           <HBox alignment="CENTER_LEFT" spacing="8">
             <Text text="Selected Files" styleClass="section-title"/>
-            <Text fx:id="fileCountText" text="(0/5)" styleClass="file-count"/>
+            <Text fx:id="fileCountText" text="(0/10)" styleClass="file-count"/>
           </HBox>
           <VBox fx:id="selectedFilesList" styleClass="files-list"/>
           <HBox styleClass="file-summary" alignment="CENTER_RIGHT">
             <VBox alignment="CENTER_RIGHT" spacing="2">
               <Text fx:id="totalSizeText" text="Total: 0 B" styleClass="total-size"/>
-              <Text text="Maximum: 100 MB" styleClass="size-limit"/>
+              <Text text="Maximum: 500 MB" styleClass="size-limit"/>
             </VBox>
             <Button fx:id="clearAllBtn" text="Clear All" onAction="#clearAllFiles" styleClass="clear-btn"/>
           </HBox>
@@ -61,7 +61,6 @@
             <Text text="Choose Transfer Method" styleClass="section-title"/>
             <HBox styleClass="transfer-methods" alignment="CENTER">
               <Button fx:id="directTransferBtn" text="Direct Transfer" onAction="#startDirectTransfer" styleClass="transfer-btn"/>
-              <Button fx:id="generateLinkBtn" text="Generate Link" onAction="#generateSecureLink" styleClass="transfer-btn"/>
             </HBox>
           </VBox>
         </VBox>

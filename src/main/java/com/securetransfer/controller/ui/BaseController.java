@@ -33,6 +33,11 @@ public abstract class BaseController {
             FXMLLoader loader = createFxmlLoader(fxmlPath);
             Parent root = loader.load();
             
+            Object controller = loader.getController();
+            if (controller instanceof BaseController) {
+                ((BaseController) controller).setSpringContext(springContext);
+            }
+            
             Stage stage = getCurrentStage();
             if (stage != null) {
                 Scene scene = new Scene(root);

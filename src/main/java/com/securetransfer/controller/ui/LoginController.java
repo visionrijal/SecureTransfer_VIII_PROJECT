@@ -2,6 +2,7 @@ package com.securetransfer.controller.ui;
 
 import com.securetransfer.model.User;
 import com.securetransfer.service.UserService;
+import com.securetransfer.util.ToastNotification;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -44,10 +46,8 @@ public class LoginController extends BaseController {
 
     @FXML
     public void initialize() {
-        // Clear any existing messages
         clearMessages();
         
-        // Add listeners to clear error messages when user types
         usernameField.textProperty().addListener((obs, oldVal, newVal) -> {
             usernameErrorLabel.setVisible(false);
             usernameErrorLabel.setManaged(false);
@@ -82,7 +82,6 @@ public class LoginController extends BaseController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         
-        // Validate input
         if (username.isEmpty()) {
             showUsernameError("Username is required");
             return;
@@ -96,17 +95,14 @@ public class LoginController extends BaseController {
         try {
             User user = userService.authenticate(username, password);
             if (user != null) {
-                // Get a fresh user object to avoid any JPA session issues
                 User freshUser = userService.findByUsername(username).orElse(user);
                 
-                // Force reset the session to ensure clean state
                 com.securetransfer.util.UserSession.getInstance().forceReset();
                 
-                // Set the current user in the session
                 com.securetransfer.util.UserSession.getInstance().setCurrentUser(freshUser);
                 logger.info("User session set for: {}", freshUser.getUsername());
                 showSuccess("Login successful!");
-                loadMainScreen();
+                loadMainScreenWithToast();
             } else {
                 showError("Invalid username or password");
             }
@@ -155,9 +151,13 @@ public class LoginController extends BaseController {
         passwordErrorLabel.setManaged(false);
     }
 
-    private void loadMainScreen() {
+    private void showToast(String message, ToastNotification.NotificationType type) {
+        ToastNotification.show((Stage) loginButton.getScene().getWindow(), message, type, Duration.seconds(3), 70);
+    }
+
+    private void loadMainScreenWithToast() {
         try {
-            logger.debug("Loading main screen");
+            logger.debug("Loading main screen with toast");
             FXMLLoader loader = createFxmlLoader("/fxml/main.fxml");
             Parent root = loader.load();
             
@@ -169,6 +169,7 @@ public class LoginController extends BaseController {
             Scene scene = new Scene(root);
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.setScene(scene);
+            ToastNotification.show(stage, "Login successful!", ToastNotification.NotificationType.SUCCESS, Duration.seconds(3), (-60));
         } catch (Exception e) {
             logger.error("Failed to load main screen", e);
             errorLabel.setText("Failed to load main screen: " + e.getMessage());

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.SVGPath?>
+
+<ScrollPane fx:controller="com.securetransfer.controller.ui.ReceiveFilesController"
+            fitToWidth="true" styleClass="receive-files-scroll"
+            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+    <VBox styleClass="receive-files-content"
+          stylesheets="@../styles/receive-files.css,@../styles/toast-notification.css">
+      
+      <!-- Hero Section -->
+      <VBox styleClass="hero-section" alignment="CENTER">
+        <VBox alignment="CENTER" spacing="8">
+          <Text text="Receive Files Securely" styleClass="hero-title"/>
+          <Text text="Enter transfer code to receive encrypted files" styleClass="hero-subtitle"/>
+        </VBox>
+        
+        <!-- Security Info -->
+        <HBox styleClass="security-info" alignment="CENTER">
+          <VBox styleClass="security-item" alignment="CENTER">
+            <SVGPath content="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z" styleClass="security-icon"/>
+            <Text text="End-to-End Encrypted" styleClass="security-label"/>
+          </VBox>
+          <VBox styleClass="security-item" alignment="CENTER">
+            <SVGPath content="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" styleClass="security-icon"/>
+            <Text text="Secure Transfer" styleClass="security-label"/>
+          </VBox>
+          <VBox styleClass="security-item" alignment="CENTER">
+            <SVGPath content="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" styleClass="security-icon"/>
+            <Text text="Verified Files" styleClass="security-label"/>
+          </VBox>
+        </HBox>
+      </VBox>
+      
+      <!-- Main Content -->
+      <VBox styleClass="main-content" spacing="32">
+        
+        <!-- Code Entry Section -->
+        <VBox fx:id="connectionStatusBox" styleClass="code-entry-section" alignment="CENTER">
+          <Text text="Enter Transfer Code" styleClass="section-title"/>
+          <Text text="Ask the sender for their 6-digit transfer code" styleClass="section-subtitle"/>
+          
+          <HBox styleClass="code-input-container" alignment="CENTER" spacing="16">
+            <TextField fx:id="codeTextField" promptText="Enter 6-digit code" styleClass="code-input"/>
+            <Button fx:id="connectButton" text="Connect" onAction="#onConnectButtonClicked" styleClass="connect-btn"/>
+          </HBox>
+          
+          <Text text="The code is valid for 30 minutes" styleClass="code-note"/>
+        </VBox>
+        
+        <!-- Transfer Status Section -->
+        <VBox fx:id="transferStatusSection" styleClass="transfer-status-section" alignment="CENTER" visible="false">
+          <Text text="Transfer Status" styleClass="section-title"/>
+          
+          <VBox fx:id="statusContent" styleClass="status-content" alignment="CENTER" spacing="16">
+            <Label fx:id="statusLabel" text="Waiting for sender..." styleClass="status-label"/>
+            <ProgressBar fx:id="transferProgressBar" visible="false" styleClass="transfer-progress-bar"/>
+            <Button fx:id="cancelTransferButton" text="Cancel Transfer" onAction="#cancelTransfer" styleClass="cancel-btn" visible="false"/>
+          </VBox>
+        </VBox>
+        
+        <!-- Add this section for the code popup (example, adjust as needed) -->
+        <VBox fx:id="codePopup" styleClass="code-popup" alignment="CENTER" spacing="16" visible="false" managed="false">
+            <SVGPath content="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z" styleClass="code-lock-icon" />
+            <Text fx:id="transferCodeText" text="123456" styleClass="transfer-code-text" />
+            <Button fx:id="cancelCodePopupBtn" text="Cancel" onAction="#cancelCodePopup" styleClass="dialog-button cancel" />
+        </VBox>
+        
+        <!-- Received Files Section -->
+        <VBox styleClass="received-files-section">
+          <HBox alignment="CENTER_LEFT" spacing="16">
+            <Text text="Received Files" styleClass="section-title"/>
+            <Button fx:id="refreshButton" text="Refresh" onAction="#refreshHistory" styleClass="refresh-btn"/>
+          </HBox>
+          
+          <TableView fx:id="receivedFilesTable" styleClass="files-table">
+            <columns>
+              <TableColumn fx:id="fileNameColumn" text="File Name" styleClass="table-column"/>
+              <TableColumn fx:id="fileSizeColumn" text="Size" styleClass="table-column"/>
+              <TableColumn fx:id="senderColumn" text="Sender" styleClass="table-column"/>
+              <TableColumn fx:id="receivedTimeColumn" text="Received" styleClass="table-column"/>
+              <TableColumn fx:id="statusColumn" text="Status" styleClass="table-column"/>
+              <TableColumn fx:id="actionsColumn" text="Actions" styleClass="table-column"/>
+            </columns>
+          </TableView>
+          
+          <VBox fx:id="noFilesMessage" styleClass="no-files-message" alignment="CENTER" visible="true">
+            <SVGPath content="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z" styleClass="no-files-icon"/>
+            <Text text="No files received yet" styleClass="no-files-text"/>
+            <Text text="Enter a transfer code to receive files" styleClass="no-files-subtext"/>
+          </VBox>
+        </VBox>
+        
+      </VBox>
+      
+    </VBox>
+  </content>
+</ScrollPane> 

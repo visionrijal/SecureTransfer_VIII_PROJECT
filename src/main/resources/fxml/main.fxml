@@ -8,7 +8,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="com.securetransfer.controller.ui.MainController"
-            stylesheets="@../styles/main.css">
+            stylesheets="@../styles/main.css,@../styles/toast-notification.css">
     
     <top>
         <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="20">

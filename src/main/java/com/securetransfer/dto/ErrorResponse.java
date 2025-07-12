@@ -3,12 +3,13 @@ package com.securetransfer.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ErrorResponse {
-    private int status;
-    private String message;
     private String error;
+    private String message;
 } 

@@ -44,6 +44,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ButtonBar;
+import jakarta.annotation.PostConstruct;
+import com.securetransfer.service.impl.SecureTransferWebSocketServer;
+import org.java_websocket.WebSocket;
+import java.util.function.BiConsumer;
 
 /**
  * Implementation of transfer service for secure file transfer operations.
@@ -69,6 +73,9 @@ public class TransferServiceImpl implements TransferService {
     @Autowired
     private ReceiverTransferRepository receiverTransferRepository;
     
+    @Autowired
+    private SecureTransferWebSocketServer webSocketServer;
+    
     // Active transfer sessions
     private final Map<String, TransferSession> activeSessions = new ConcurrentHashMap<>();
     
@@ -83,6 +90,31 @@ public class TransferServiceImpl implements TransferService {
     
     private final Map<String, ByteArrayOutputStream> incomingFileBuffers = new ConcurrentHashMap<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
+    
+    @PostConstruct
+    public void registerWebSocketCallbacks() {
+        webSocketServer.setReceiverConnectedCallback(this::onReceiverConnected);
+    }
+
+    private void onReceiverConnected(String transferCode, WebSocket conn) {
+        logger.info("Receiver connected (callback) - showing confirmation dialog for transfer code: {}", transferCode);
+        javafx.application.Platform.runLater(() -> {
+            try {
+                TransferSession session = activeSessions.get(transferCode);
+                if (session != null) {
+                    String fileName = session.getFileName();
+                    long fileSize = session.getFileSize();
+                    showTransferConfirmationDialog(transferCode, fileName, fileSize);
+                } else {
+                    logger.warn("No transfer session found for code: {}", transferCode);
+                    ToastNotification.show(null, "Transfer session not found", ToastNotification.NotificationType.ERROR, javafx.util.Duration.seconds(3), 70);
+                }
+            } catch (Exception e) {
+                logger.error("Error showing confirmation dialog: {}", e.getMessage());
+                ToastNotification.show(null, "Error showing confirmation: " + e.getMessage(), ToastNotification.NotificationType.ERROR, javafx.util.Duration.seconds(3), 70);
+            }
+        });
+    }
     
     @Override
     public CompletableFuture<TransferSession> initiateTransfer(String transferCode, List<File> files, String username) {
@@ -957,50 +989,8 @@ public class TransferServiceImpl implements TransferService {
     }
     
     @Override
-    public void triggerReceiverConnectionCallback(String transferCode) {
-        Runnable callback = receiverConnectionCallbacks.get(transferCode);
-        if (callback != null) {
-            logger.info("Triggering receiver connection callback for transfer code: {}", transferCode);
-            callback.run();
-        } else {
-            logger.warn("No receiver connection callback found for transfer code: {}", transferCode);
-        }
-    }
-
-    @Override
     public void connectSenderWebSocketClient(String transferCode, String username) {
-        logger.info("Setting up sender notification for transfer code: {}", transferCode);
-        
-        // Register a callback to be notified when receiver connects
-        // This will be called by the WebSocket server when a receiver connects
-        registerReceiverConnectionCallback(transferCode, () -> {
-            logger.info("Receiver connected - showing confirmation dialog for transfer code: {}", transferCode);
-            
-            // Show confirmation dialog on JavaFX thread
-            javafx.application.Platform.runLater(() -> {
-                try {
-                    // Get the transfer session to show file details
-                    TransferSession session = activeSessions.get(transferCode);
-                    if (session != null) {
-                        String fileName = session.getFileName();
-                        long fileSize = session.getFileSize();
-                        
-                        // Show confirmation dialog
-                        showTransferConfirmationDialog(transferCode, fileName, fileSize);
-                    } else {
-                        logger.warn("No transfer session found for code: {}", transferCode);
-                        ToastNotification.show(null, "Transfer session not found", 
-                            ToastNotification.NotificationType.ERROR, javafx.util.Duration.seconds(3), 70);
-                    }
-                } catch (Exception e) {
-                    logger.error("Error showing confirmation dialog: {}", e.getMessage());
-                    ToastNotification.show(null, "Error showing confirmation: " + e.getMessage(), 
-                        ToastNotification.NotificationType.ERROR, javafx.util.Duration.seconds(3), 70);
-                }
-            });
-        });
-        
-        logger.info("Sender notification setup complete for transfer code: {}", transferCode);
+        // No-op in callback-based design
     }
     
     private void showTransferConfirmationDialog(String transferCode, String fileName, long fileSize) {

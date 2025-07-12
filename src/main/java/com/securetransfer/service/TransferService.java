@@ -128,15 +128,9 @@ public interface TransferService {
      * Connects the sender as a WebSocket client to the server to receive peerConnected events.
      * @param transferCode the transfer code
      * @param username the sender's username
+     * (No-op in new callback-based design)
      */
     void connectSenderWebSocketClient(String transferCode, String username);
-    
-    /**
-     * Trigger the receiver connection callback for a transfer code.
-     * This is called by the WebSocket server when a receiver connects.
-     * @param transferCode the transfer code
-     */
-    void triggerReceiverConnectionCallback(String transferCode);
     
     /**
      * Transfer progress information

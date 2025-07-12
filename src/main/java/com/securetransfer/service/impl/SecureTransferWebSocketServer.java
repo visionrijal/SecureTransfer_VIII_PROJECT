@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.securetransfer.util.KeystoreManager;
 import java.security.KeyStore;
+import java.util.function.BiConsumer;
 
 @Component
 public class SecureTransferWebSocketServer extends org.java_websocket.server.WebSocketServer {
@@ -28,8 +29,10 @@ public class SecureTransferWebSocketServer extends org.java_websocket.server.Web
     private final Map<String, TransferSession> activeSessions = new ConcurrentHashMap<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
     
-    @Autowired
-    private com.securetransfer.service.TransferService transferService;
+    private BiConsumer<String, WebSocket> receiverConnectedCallback;
+    public void setReceiverConnectedCallback(BiConsumer<String, WebSocket> callback) {
+        this.receiverConnectedCallback = callback;
+    }
 
     public SecureTransferWebSocketServer(@Value("${websocket.port:8445}") int preferredPort) {
         // Bind to all network interfaces (0.0.0.0) to allow external connections
@@ -246,18 +249,10 @@ public class SecureTransferWebSocketServer extends org.java_websocket.server.Web
                     } catch (Exception e) {
                         logger.error("Error sending peer connection notification: {}", e.getMessage());
                     }
-                }
-                
-                // Trigger the receiver connection callback to notify the sender
-                // This will show the confirmation dialog on the sender side
-                try {
-                    if (transferService != null) {
-                        // Trigger the callback that was registered by the sender
-                        transferService.triggerReceiverConnectionCallback(transferCode);
-                        logger.info("Triggered receiver connection callback for transfer code: {}", transferCode);
+                    // Call the callback if set
+                    if (receiverConnectedCallback != null) {
+                        receiverConnectedCallback.accept(transferCode, conn);
                     }
-                } catch (Exception e) {
-                    logger.warn("Could not trigger receiver connection callback: {}", e.getMessage());
                 }
             }
         } else {

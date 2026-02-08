@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  instance1:
+    build: .
+    container_name: securetransfer_instance1
+    environment:
+      - SERVER_PORT=8080
+      - WEBSOCKET_PORT=8445
+      - DATABASE_URL=jdbc:h2:mem:instance1
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    network_mode: "host"
+
+  instance2:
+    build: .
+    container_name: securetransfer_instance2
+    environment:
+      - SERVER_PORT=8090
+      - WEBSOCKET_PORT=8446
+      - DATABASE_URL=jdbc:h2:mem:instance2
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    network_mode: "host"

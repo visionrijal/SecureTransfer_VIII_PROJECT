@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane fitToWidth="true" fitToHeight="true" styleClass="scroll-pane"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.securetransfer.controller.ui.WelcomeController"
+            stylesheets="@../styles/global.css">
+    <content>
+        <VBox alignment="TOP_CENTER" spacing="0" style="-fx-background-color: -fx-bg-base;">
+            <!-- Hero Section -->
+            <VBox alignment="CENTER" spacing="48" styleClass="hero-section" minHeight="600">
+                <VBox alignment="CENTER" spacing="24">
+                    <Text text="Transfer Anything, Anywhere." styleClass="heading-l" textAlignment="CENTER" wrappingWidth="800"/>
+                    <Text text="The ultimate peer-to-peer file transfer experience. End-to-end encrypted, blazing fast, and beautifully simple." 
+                          styleClass="text-sub" textAlignment="CENTER" wrappingWidth="600" opacity="0.8"/>
+                </VBox>
+                
+                <HBox alignment="CENTER" spacing="24">
+                    <!-- These buttons will trigger navigation in the MainController -->
+                    <Button text="Send Files" onAction="#showSendFiles" styleClass="btn-primary"/>
+                    <Button text="Receive Files" onAction="#showReceiveFiles" styleClass="btn-secondary"/>
+                </HBox>
+                
+                <!-- Stat Cards -->
+                <HBox alignment="CENTER" spacing="32">
+                    <VBox styleClass="card-container" alignment="CENTER" spacing="12" minWidth="200">
+                        <SVGPath styleClass="navbar-logo" content="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1" scaleX="1.5" scaleY="1.5"/>
+                        <Text text="Military Grade" styleClass="field-label"/>
+                        <Text text="AES-256 GCM" styleClass="text-sub" style="-fx-font-size: 12px;"/>
+                    </VBox>
+                    <VBox styleClass="card-container" alignment="CENTER" spacing="12" minWidth="200">
+                        <SVGPath styleClass="navbar-logo" content="M13,2.05V2H11V2.05C7.4,2.5 4.5,5.4 4.05,9H4V11H4.05C4.5,14.6 7.4,17.5 11,17.95V18H13V17.95C16.6,17.5 19.5,14.6 19.95,11H20V9H19.95C19.5,5.4 16.6,2.5 13,2.05" scaleX="1.5" scaleY="1.5"/>
+                        <Text text="Peer-to-Peer" styleClass="field-label"/>
+                        <Text text="Direct Transfer" styleClass="text-sub" style="-fx-font-size: 12px;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- Footer -->
+            <HBox styleClass="footer" alignment="CENTER" spacing="40">
+                <VBox spacing="8" alignment="CENTER_LEFT">
+                    <Text text="SecureTransfer" styleClass="navbar-brand" style="-fx-font-size: 18px;"/>
+                    <Text text="Privacy is a right, not a privilege." styleClass="text-sub" style="-fx-font-size: 12px;"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <HBox spacing="24" alignment="CENTER">
+                    <Text text="© 2025 DokoData Team" styleClass="text-sub" opacity="0.6" style="-fx-font-size: 12px;"/>
+                </HBox>
+            </HBox>
+        </VBox>
+    </content>
+</ScrollPane>

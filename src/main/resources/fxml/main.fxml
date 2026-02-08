@@ -2,68 +2,48 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.shape.Circle?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="com.securetransfer.controller.ui.MainController"
-            stylesheets="/styles/main.css">
+            style="-fx-background-color: -fx-bg-base;"
+            stylesheets="@../styles/global.css"
+            fx:id="rootPane">
     
-    <!-- Top Bar -->
     <top>
-        <HBox styleClass="top-bar">
-            <padding>
-                <Insets top="15" right="20" bottom="15" left="20"/>
-            </padding>
-            
-            <!-- Logo and Title -->
-            <HBox alignment="CENTER_LEFT" spacing="10">
-                <Circle radius="15" fill="#667eea"/>
-                <Text styleClass="app-title">SecureTransfer</Text>
+        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="24">
+            <HBox alignment="CENTER_LEFT" spacing="12" onMouseClicked="#showWelcomePage" styleClass="navbar-brand-container" style="-fx-cursor: hand;">
+                <SVGPath styleClass="navbar-logo" content="M12 2L2 7l10 5 10-5-10-5z" scaleX="1.2" scaleY="1.2"/>
+                <Text text="SecureTransfer" styleClass="navbar-brand"/>
             </HBox>
             
-            <!-- User Info and Logout -->
-            <HBox alignment="CENTER_RIGHT" spacing="15" HBox.hgrow="ALWAYS">
-                <Label fx:id="welcomeLabel" styleClass="username-label"/>
-                <Button fx:id="logoutButton" text="Logout" styleClass="logout-button" onAction="#handleLogout"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <HBox alignment="CENTER" spacing="8">
+                <Button fx:id="sendNavBtn" text="Send" onAction="#showSendFiles" styleClass="nav-link"/>
+                <Button fx:id="receiveNavBtn" text="Receive" onAction="#showReceiveFiles" styleClass="nav-link"/>
+                <Button text="USB Wizard" onAction="#showUSBWizard" styleClass="nav-link"/>
+                <Button text="History" onAction="#showTransferHistory" styleClass="nav-link"/>
+            </HBox>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <HBox alignment="CENTER_RIGHT" spacing="16">
+                <Button onAction="#showProfile" styleClass="btn-secondary" style="-fx-padding: 8;">
+                    <graphic>
+                        <SVGPath styleClass="profile-icon" content="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" scaleX="0.8" scaleY="0.8"/>
+                    </graphic>
+                </Button>
+                <Button text="Sign Out" onAction="#logout" styleClass="btn-secondary" style="-fx-text-fill: -fx-error; -fx-border-color: rgba(239, 68, 68, 0.2);"/>
             </HBox>
         </HBox>
     </top>
     
-    <!-- Main Content -->
     <center>
-        <VBox spacing="20" styleClass="main-content">
-            <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
-            </padding>
-            
-            <!-- File Transfer Section -->
-            <VBox spacing="15" styleClass="transfer-section">
-                <Text styleClass="section-title">Send File</Text>
-                
-                <HBox spacing="10" alignment="CENTER_LEFT">
-                    <Button fx:id="selectFileButton" text="Select File" styleClass="primary-button" onAction="#handleSendFile"/>
-                    <Button fx:id="transferButton" text="Transfer" styleClass="primary-button" onAction="#handleTransfer"/>
-                </HBox>
-                
-                <ProgressBar fx:id="transferProgress" progress="0.0" maxWidth="Infinity"/>
-                <Label fx:id="statusLabel" styleClass="status-label"/>
-            </VBox>
-            
-            <!-- File List -->
-            <VBox spacing="15" styleClass="history-section">
-                <Text styleClass="section-title">Files</Text>
-                
-                <TableView fx:id="fileTable" styleClass="transfer-table">
-                    <columns>
-                        <TableColumn fx:id="fileNameColumn" text="File Name" prefWidth="200"/>
-                        <TableColumn fx:id="fileSizeColumn" text="Size" prefWidth="100"/>
-                        <TableColumn fx:id="statusColumn" text="Status" prefWidth="100"/>
-                    </columns>
-                </TableView>
-            </VBox>
-        </VBox>
+        <StackPane fx:id="contentArea">
+            <!-- Modular views (Welcome, Send, Receive) will be loaded here -->
+        </StackPane>
     </center>
 </BorderPane>

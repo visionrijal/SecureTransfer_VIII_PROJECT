@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane fx:controller="com.securetransfer.controller.ui.ReceiveFilesController"
+            fitToWidth="true" style="-fx-background-color: transparent;" styleClass="scroll-pane"
+            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+    <VBox spacing="60" alignment="TOP_CENTER" style="-fx-background-color: -fx-bg-base;"
+          stylesheets="@../styles/global.css">
+      
+      <padding>
+          <Insets top="60" right="40" bottom="60" left="40"/>
+      </padding>
+
+      <!-- Header -->
+      <VBox alignment="CENTER" spacing="16">
+        <Text text="Receive Files" styleClass="heading-l"/>
+        <Text text="Enter code to establish a secure P2P link." styleClass="text-sub"/>
+      </VBox>
+
+      <!-- Center Card -->
+      <VBox styleClass="card-container" alignment="CENTER" maxWidth="700" spacing="48">
+        <VBox fx:id="connectionStatusBox" spacing="32" alignment="CENTER">
+          <VBox alignment="CENTER" spacing="12">
+            <Text text="Transfer Code" styleClass="heading-m"/>
+            <Text text="The 6-digit code shared by the sender" styleClass="text-sub"/>
+          </VBox>
+          
+          <HBox alignment="CENTER" spacing="20">
+            <TextField fx:id="codeTextField" promptText="000000" styleClass="text-field" 
+                       maxWidth="220" alignment="CENTER" style="-fx-font-size: 28px; -fx-font-family: 'Monospaced'; -fx-font-weight: bold;"/>
+            <Button fx:id="connectButton" text="Connect" onAction="#onConnectButtonClicked" styleClass="btn-primary" minWidth="140"/>
+          </HBox>
+        </VBox>
+        
+        <VBox fx:id="transferStatusSection" spacing="32" alignment="CENTER" visible="false" managed="false">
+          <VBox alignment="CENTER" spacing="8">
+            <Text text="Streaming Data" styleClass="heading-m"/>
+            <Label fx:id="statusLabel" text="Establishing encrypted tunnel..." styleClass="text-sub"/>
+          </VBox>
+          
+          <VBox spacing="12">
+            <ProgressBar fx:id="transferProgressBar" maxWidth="Infinity" styleClass="progress-bar"/>
+            <HBox alignment="CENTER_RIGHT">
+                <Button fx:id="cancelTransferButton" text="Abort Transfer" onAction="#cancelTransfer" styleClass="btn-secondary"/>
+            </HBox>
+          </VBox>
+        </VBox>
+      </VBox>
+
+      <!-- History Table Card -->
+      <VBox styleClass="card-container" maxWidth="900" spacing="24">
+        <HBox alignment="CENTER_LEFT" spacing="12">
+          <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Text text="Transfer History" styleClass="heading-m"/>
+            <Text text="Managed direct transfers" styleClass="text-sub" opacity="0.6"/>
+          </VBox>
+          <Button fx:id="refreshButton" text="Refresh" onAction="#refreshHistory" styleClass="btn-secondary"/>
+        </HBox>
+        
+        <TableView fx:id="receivedFilesTable" styleClass="table-view" minHeight="400">
+          <columns>
+            <TableColumn fx:id="fileNameColumn" text="File Name" prefWidth="250"/>
+            <TableColumn fx:id="fileSizeColumn" text="Size" prefWidth="120"/>
+            <TableColumn fx:id="senderColumn" text="Source" prefWidth="150"/>
+            <TableColumn fx:id="receivedTimeColumn" text="Timestamp" prefWidth="180"/>
+            <TableColumn fx:id="statusColumn" text="Status" prefWidth="120"/>
+            <TableColumn fx:id="actionsColumn" text="Action" prefWidth="100"/>
+          </columns>
+        </TableView>
+
+        <VBox fx:id="noFilesMessage" alignment="CENTER" spacing="16" visible="true">
+          <SVGPath content="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z" 
+                   styleClass="navbar-logo" opacity="0.2" scaleX="2" scaleY="2"/>
+          <Text text="No previous activity found" styleClass="text-sub" opacity="0.4"/>
+        </VBox>
+      </VBox>
+    </VBox>
+  </content>
+</ScrollPane>
+ 

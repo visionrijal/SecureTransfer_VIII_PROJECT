@@ -17,6 +17,14 @@ public class JavaFXApplication extends Application {
     private ConfigurableApplicationContext springContext;
     private Parent rootNode;
 
+    public static void main(String[] args) {
+        // Set ICE port range globally for all ICE agents before anything else
+        System.setProperty("org.ice4j.ice.MIN_PORT", "5000");
+        System.setProperty("org.ice4j.ice.MAX_PORT", "5100");
+        System.setProperty("org.ice4j.ice.harvest.PREFERRED_PORT", "5000");
+        launch(args);
+    }
+
     @Override
     public void init() {
         springContext = SpringApplication.run(SecureTransferApplication.class);
@@ -25,37 +33,44 @@ public class JavaFXApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
+            System.out.println("🚀 Launching JavaFX Application");
+
             URL fxmlUrl = getClass().getClassLoader().getResource("fxml/login.fxml");
+            System.out.println("FXML URL = " + fxmlUrl);
+
             if (fxmlUrl == null) {
-                throw new IOException("Cannot find fxml/login.fxml");
+                throw new IOException("❌ Cannot find fxml/login.fxml");
             }
 
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
             fxmlLoader.setControllerFactory(springContext::getBean);
             rootNode = fxmlLoader.load();
-            
-            // Inject Spring context into controller
+
             Object controller = fxmlLoader.getController();
             if (controller instanceof BaseController) {
                 ((BaseController) controller).setSpringContext(springContext);
             }
-            
+
             Scene scene = new Scene(rootNode);
-            
-            // Load stylesheet if it exists
+            primaryStage.setTitle("Secure Transfer");
+
             URL cssUrl = getClass().getClassLoader().getResource("styles/global.css");
             if (cssUrl != null) {
                 scene.getStylesheets().add(cssUrl.toExternalForm());
+            } else {
+                System.out.println("⚠️ global.css not found");
             }
-            
-            primaryStage.setTitle("Secure Transfer");
+
             primaryStage.setScene(scene);
             primaryStage.setMinWidth(800);
             primaryStage.setMinHeight(600);
+
+            System.out.println("✅ Showing primary stage...");
             primaryStage.show();
-        } catch (IOException e) {
+        } catch (Exception e) {
+            System.err.println("❌ Exception in start(): " + e.getMessage());
             e.printStackTrace();
-            throw new RuntimeException("Failed to load FXML: " + e.getMessage(), e);
+            throw e;
         }
     }
 
@@ -63,4 +78,4 @@ public class JavaFXApplication extends Application {
     public void stop() {
         springContext.close();
     }
-} 
+}

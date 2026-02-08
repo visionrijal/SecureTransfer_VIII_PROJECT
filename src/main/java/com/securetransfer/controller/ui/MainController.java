@@ -1,187 +1,213 @@
 package com.securetransfer.controller.ui;
 
-import com.securetransfer.model.FileTransfer;
-import com.securetransfer.service.AuthenticationService;
-import com.securetransfer.service.FileTransferService;
-import com.securetransfer.service.UserService;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.text.Text;
+import javafx.scene.layout.*;
+import javafx.scene.shape.SVGPath;
+import javafx.scene.Node;
+import javafx.animation.*;
+import javafx.util.Duration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import com.securetransfer.util.UserSession;
+import javafx.application.Platform;
+import com.securetransfer.model.User;
+import com.securetransfer.util.ToastNotification;
 
 @Controller
 public class MainController extends BaseController {
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
-    
-    @FXML
-    private TableView<FileTransfer> fileTable;
-    @FXML
-    private TableColumn<FileTransfer, String> fileNameColumn;
-    @FXML
-    private TableColumn<FileTransfer, String> fileSizeColumn;
-    @FXML
-    private TableColumn<FileTransfer, String> statusColumn;
-    @FXML
-    private ProgressBar transferProgress;
-    @FXML
-    private Label statusLabel;
-    @FXML
-    private Button selectFileButton;
-    @FXML
-    private Button transferButton;
-    @FXML
-    private Button logoutButton;
-    @FXML
-    private Label welcomeLabel;
 
-    private final AuthenticationService authenticationService;
-    private final FileTransferService fileTransferService;
-    private final ObservableList<FileTransfer> fileList;
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    public MainController(AuthenticationService authenticationService, FileTransferService fileTransferService) {
-        this.authenticationService = authenticationService;
-        this.fileTransferService = fileTransferService;
-        this.fileList = FXCollections.observableArrayList();
-    }
+    @FXML
+    private StackPane contentArea;
+    @FXML
+    private Button sendNavBtn;
+    @FXML
+    private Button receiveNavBtn;
+    @FXML
+    private BorderPane rootPane;
 
     @FXML
     public void initialize() {
-        setupTableColumns();
-        fileTable.setItems(fileList);
-        welcomeLabel.setText("Welcome to Secure Transfer!");
+        logger.info("Initializing MainController");
+        // Load the welcome page by default
+        Platform.runLater(this::showWelcomePage);
     }
 
-    private void setupTableColumns() {
-        fileNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        fileSizeColumn.setCellValueFactory(cellData -> {
-            FileTransfer file = cellData.getValue();
-            return new SimpleStringProperty(formatFileSize(file.getLength()));
-        });
-        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+    // ================================================
+    // Navigation Logic
+    // ================================================
+
+    @FXML
+    public void showWelcomePage() {
+        logger.info("Showing welcome page");
+        loadDynamicContent("/fxml/welcome.fxml", "welcome");
     }
 
     @FXML
-    public void handleSendFile() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select File to Send");
-        File selectedFile = fileChooser.showOpenDialog(selectFileButton.getScene().getWindow());
-        
-        if (selectedFile != null) {
-            fileList.add(new FileTransfer(selectedFile));
-            statusLabel.setText("File selected: " + selectedFile.getName());
-        }
+    public void showSendFiles() {
+        logger.info("Showing send files content");
+        loadDynamicContent("/fxml/send-files.fxml", "send-files");
     }
 
     @FXML
-    public void handleTransfer() {
-        FileTransfer selectedFileTransfer = fileTable.getSelectionModel().getSelectedItem();
-        if (selectedFileTransfer == null) {
-            statusLabel.setText("Please select a file to transfer");
-            return;
-        }
-
-        File selectedFile = selectedFileTransfer.getFile();
-        transferProgress.setProgress(0);
-        statusLabel.setText("Transferring file: " + selectedFile.getName());
-        selectedFileTransfer.setStatus("Transferring");
-
-        CompletableFuture<Void> transferFuture = fileTransferService.transferFile(selectedFile, "peer1");
-        transferFuture.thenRun(() -> {
-            statusLabel.setText("Transfer completed: " + selectedFile.getName());
-            transferProgress.setProgress(1.0);
-            selectedFileTransfer.setStatus("Completed");
-        }).exceptionally(throwable -> {
-            statusLabel.setText("Transfer failed: " + throwable.getMessage());
-            transferProgress.setProgress(0);
-            selectedFileTransfer.setStatus("Failed");
-            return null;
-        });
+    public void showReceiveFiles() {
+        logger.info("Showing receive files content");
+        loadDynamicContent("/fxml/receive-files.fxml", "receive-files");
     }
 
-    @FXML
-    private void handleLogout() {
+    private void loadDynamicContent(String fxmlPath, String activePage) {
         try {
-            logger.debug("Loading login screen");
-            FXMLLoader loader = createFxmlLoader("/fxml/login.fxml");
-            Parent root = loader.load();
-            
+            FXMLLoader loader = createFxmlLoader(fxmlPath);
+            Parent content = loader.load();
+
+            // Set spring context for the new controller
             Object controller = loader.getController();
             if (controller instanceof BaseController) {
                 ((BaseController) controller).setSpringContext(springContext);
             }
-            
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) logoutButton.getScene().getWindow();
-            stage.setScene(scene);
+
+            // Handle specific controller injections if needed
+            if (controller instanceof SendFilesController) {
+                ((SendFilesController) controller).setMainController(this);
+            } else if (controller instanceof WelcomeController) {
+                ((WelcomeController) controller).setMainController(this);
+            }
+
+            // Clear and swap
+            contentArea.getChildren().setAll(content);
+            updateNavbarActiveState(activePage);
+
+            logger.info("Successfully loaded content: {}", fxmlPath);
         } catch (Exception e) {
-            logger.error("Failed to load login screen", e);
+            logger.error("Failed to load content from {}: {}", fxmlPath, e.getMessage());
+            e.printStackTrace();
+            // Show alert if stage is available, otherwise log
+            Platform.runLater(() -> {
+                try {
+                    showErrorAlert("Navigation Error", "Failed to load requested page.");
+                } catch (Exception ignored) {
+                }
+            });
         }
+    }
+
+    private void updateNavbarActiveState(String activePage) {
+        // Clear active classes
+        if (sendNavBtn != null)
+            sendNavBtn.getStyleClass().remove("active");
+        if (receiveNavBtn != null)
+            receiveNavBtn.getStyleClass().remove("active");
+
+        // Apply active class
+        if ("send-files".equals(activePage) && sendNavBtn != null) {
+            sendNavBtn.getStyleClass().add("active");
+        } else if ("receive-files".equals(activePage) && receiveNavBtn != null) {
+            receiveNavBtn.getStyleClass().add("active");
+        }
+    }
+
+    // ================================================
+    // Dialogs & Profiles
+    // ================================================
+
+    @FXML
+    public void showProfile() {
+        User currentUser = UserSession.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            showErrorAlert("Not Logged In", "Please log in to view your profile.");
+            return;
+        }
+
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("👤 User Profile");
+        dialog.setHeaderText("Account Details");
+
+        VBox content = new VBox(20);
+        content.setPadding(new Insets(24));
+        content.setAlignment(Pos.CENTER);
+
+        Text username = new Text("Username: " + currentUser.getUsername());
+        username.getStyleClass().add("heading-m");
+
+        Text status = new Text("Status: " + (currentUser.isActive() ? "Active" : "Inactive"));
+        status.getStyleClass().add("text-sub");
+
+        content.getChildren().addAll(username, status);
+        dialog.getDialogPane().setContent(content);
+        dialog.getDialogPane().getStyleClass().add("dialog-pane");
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+
+        dialog.showAndWait();
+    }
+
+    @FXML
+    public void showUSBWizard() {
+        ToastNotification.show(getCurrentStage(), "USB Wizard is coming soon!",
+                ToastNotification.NotificationType.INFO, Duration.seconds(3));
+    }
+
+    @FXML
+    public void showTransferHistory() {
+        ToastNotification.show(getCurrentStage(), "Transfer history is coming soon!",
+                ToastNotification.NotificationType.INFO, Duration.seconds(3));
+    }
+
+    @FXML
+    public void logout() {
+        UserSession.getInstance().clearSession();
+        loadScreen("/fxml/login.fxml");
+        logger.info("User logged out");
+    }
+
+    private void loadScreen(String fxmlPath) {
+        try {
+            FXMLLoader loader = createFxmlLoader(fxmlPath);
+            Parent root = loader.load();
+
+            Object controller = loader.getController();
+            if (controller instanceof BaseController) {
+                ((BaseController) controller).setSpringContext(springContext);
+            }
+
+            Scene scene = new Scene(root);
+            Stage stage = getCurrentStage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            logger.error("Failed to load screen {}: {}", fxmlPath, e.getMessage());
+        }
+    }
+
+    private void showErrorAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.getDialogPane().getStyleClass().add("dialog-pane");
+        alert.showAndWait();
+    }
+
+    @Override
+    protected Stage getCurrentStage() {
+        return (Stage) rootPane.getScene().getWindow();
     }
 
     @Override
     protected void loadLoginScreen() {
-        try {
-            logger.debug("Loading login screen");
-            FXMLLoader loader = createFxmlLoader("/fxml/login.fxml");
-            Parent root = loader.load();
-            
-            Object controller = loader.getController();
-            if (controller instanceof BaseController) {
-                ((BaseController) controller).setSpringContext(springContext);
-            }
-            
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) logoutButton.getScene().getWindow();
-            stage.setScene(scene);
-        } catch (Exception e) {
-            logger.error("Failed to load login screen", e);
-        }
+        loadScreen("/fxml/login.fxml");
     }
 
     @Override
     protected void loadRegistrationScreen() {
-        try {
-            logger.debug("Loading registration screen");
-            FXMLLoader loader = createFxmlLoader("/fxml/registration.fxml");
-            Parent root = loader.load();
-            
-            Object controller = loader.getController();
-            if (controller instanceof BaseController) {
-                ((BaseController) controller).setSpringContext(springContext);
-            }
-            
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) logoutButton.getScene().getWindow();
-            stage.setScene(scene);
-        } catch (Exception e) {
-            logger.error("Failed to load registration screen", e);
-        }
+        loadScreen("/fxml/registration.fxml");
     }
-
-    private String formatFileSize(long bytes) {
-        if (bytes < 1024) return bytes + " B";
-        int exp = (int) (Math.log(bytes) / Math.log(1024));
-        String pre = "KMGTPE".charAt(exp-1) + "";
-        return String.format("%.1f %sB", bytes / Math.pow(1024, exp), pre);
-    }
-} 
+}

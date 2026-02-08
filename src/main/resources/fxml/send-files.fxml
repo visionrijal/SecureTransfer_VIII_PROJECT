@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane fx:controller="com.securetransfer.controller.ui.SendFilesController"
+            fitToWidth="true" style="-fx-background-color: transparent;" styleClass="scroll-pane"
+            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+    <VBox spacing="60" alignment="TOP_CENTER" style="-fx-background-color: -fx-bg-base;"
+          stylesheets="@../styles/global.css">
+      
+      <padding>
+          <Insets top="60" right="40" bottom="60" left="40"/>
+      </padding>
+
+      <!-- Header Section -->
+      <VBox alignment="CENTER" spacing="16">
+        <Text text="Send Files" styleClass="heading-l"/>
+        <Text text="Direct peer-to-peer transfer, fully encrypted." styleClass="text-sub"/>
+      </VBox>
+
+      <!-- Center Card -->
+      <VBox styleClass="card-container" alignment="CENTER" maxWidth="700" spacing="40">
+        <VBox fx:id="fileDropZone" styleClass="drag-drop-area" alignment="CENTER" spacing="24"
+              onDragOver="#handleDragOver" 
+              onDragDropped="#handleDragDropped"
+              onDragExited="#handleDragExited">
+          <SVGPath content="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" styleClass="navbar-logo" scaleX="2" scaleY="2"/>
+          <VBox alignment="CENTER" spacing="8">
+            <Text text="Drop files here" styleClass="heading-m"/>
+            <Text text="or click to browse your system" styleClass="text-sub"/>
+          </VBox>
+          <Button fx:id="selectFilesBtn" text="Select Files" onAction="#selectFiles" styleClass="btn-primary"/>
+        </VBox>
+
+        <VBox fx:id="selectedFilesContainer" spacing="32" visible="false" managed="false">
+          <HBox alignment="CENTER_LEFT" spacing="12">
+            <Text text="Ready to Transfer" styleClass="heading-m"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Text fx:id="fileCountText" text="0 files selected" styleClass="text-sub" opacity="0.7"/>
+          </HBox>
+          
+          <VBox fx:id="selectedFilesList" spacing="12"/>
+          
+          <HBox alignment="CENTER" spacing="24">
+            <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+              <Text fx:id="totalSizeText" text="Total: 0 B" styleClass="heading-m"/>
+              <Text text="Secure P2P Channel" styleClass="text-sub"/>
+            </VBox>
+            <Button fx:id="clearAllBtn" text="Clear List" onAction="#clearAllFiles" styleClass="btn-secondary"/>
+            <Button fx:id="directTransferBtn" text="Send Files" onAction="#startDirectTransfer" 
+                  styleClass="btn-primary" minWidth="160"/>
+          </HBox>
+        </VBox>
+      </VBox>
+
+      <!-- Security Meta -->
+      <HBox alignment="CENTER" spacing="60">
+        <HBox alignment="CENTER" spacing="12">
+           <SVGPath styleClass="navbar-logo" content="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1" opacity="0.6"/>
+           <Text text="End-to-End Encrypted" styleClass="caption-text" opacity="0.8"/>
+        </HBox>
+        <HBox alignment="CENTER" spacing="12">
+           <SVGPath styleClass="navbar-logo" content="M13,2.05V2H11V2.05C7.4,2.5 4.5,5.4 4.05,9H4V11H4.05C4.5,14.6 7.4,17.5 11,17.95V18H13V17.95C16.6,17.5 19.5,14.6 19.95,11H20V9H19.95C19.5,5.4 16.6,2.5 13,2.05" opacity="0.6"/>
+           <Text text="Direct P2P Link" styleClass="caption-text" opacity="0.8"/>
+        </HBox>
+      </HBox>
+    </VBox>
+  </content>
+</ScrollPane>

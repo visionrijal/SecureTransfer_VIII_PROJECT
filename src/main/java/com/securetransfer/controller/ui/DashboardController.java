@@ -2,12 +2,14 @@ package com.securetransfer.controller.ui;
 
 import com.securetransfer.model.User;
 import com.securetransfer.service.AuthenticationService;
+import com.securetransfer.util.ToastNotification;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -63,5 +65,9 @@ public class DashboardController {
     private void handleReceiveFile() {
         // TODO: Implement file receiving dialog
         statusLabel.setText("Receive file functionality coming soon");
+    }
+
+    public void showLoginSuccessToast() {
+        ToastNotification.show((Stage) usernameLabel.getScene().getWindow(), "Login successful!", ToastNotification.NotificationType.SUCCESS, Duration.seconds(3));
     }
 } 

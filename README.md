@@ -58,7 +58,7 @@ docker-compose logs -f
 ```
 
 ## UI Showcase
-Below are the outputs illustrating the "Minimalist Zen" aesthetic.
+Below are the outputs.
 
 | Screen | Description |
 | :--- | :--- |
